@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :rents
   resources :books
   get 'about', to: 'about#index'
   get 'contact', to: 'contact#index'

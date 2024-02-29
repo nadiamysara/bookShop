@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  book: MyString
+  user: MyString
+  dateBorrowed: 2024-02-29
+  dateDue: 2024-02-29
+
+two:
+  book: MyString
+  user: MyString
+  dateBorrowed: 2024-02-29
+  dateDue: 2024-02-29
