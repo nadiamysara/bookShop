@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :authenticate_user! exception: :show
+  before_action :authenticate_user!, except: [:index]
   before_action :set_book, only: %i[ show edit update destroy ]
 
   load_and_authorize_resource

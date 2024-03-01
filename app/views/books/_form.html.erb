@@ -15,6 +15,11 @@
     <%= form.label :title, style: "display: block" %>
     <%= form.text_field :title %>
   </div>
+  
+  <div>
+    <%= form.label :author, style: "display: block" %>
+      <%= form.collection_select :author_id, Author.order(:name),:id,:name, prompt: true %>
+  </div>
 
   <div>
     <%= form.label :genre, style: "display: block" %>
