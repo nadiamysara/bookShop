@@ -1,4 +1,5 @@
 class RentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_rent, only: %i[ show edit update destroy ]
 
   # GET /rents or /rents.json
