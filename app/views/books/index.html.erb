@@ -14,3 +14,7 @@
 <% if can? :create, Book %>
   <%= link_to "New book", new_book_path %>
 <% end %>
+
+<% @rents.each do |book_user| %>
+    <%= book_user.book_id %>
+<% end %>

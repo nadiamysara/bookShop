@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
-  get 'book_user/create'
-  get 'book_user/update'
-  get 'book_user/:id/update', to: 'book_user#edit'
-  get 'book_user', action: :index, controller: 'book_user', as: :rent
+  #get 'book_user/create'
+  #get 'book_user/update'
+  #get 'book_user/:id/update', to: 'book_user#edit'
+  #get 'book_user', action: :index, controller: 'book_user', as: :rent
   #get 'book_user', to: 'book_user#index', as: 'rent'
   resources :authors
   #devise_for :authors
   #devise_for :books
   resources :books
+  get 'books/:id', to: 'books#rent'
   get 'about', to: 'about#index'
   get 'contact', to: 'contact#index'
   #get 'books', to: 'books#index'

@@ -11,7 +11,6 @@ class Ability
       can :manage, :all
     else
       can :read, :all
-      can :create, Rent
     end
 
     # Define abilities for the user here. For example:

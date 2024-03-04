@@ -9,6 +9,7 @@ class BooksController < ApplicationController
   # GET /books or /books.json
   def index
     @books = Book.all
+    @rents = BookUser.where(user_id: current_user)
   end
 
   # GET /books/1 or /books/1.json
@@ -54,6 +55,15 @@ class BooksController < ApplicationController
 
   # DELETE /books/1 or /books/1.json
   def destroy
+    BookUser.create(user_id: current_user, book_id: @book.id)
+
+    respond_to do |format|
+      format.html { redirect_to books_url, notice: "Book was successfully rented." }
+      format.json { head :no_content }
+    end
+  end
+
+  def rent
     @book.destroy!
 
     respond_to do |format|
