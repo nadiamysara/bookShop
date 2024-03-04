@@ -1,0 +1,2 @@
+module BookUserHelper
+end
