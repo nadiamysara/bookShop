@@ -8,8 +8,8 @@
 <% end %>
 
 <%= link_to "Books", books_path, class: "nav-link" %>
-<%= link_to "Rents", rents_path, class: "nav-link" %>
-<%= link_to "Author", author_path, class: "nav-link" %>
+<%= link_to "Books", books_path, class: "nav-link" %>
+<%= link_to "Author", authors_path, class: "nav-link" %>
 <% if user_signed_in? %>
     <%= link_to "Profile", edit_user_registration_path, class: "nav-link" %>
 <% end %>

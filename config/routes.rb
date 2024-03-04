@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :rents
+  resources :authors
+  devise_for :authors
+  devise_for :books
   resources :books
   get 'about', to: 'about#index'
   get 'contact', to: 'contact#index'

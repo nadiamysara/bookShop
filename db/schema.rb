@@ -10,12 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_01_074809) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_04_014532) do
   create_table "authors", force: :cascade do |t|
     t.string "name"
     t.string "dec"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "book_users", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "book_id", null: false
+    t.string "due_date"
+    t.string "date"
+    t.date "return_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_book_users_on_book_id"
+    t.index ["user_id"], name: "index_book_users_on_user_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -35,15 +47,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_01_074809) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "rents", force: :cascade do |t|
-    t.string "book"
-    t.string "user"
-    t.date "dateBorrowed"
-    t.date "dateDue"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -58,5 +61,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_01_074809) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "book_users", "books"
+  add_foreign_key "book_users", "users"
   add_foreign_key "books", "authors"
 end
