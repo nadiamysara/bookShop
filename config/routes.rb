@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'book_user/create'
   get 'book_user/update'
-  get 'bookuser', to: 'book_user#index'
+  get 'book_user', to: 'book_user#index', as: 'rent'
   resources :authors
   devise_for :authors
   devise_for :books
