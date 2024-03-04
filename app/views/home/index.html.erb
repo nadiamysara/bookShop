@@ -2,7 +2,8 @@
 <p>Find me in app/views/home/index.html.erb</p>
 
 <% if user_signed_in? %>
-    <h1>Welcome <%= User.find(current_user.id).full_name %>!</h1>
+    <!--<h1>Welcome <%= User.find(current_user.id).full_name %>!</h1> -->
+    <h1>Welcome <%= format_name(User.find(current_user.id)) %>!</h1>
 <% else %>
     <h1>Welcome Visitor!</h1>
 <% end %>
