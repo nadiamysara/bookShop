@@ -5,6 +5,11 @@
   </p>
 
   <p>
+    <strong>Author:</strong>
+    <%= Author.find(book.author_id).name %>
+  </p>
+
+  <p>
     <strong>Genre:</strong>
     <%= book.genre %>
   </p>

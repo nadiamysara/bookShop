@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   resources :authors
   #devise_for :authors
   #devise_for :books
-  resources :books
-  get 'books/:id', to: 'books#rent'
+  resources :books do
+    get :rent , on: :member
+  end
+  #get 'books/:id', to: 'books#new_rent' , as: :new_rent
   get 'about', to: 'about#index'
   get 'contact', to: 'contact#index'
   #get 'books', to: 'books#index'
