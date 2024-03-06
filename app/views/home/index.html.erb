@@ -13,3 +13,6 @@
 <% if user_signed_in? %>
     <%= link_to "Profile", edit_user_registration_path, class: "nav-link" %>
 <% end %>
+<% if user_signed_in? %>
+    <%= link_to "Rent", book_users_path, class: "nav-link" %>
+<% end %>

@@ -8,7 +8,9 @@
   |<% end %>
   <%= link_to "Rent this book", rent_book_path(@book)%> | 
   <%= link_to "Back to books", books_path %>
+  <!-- Cannot delete book records because of the references
   <% if can? :destroy, @books %>
     <%= button_to "Destroy this book", @book, method: :delete %>
   <% end %>
+   -->
 </div>

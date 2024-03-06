@@ -1,0 +1,27 @@
+<div id="<%= dom_id book_user %>">
+  <p>
+    <strong>Book:</strong>
+    <%= Book.find(book_user.book_id).title %>
+  </p>
+
+  <p>
+    <strong>Rent date:</strong>
+    <%= (book_user.created_at).strftime("%e %b %Y | %r") %>
+  </p>
+
+  <p>
+    <strong>Due date:</strong>
+    <%= book_user.due_date %>
+  </p>
+
+  <p>
+    <strong>Return date:</strong>
+    <%= book_user.return_date %>
+  </p>
+
+  <p>
+    <strong>Status:</strong>
+    <%= book_user.status %>
+  </p>
+
+</div>

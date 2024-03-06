@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :book_users
   #get 'book_user/create'
   #get 'book_user/update'
   #get 'book_user/:id/update', to: 'book_user#edit'
