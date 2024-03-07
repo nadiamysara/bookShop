@@ -2,9 +2,24 @@
 
 <%= render @author %>
 
+<div id="books">
+  <b>This writers works:</b>
+  <ol>
+      <% Book.all.where(author_id: @author).each do |book| %>     
+        <li>
+          <%= book.title %> | 
+          <!-- <%= Author.find(book.author_id).name  %> | -->
+          <%= link_to "Show this book", book %>
+        </li>
+      <% end %>
+  </ol>
+</div>
+
 <div>
-  <%= link_to "Edit this author", edit_author_path(@author) %> |
+  <% if can? :update, @author %>
+    <%= link_to "Edit this author", edit_author_path(@author) %> |
+  <% end %>
   <%= link_to "Back to authors", authors_path %>
 
-  <%= button_to "Destroy this author", @author, method: :delete %>
+  <!--<%= button_to "Destroy this author", @author, method: :delete %>-->
 </div>

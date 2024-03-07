@@ -10,5 +10,6 @@
     </p>
   <% end %>
 </div>
-
-<%= link_to "New author", new_author_path %>
+<% if can? :create, @author %>
+  <%= link_to "New author", new_author_path %>
+<% end %>

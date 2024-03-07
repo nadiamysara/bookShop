@@ -3,8 +3,6 @@ class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
 
   load_and_authorize_resource
-  # comments_controller.rb possibility
-  load_and_authorize_resource :nested => :books
 
   # GET /books or /books.json
   def index
@@ -54,21 +52,24 @@ class BooksController < ApplicationController
   end
 
   # DELETE /books/1 or /books/1.json
-  def rent
-    BookUser.create(user_id: current_user.id, book_id: @book.id)
-
-    respond_to do |format|
-      format.html { redirect_to books_url, notice: "Book was successfully rented." }
-      format.json { head :no_content }
-    end
-  end
-
   def destroy
     @book.destroy!
 
     respond_to do |format|
       format.html { redirect_to books_url, notice: "Book was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def rent
+    respond_to do |format|
+      if BookUser.create(user_id: current_user.id, book_id: @book.id)
+        format.html { redirect_to book_url(@book), notice: "Book was successfully rented." }
+        format.json { render :show, status: :created, location: @book }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @book.errors, status: :unprocessable_entity }
+      end
     end
   end
 

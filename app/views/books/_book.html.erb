@@ -6,7 +6,8 @@
 
   <p>
     <strong>Author:</strong>
-    <%= Author.find(book.author_id).name %>
+    <!--<%= Author.find(book.author_id).name %>-->
+    <%= link_to Author.find(book.author_id).name, author_path(book.author_id) %>
   </p>
 
   <p>
