@@ -69,3 +69,7 @@ end
 gem "devise", "~> 4.9"
 
 gem "cancancan", "~> 3.5"
+
+gem 'sidekiq', '~> 7.2', '>= 7.2.2'
+
+gem 'sinatra', github: 'sinatra/sinatra'

@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_041630) do
   create_table "book_users", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "book_id", null: false
-    t.datetime "due_date"
+    t.datetime "due_date", default: "2024-01-01 00:00:00"
     t.datetime "return_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

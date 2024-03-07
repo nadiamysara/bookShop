@@ -1,4 +1,5 @@
 <div id="<%= dom_id book_user %>">
+<%= book_user.id %>
   <p>
     <strong>Book:</strong>
     <%= Book.find(book_user.book_id).title %>
@@ -11,7 +12,7 @@
 
   <p>
     <strong>Due date:</strong>
-    <%= book_user.due_date %>
+    <%= (book_user.due_date).strftime("%e %b %Y | %r") %>
   </p>
 
   <p>

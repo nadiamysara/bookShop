@@ -23,5 +23,11 @@ module DemoDevise
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    #Setting a Backend for Background/Active job
+    config.active_job.queue_adapter = :sidekiq
+
+    #Active Support Time Zone
+    config.time_zone = 'Kuala Lumpur'
   end
 end
