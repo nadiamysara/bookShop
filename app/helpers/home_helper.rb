@@ -1,9 +1,9 @@
 module HomeHelper
   def format_name(user)
     if user.admin == true
-      "Back Mr. #{user.full_name}"
+      "Back Mr. #{user.name}"
     else
-      "Mt. #{user.full_name}"
+      "Mt. #{user.name}"
     end
   end
 end
