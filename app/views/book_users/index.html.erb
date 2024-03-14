@@ -6,7 +6,8 @@
   <% @book_users.each do |book_user| %>
     <%= render book_user %>
     <p>
-      <%= link_to "Show this book user", book_path(book_user.book_id) %>
+      <%= link_to "Show this book", book_path(book_user.book_id) %>
+      <%= link_to "Show this rent", book_user %>
     </p>
   <% end %>
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_08_080255) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_12_061510) do
   create_table "authors", force: :cascade do |t|
     t.string "name"
     t.string "dec"
@@ -44,6 +44,53 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_08_080255) do
     t.index ["author_id"], name: "index_books_on_author_id"
   end
 
+  create_table "histories", force: :cascade do |t|
+    t.string "source"
+    t.string "payment_status"
+    t.string "currency"
+    t.float "transaction_amount"
+    t.float "transaction_amount_received"
+    t.string "order_number"
+    t.string "merchant_reference_number"
+    t.string "exchange_number"
+    t.string "buyer_name"
+    t.string "buyer_phone"
+    t.string "buyer_email"
+    t.string "payment_id"
+    t.string "client_ip"
+    t.string "status_url"
+    t.string "retry_url"
+    t.string "receipt_url"
+    t.string "checksum"
+    t.string "transaction_fee"
+    t.string "payment_mode"
+    t.string "payment_method"
+    t.string "fpx_model"
+    t.string "fpx_debit_auth_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer "book_user_id", null: false
+    t.decimal "price", default: "1.0"
+    t.boolean "status", default: false
+    t.string "buyer_name"
+    t.string "buyer_email"
+    t.string "buyer_phone"
+    t.float "transaction_amount"
+    t.string "product_description"
+    t.string "callback_url"
+    t.string "redirect_url"
+    t.string "token"
+    t.boolean "redirect_post"
+    t.string "uid"
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_user_id"], name: "index_payments_on_book_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -62,4 +109,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_08_080255) do
   add_foreign_key "book_users", "books"
   add_foreign_key "book_users", "users"
   add_foreign_key "books", "authors"
+  add_foreign_key "payments", "book_users"
 end

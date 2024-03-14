@@ -6,6 +6,6 @@ class BookPassDueJob < ApplicationJob
     BookUser.find(rent).update(status: "Due")
 
     # Create payment record to pay dued books
-    Payment.create(book_user_id:rent, url:"none")
+    # Payment.create(book_user_id:rent)
   end
 end

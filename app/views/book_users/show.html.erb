@@ -3,6 +3,8 @@
 <%= render @book_user %>
 
 <div>
+  <%#= link_to "Pay this book", pay_book_user_path(@book_user) %> |
+  <%= link_to "Pay this book", new_book_user_payment_path %>
   <%= link_to "Edit this book user", edit_book_user_path(@book_user) %> |
   <%= link_to "Back to book users", book_users_path %>
 

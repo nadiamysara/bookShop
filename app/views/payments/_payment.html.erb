@@ -1,5 +1,10 @@
 <div id="<%= dom_id payment %>">
   <p>
+    <strong>ID:</strong>
+    <%= payment.id %>
+  </p>
+  
+  <p>
     <strong>Rent:</strong>
     <%= payment.book_user_id %>
   </p>
@@ -15,8 +20,58 @@
   </p>
 
   <p>
-    <strong>Url:</strong>
-    <%= payment.url %>
+    <strong>Name:</strong>
+    <%= payment.buyer_name %>
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    <%= payment.buyer_email %>
+  </p>
+
+  <p>
+    <strong>Phone:</strong>
+    <%= payment.buyer_phone %>
+  </p>
+
+  <p>
+    <strong>transaction_amount:</strong>
+    <%= payment.transaction_amount %>
+  </p>
+
+  <p>
+    <strong>product_description:</strong>
+    <%= payment.product_description %>
+  </p>
+
+  <p>
+    <strong>callback_url:</strong>
+    <%= payment.callback_url %>
+  </p>
+  
+  <p>
+    <strong>redirect_url:</strong>
+    <%= payment.redirect_url %>
+  </p>
+  
+  <p>
+    <strong>Auth Token:</strong>
+    <%= payment.token %>
+  </p>
+
+  <p>
+    <strong>redirect_post:</strong>
+    <%= payment.redirect_post %>
+  </p>
+
+  <p>
+    <strong>uid:</strong>
+    <%= payment.uid %>
+  </p>
+
+  <p>
+    <strong>checksum:</strong>
+    <%= payment.checksum %>
   </p>
 
 </div>

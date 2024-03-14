@@ -1,9 +1,25 @@
 Rails.application.routes.draw do
-  resources :payments
+  resources :histories
+  resources :payments do
+    get :pay, on: :collection
+    post :payment_redirect
+  end
+  # resources :payments do
+  #   get :pay , on: :member
+  #   post :pay , on: :member
+  # end
+  require 'repost'
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
-
   resources :book_users
+  # resources :book_users do
+  #   resources :payments do
+  #     get :pay , on: :member
+  #     post :pay , on: :member
+  #   end
+  #   get :pay , on: :member
+  #   post :paying, on: :member
+  # end
   #get 'book_user/create'
   #get 'book_user/update'
   #get 'book_user/:id/update', to: 'book_user#edit'

@@ -1,10 +1,10 @@
-<%= form_with(model: payment, data:{turbo: false}) do |form| %>
-  <% if payment.errors.any? %>
+<%= form_for(@payment) do |form| %>
+  <% if @payment.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+      <h2><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
 
       <ul>
-        <% payment.errors.each do |error| %>
+        <% @payment.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -25,13 +25,8 @@
   </div>
 
   <div>
-    <%#= form.label "Order Number", style: "display: block" %>
-    <%#= form.text_field :id, :value => @payment.id, :disabled => true %>
-    <%= form.label "Book Rent ID", style: "display: block" %>
-    <%= form.collection_select :book_user_id, BookUser.where(status: "Due"), :id, :id, prompt: true %>
-
-    <%#= form.label :order_number, style: "display: block" %>
-    <%#= form.collection_select :order_number, BookUser.where(status: "Due"), :id, :id, prompt: true %>
+    <%= form.label "Order Number", style: "display: block" %>
+    <%= form.text_field :id, :value => @book_user.id %>
   </div>
   <div>
     <%= form.label "Pay Price", style: "display: block" %>
