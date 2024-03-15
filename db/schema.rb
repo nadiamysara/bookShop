@@ -82,6 +82,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_072019) do
     t.string "buyer_phone"
     t.float "transaction_amount", default: 2.0
     t.string "product_description"
+    t.string "order_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_user_id"], name: "index_payments_on_book_user_id"

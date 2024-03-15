@@ -11,6 +11,7 @@ class CreatePayments < ActiveRecord::Migration[7.1]
           t.string :buyer_phone
           t.float :transaction_amount, default: 2.00
           t.string :product_description
+          t.string :order_number
 
           t.timestamps
         end

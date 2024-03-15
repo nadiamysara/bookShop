@@ -28,7 +28,7 @@ class PaymentsController < ApplicationController
     @payment = Payment.new(payment_params)
     if @payment.save
       params = {
-        order_number: @payment.id,
+        order_number: @payment.order_number,
         buyer_name: @payment.buyer_name,
         buyer_email: @payment.buyer_email,
         buyer_phone: @payment.buyer_phone,
@@ -54,7 +54,7 @@ class PaymentsController < ApplicationController
   def update
     if @payment.save
       params = {
-        order_number: @payment.id,
+        order_number: @payment.order_number,
         buyer_name: @payment.buyer_name,
         buyer_email: @payment.buyer_email,
         buyer_phone: @payment.buyer_phone,
@@ -94,6 +94,6 @@ class PaymentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def payment_params
-      params.require(:payment).permit(:book_user_id, :buyer_name, :buyer_email, :buyer_phone, :transaction_amount, :product_description, :user_id)
+      params.require(:payment).permit(:book_user_id, :buyer_name, :buyer_email, :buyer_phone, :transaction_amount, :product_description, :user_id, :order_number)
     end
 end

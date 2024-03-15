@@ -37,9 +37,15 @@
     <%#= form.label :order_number, style: "display: block" %>
     <%#= form.collection_select :order_number, BookUser.where(status: "Due"), :id, :id, prompt: true %>
   </div>
+
+  <div>
+    <%= form.label "Order Number", style: "display: block" %>
+    <%= form.text_field :order_number, :value => g_order_number(current_user.id), readonly: true %>
+  </div>
+
   <div>
     <%= form.label "Pay Price", style: "display: block" %>
-    <%= form.text_field :transaction_amount, :value => @payment.transaction_amount, :disabled => true %>
+    <%= form.text_field :transaction_amount, :value => 3.00, :disabled => true %>
   </div>
   <div>
     <%= form.label "Description", style: "display: block" %>
