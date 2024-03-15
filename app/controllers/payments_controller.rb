@@ -6,7 +6,7 @@ class PaymentsController < ApplicationController
 
   # GET /payments or /payments.json
   def index
-    #if current_user.admin?
+    # if current_user.admin?
       @payments = Payment.all
     # else
     #   @payments = Payment.where(user_id: current_user.id)
@@ -68,8 +68,6 @@ class PaymentsController < ApplicationController
   end
 
   def redirect
-    # payment_id = params[:redirect_url].split(/\W/)[6] #Amik dari sini https://stackoverflow.com/questions/9534271/extract-the-last-word-in-sentence-string dan https://stackoverflow.com/questions/6560577/how-do-i-split-a-string-into-three-parts ttp lebih baik kat order_number split kan macam dalam link 2nd
-
     redirect_params = {
       source: params[:source],
       payment_status: params[:payment_status],

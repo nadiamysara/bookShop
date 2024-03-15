@@ -1,15 +1,4 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @payment %>
-
-<div>
-  <%= link_to "Edit this payment", edit_payment_path(@payment) %> |
-  <%= link_to "Back to payments", payments_path %>
-
-  <%= button_to "Destroy this payment", @payment, method: :delete %>
-</div>
-
-<% History.where(payment_id: @payment).each do |history| %>     
+<div id="<%= dom_id history %>">
   <p>
     <strong>ID:</strong>
     <%= history.id %>
@@ -27,7 +16,7 @@
 
   <p>
     <strong>Transaction Amount:</strong>
-    <%= history.currency %> <%= history.transaction_amount %>
+    <%= history.currency history.transaction_amount %>
   </p>
 
   <p>
@@ -39,4 +28,4 @@
     <strong>Merchant Reference Number:</strong>
     <%= history.merchant_reference_number %>
   </p>
-<% end %>
+</div>
