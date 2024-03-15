@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  #for error when redirect from securepay
+  #protect_from_forgery with: :exception
+  protect_from_forgery with: :null_session
 
   #adding name to devise User
   before_action :configure_permitted_parameters, if:  :devise_controller?

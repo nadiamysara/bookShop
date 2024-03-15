@@ -47,15 +47,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_072019) do
   create_table "histories", force: :cascade do |t|
     t.string "source"
     t.string "payment_status"
-    t.string "payment_method"
-    t.string "payment_mode"
-    t.string "fpx_model"
-    t.float "transaction_fee"
     t.string "currency"
-    t.string "fpx_debit_auth_code"
     t.float "transaction_amount"
     t.float "transaction_amount_received"
-    t.integer "book_user_id"
+    t.string "order_number"
     t.string "merchant_reference_number"
     t.string "exchange_number"
     t.string "buyer_name"
@@ -66,11 +61,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_072019) do
     t.string "status_url"
     t.string "retry_url"
     t.string "receipt_url"
-    t.string "params"
     t.string "checksum"
+    t.float "transaction_fee"
+    t.string "payment_mode"
+    t.string "payment_method"
+    t.string "fpx_model"
+    t.string "fpx_debit_auth_code"
+    t.string "params"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["book_user_id"], name: "index_histories_on_book_user_id", unique: true
   end
 
   create_table "payments", force: :cascade do |t|
@@ -107,7 +106,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_072019) do
   add_foreign_key "book_users", "books"
   add_foreign_key "book_users", "users"
   add_foreign_key "books", "authors"
-  add_foreign_key "histories", "book_users"
   add_foreign_key "payments", "book_users"
   add_foreign_key "payments", "users"
 end

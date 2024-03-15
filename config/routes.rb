@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :payments
+  resources :payments do
+    post :redirect
+  end
   require 'repost'
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
