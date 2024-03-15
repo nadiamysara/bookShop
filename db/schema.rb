@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_12_061510) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_14_072019) do
   create_table "authors", force: :cascade do |t|
     t.string "name"
     t.string "dec"
@@ -47,10 +47,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_12_061510) do
   create_table "histories", force: :cascade do |t|
     t.string "source"
     t.string "payment_status"
+    t.string "payment_method"
+    t.string "payment_mode"
+    t.string "fpx_model"
+    t.float "transaction_fee"
     t.string "currency"
+    t.string "fpx_debit_auth_code"
     t.float "transaction_amount"
     t.float "transaction_amount_received"
-    t.string "order_number"
+    t.integer "book_user_id"
     t.string "merchant_reference_number"
     t.string "exchange_number"
     t.string "buyer_name"
@@ -61,34 +66,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_12_061510) do
     t.string "status_url"
     t.string "retry_url"
     t.string "receipt_url"
+    t.string "params"
     t.string "checksum"
-    t.string "transaction_fee"
-    t.string "payment_mode"
-    t.string "payment_method"
-    t.string "fpx_model"
-    t.string "fpx_debit_auth_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["book_user_id"], name: "index_histories_on_book_user_id", unique: true
   end
 
   create_table "payments", force: :cascade do |t|
     t.integer "book_user_id", null: false
-    t.decimal "price", default: "1.0"
     t.boolean "status", default: false
+    t.integer "user_id"
     t.string "buyer_name"
     t.string "buyer_email"
     t.string "buyer_phone"
-    t.float "transaction_amount"
+    t.float "transaction_amount", default: 2.0
     t.string "product_description"
-    t.string "callback_url"
-    t.string "redirect_url"
-    t.string "token"
-    t.boolean "redirect_post"
-    t.string "uid"
-    t.string "checksum"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_user_id"], name: "index_payments_on_book_user_id"
+    t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -109,5 +106,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_12_061510) do
   add_foreign_key "book_users", "books"
   add_foreign_key "book_users", "users"
   add_foreign_key "books", "authors"
+  add_foreign_key "histories", "book_users"
   add_foreign_key "payments", "book_users"
+  add_foreign_key "payments", "users"
 end

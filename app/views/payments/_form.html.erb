@@ -2,7 +2,6 @@
   <% if payment.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
-
       <ul>
         <% payment.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,6 +10,11 @@
     </div>
   <% end %>
 
+  <div>
+    <%#= hidden_field_tag :user_id, current_user.id %>
+    <%= form.label "ID", style: "display: block" %>
+    <%= form.text_field :user_id, :value => current_user.id %>
+  </div>
   <div>
     <%= form.label "Full Name", style: "display: block" %>
     <%= form.text_field :buyer_name, :value => current_user.name %>
@@ -35,16 +39,11 @@
   </div>
   <div>
     <%= form.label "Pay Price", style: "display: block" %>
-    <%= form.text_field :transaction_amount %>
+    <%= form.text_field :transaction_amount, :value => @payment.transaction_amount, :disabled => true %>
   </div>
   <div>
     <%= form.label "Description", style: "display: block" %>
     <%= form.text_field :product_description %>
-  </div>
-
-  <div>
-    <%= form.label :price, style: "display: block" %>
-    <%= form.text_field :price, :value => @payment.price, :disabled => true %>
   </div>
 
   <div>

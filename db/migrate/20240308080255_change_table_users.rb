@@ -3,7 +3,7 @@ class ChangeTableUsers < ActiveRecord::Migration[7.1]
     reversible do |dir|
       dir.up do
         change_table :users do |t|
-          t.rename :full_name, :name
+          t.rename :name, :name
           t.column :phone, :string
         end
         change_table :book_users do |t|
@@ -15,7 +15,7 @@ class ChangeTableUsers < ActiveRecord::Migration[7.1]
 
       dir.down do
         change_table :users do |t|
-          t.rename :name, :full_name
+          t.rename :name, :name
           t.remove :phone
         end
         change_table :book_users do |t|
