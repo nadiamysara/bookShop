@@ -15,6 +15,12 @@ class PaymentsController < ApplicationController
 
   # GET /payments/1 or /payments/1.json
   def show
+    # unless user_signed_in?
+    #   if cookies[:user_id].present?
+    #     user = User.find(cookies[:user_id])
+    #     sign_in(user) if user.present?
+    #   end
+    # end
   end
 
   # GET /payments/new
@@ -31,6 +37,7 @@ class PaymentsController < ApplicationController
     @payment = Payment.new(payment_params)
     if @payment.save
       params = {
+        #user_id: @payment.user_id,
         order_number: @payment.order_number,
         buyer_name: @payment.buyer_name,
         buyer_email: @payment.buyer_email,
@@ -68,6 +75,12 @@ class PaymentsController < ApplicationController
   end
 
   def redirect
+    # Auto login
+    string = params[:order_number]
+    user_id = string[14..]
+    user = User.find(user_id)
+    sign_in(user)
+
     redirect_params = {
       source: params[:source],
       payment_status: params[:payment_status],
@@ -91,7 +104,6 @@ class PaymentsController < ApplicationController
       retry_url: params[:retry_url],
       receipt_url: params[:receipt_url],
       checksum: params[:checksum],
-      params: params[:params]
     }
     @history = History.create(redirect_params)
 
@@ -101,9 +113,11 @@ class PaymentsController < ApplicationController
     else
       _notice = "Payment failed"
     end
+
+    @payment = Payment.find(params[:payment_id])
     # redirect_to payment_redirect_path(payment_id: @payment.id, id: @history.id), notice: _notice
     # redirect_to payment_redirect_path(@payment), notice: _notice
-    redirect_to payments_path(@payment), notice: _notice
+    redirect_to payment_path(@payment), notice: _notice
   end
 
   private
@@ -118,6 +132,6 @@ class PaymentsController < ApplicationController
     end
 
     def redirect_params
-      params.require(:payment).permit(:payment_id, :buyer_name, :buyer_email, :buyer_phone, :transaction_amount, :transaction_amount_received, :client_ip, :order_number, :source, :payment_status, :currency, :merchant_reference_number, :exchange_number, :status_url, :retry_url, :receipt_url, :checksum, :transaction_fee, :payment_mode, :payment_method, :fpx_model, :fpx_debit_auth_code, :params)
+      params.require(:payment).permit(:payment_id, :buyer_name, :buyer_email, :buyer_phone, :transaction_amount, :transaction_amount_received, :client_ip, :order_number, :source, :payment_status, :currency, :merchant_reference_number, :exchange_number, :status_url, :retry_url, :receipt_url, :checksum, :transaction_fee, :payment_mode, :payment_method, :fpx_model, :fpx_debit_auth_code)
     end
 end

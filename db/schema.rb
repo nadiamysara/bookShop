@@ -67,7 +67,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_072019) do
     t.string "payment_method"
     t.string "fpx_model"
     t.string "fpx_debit_auth_code"
-    t.string "params"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

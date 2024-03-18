@@ -25,8 +25,9 @@ class CreateHistories < ActiveRecord::Migration[7.1]
           t.string :payment_method
           t.string :fpx_model
           t.string :fpx_debit_auth_code
-          t.string :params
+          #t.string :params
           #t.belongs_to :book_user, index: { unique: true }, foreign_key: true
+          #t.belongs_to :user_id
 
           t.timestamps
         end
