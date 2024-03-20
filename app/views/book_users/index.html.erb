@@ -1,18 +1,50 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Book users</h1>
+<h1>Rent History</h1>
 
 <div id="book_users">
-  <% @book_users.each do |book_user| %>
-    <%= render book_user %>
-    <p>
-      <%= link_to "Show this book", book_path(book_user.book_id) %>
-      <%= link_to "Show this rent", book_user %>
-      <% if book_user.status == "Due" %>
-        <%= link_to "Pay this due", new_book_user_payment_path(book_user_id: book_user.id) %>
-      <% end %>
-    </p>
-  <% end %>
+  <table class="table table-striped">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Book Title</th>
+        <th scope="col">Rent Date</th>
+        <th scope="col">Due Date</th>
+        <!--<th scope="col">Return Date</th>-->
+        <th scope="col">Status</th>
+        <th scope="col">Due Fee</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+      <% @book_users.each do |book_user| %>
+      <tr>
+        <td><%= book_user.id %></td>
+        <td><%= Book.find(book_user.book_id).title %></td>
+        <td><%= (book_user.created_at).strftime("%e %b %Y @ %r") %></td>
+        <td><%= (book_user.due_date).strftime("%e %b %Y @ %r") %></td>
+        <!--<td><%#= book_user.return_date %></td>-->
+        <td><%= book_user.status %></td>
+        <td><%= book_user.price %></td>
+        <td>
+          <%= link_to "Show this rent", book_path(book_user.book_id) %>
+        </td>
+        <td>
+          <%= link_to "Show this book", book_user %>
+        </td>
+        <td>
+          <%= link_to "Pay due fee", new_book_user_payment_path(book_user_id: book_user.id) %>
+        </td>
+      <tr>
+    <% end %>
+  </table>
+
+    <%#= render book_user %>
+      <%#= link_to "Show this book", book_path(book_user.book_id) %>
+      <%#= link_to "Show this rent", book_user %>
+      <%# if book_user.status == "Due" %>
+        <%#= link_to "Pay this due", new_book_user_book_user_path(book_user_id: book_user.id) %>
+      <%# end %>
+  <%# end %>
 </div>
 
 <%= link_to "Borrow more books", books_path %>

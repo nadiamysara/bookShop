@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_14_072019) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_20_042545) do
   create_table "authors", force: :cascade do |t|
     t.string "name"
     t.string "dec"
@@ -29,6 +29,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_072019) do
     t.string "desc"
     t.string "checksum"
     t.string "token"
+    t.float "price", default: 0.0
     t.index ["book_id"], name: "index_book_users_on_book_id"
     t.index ["user_id"], name: "index_book_users_on_user_id"
   end

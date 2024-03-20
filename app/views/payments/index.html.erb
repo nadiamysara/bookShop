@@ -3,13 +3,38 @@
 <h1>Payments</h1>
 
 <div id="payments">
-  <% @payments.each do |payment| %>
-    <%= render payment %>
-    <p>
-      <%= link_to "Show this payment", payment %>
-      <%#= link_to "Show this payment redirect" %>
-    </p>
-  <% end %>
+  <table class="table table-striped">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Rent ID</th>
+      <th scope="col">Status</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Transaction Amount</th>
+      <th scope="col">Product Description</th>
+      <th scope="col"></th>
+    </tr>
+    <% @payments.each do |payment| %>
+      <%#= render payment %>
+      <tr>
+        <td><%= payment.id %></td>
+        <td><%= payment.book_user_id %></td>
+        <td><%= payment.status %></td>
+        <td><%= payment.buyer_name %></td>
+        <td><%= payment.buyer_email %></td>
+        <td><%= payment.buyer_phone %></td>
+        <td><%= payment.transaction_amount %></td>
+        <td><%= payment.product_description %></td>
+        <td>
+          <p>
+            <%= link_to "Show this payment", payment %>
+            <%#= link_to "Show this payment redirect" %>
+          </p>
+        </td>
+      <tr>
+    <% end %>
+  </table>
 </div>
 
 <%= link_to "New payment", new_payment_path %>

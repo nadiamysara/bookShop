@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   end
   require 'repost'
   require 'sidekiq/web'
+  require 'sidekiq/cron/web'
   mount Sidekiq::Web => '/sidekiq'
   resources :book_users do
     resources :payments, shallow: true do

@@ -9,11 +9,11 @@
       </ul>
     </div>
   <% end %>
-
+  
   <div>
-    <%#= hidden_field_tag :user_id, current_user.id %>
-    <%= form.label "ID", style: "display: block" %>
-    <%= form.text_field :user_id, :value => current_user.id, :readonly => true %>
+    <%= form.hidden_field :user_id, :value => current_user.id %>    
+    <%#= form.label "ID", style: "display: block" %>
+    <%#= form.text_field :user_id, :value => current_user.id, :readonly => true %>
   </div>
   <div>
     <%= form.label "Full Name", style: "display: block" %>
@@ -35,14 +35,15 @@
     <%#= form.label :order_number, style: "display: block" %>
     <%#= form.collection_select :order_number, BookUser.where(status: "Due"), :id, :id, prompt: true %>
 
-    <%= form.label "Book Rent ID", style: "display: block" %>
+    <%#= form.label "Book Rent ID", style: "display: block" %>
     <%#= form.collection_select :book_user_id, BookUser.where(status: "Due"), :id, :id, prompt: true %>
-    <%= form.text_field :book_user_id, :value => params[:book_user_id] %>
+    <%= form.hidden_field :book_user_id, :value => params[:book_user_id] %>    
+    <%#= form.text_field :book_user_id, :value => params[:book_user_id] %>
   </div>
 
   <div>
     <%= form.label "Order Number", style: "display: block" %>
-    <%= form.text_field :order_number, :value => g_order_number(current_user.id), readonly: true %>
+    <%= form.text_field :order_number, value: g_order_number(current_user.id), readonly: true %>
   </div>
 
   <div>
