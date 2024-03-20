@@ -1,5 +1,5 @@
 class BookUsersController < ApplicationController
-  before_action :set_book_user, only: %i[ show edit update destroy paying pay ]
+  before_action :set_book_user, only: %i[ show edit update destroy ]
 
   # GET /book_users or /book_users.json
   def index

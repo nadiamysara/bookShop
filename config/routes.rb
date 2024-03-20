@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   require 'repost'
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
-  resources :book_users
+  resources :book_users do
+    resources :payments, shallow: true do
+      post :redirect
+    end
+  end
   resources :authors
   resources :books do
     get :rent , on: :member

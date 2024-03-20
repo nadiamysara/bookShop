@@ -4,13 +4,15 @@ class PaymentsController < ApplicationController
   #for error when redirect from securepay
   skip_before_action :verify_authenticity_token, only: :redirect
 
+  #append_before_action :authenticate_user!
+
   # GET /payments or /payments.json
   def index
-    # if current_user.admin?
+    if current_user.admin == true
       @payments = Payment.all
-    # else
-    #   @payments = Payment.where(user_id: current_user.id)
-    # end
+    else
+      @payments = Payment.where(user_id: current_user.id)
+    end
   end
 
   # GET /payments/1 or /payments/1.json
@@ -25,6 +27,7 @@ class PaymentsController < ApplicationController
 
   # GET /payments/new
   def new
+
     @payment = Payment.new()
   end
 
@@ -106,15 +109,15 @@ class PaymentsController < ApplicationController
       checksum: params[:checksum],
     }
     @history = History.create(redirect_params)
-
+    @payment = Payment.find(params[:payment_id])
     payment_status = params[:payment_status]
-    if payment_status == true
+    if payment_status == "true"
       _notice = "Payment was a success"
+      @payment.update(status: true)
+      BookUser.where(id:@payment.book_user_id).update(status: "Paid")
     else
       _notice = "Payment failed"
     end
-
-    @payment = Payment.find(params[:payment_id])
     # redirect_to payment_redirect_path(payment_id: @payment.id, id: @history.id), notice: _notice
     # redirect_to payment_redirect_path(@payment), notice: _notice
     redirect_to payment_path(@payment), notice: _notice

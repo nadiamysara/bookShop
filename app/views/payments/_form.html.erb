@@ -1,9 +1,9 @@
-<%= form_with(model: payment, data:{turbo: false}) do |form| %>
-  <% if payment.errors.any? %>
+<%= form_with(model: @payment, data:{turbo: false}) do |form| %>
+  <% if @payment.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+      <h2><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
       <ul>
-        <% payment.errors.each do |error| %>
+        <% @payment.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -13,7 +13,7 @@
   <div>
     <%#= hidden_field_tag :user_id, current_user.id %>
     <%= form.label "ID", style: "display: block" %>
-    <%= form.text_field :user_id, :value => current_user.id %>
+    <%= form.text_field :user_id, :value => current_user.id, :readonly => true %>
   </div>
   <div>
     <%= form.label "Full Name", style: "display: block" %>
@@ -31,11 +31,13 @@
   <div>
     <%#= form.label "Order Number", style: "display: block" %>
     <%#= form.text_field :id, :value => @payment.id, :disabled => true %>
-    <%= form.label "Book Rent ID", style: "display: block" %>
-    <%= form.collection_select :book_user_id, BookUser.where(status: "Due"), :id, :id, prompt: true %>
 
     <%#= form.label :order_number, style: "display: block" %>
     <%#= form.collection_select :order_number, BookUser.where(status: "Due"), :id, :id, prompt: true %>
+
+    <%= form.label "Book Rent ID", style: "display: block" %>
+    <%#= form.collection_select :book_user_id, BookUser.where(status: "Due"), :id, :id, prompt: true %>
+    <%= form.text_field :book_user_id, :value => params[:book_user_id] %>
   </div>
 
   <div>
@@ -45,7 +47,7 @@
 
   <div>
     <%= form.label "Pay Price", style: "display: block" %>
-    <%= form.text_field :transaction_amount, :value => 3.00, :disabled => true %>
+    <%= form.text_field :transaction_amount, :value => 3.00, readonly: true %>
   </div>
   <div>
     <%= form.label "Description", style: "display: block" %>

@@ -8,6 +8,9 @@
     <p>
       <%= link_to "Show this book", book_path(book_user.book_id) %>
       <%= link_to "Show this rent", book_user %>
+      <% if book_user.status == "Due" %>
+        <%= link_to "Pay this due", new_book_user_payment_path(book_user_id: book_user.id) %>
+      <% end %>
     </p>
   <% end %>
 </div>

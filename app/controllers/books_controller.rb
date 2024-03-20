@@ -65,7 +65,7 @@ class BooksController < ApplicationController
     @rent = BookUser.new(user_id: current_user.id, book_id: @book.id, due_date: 10.seconds.from_now, status: "renting")
     respond_to do |format|
       if @rent.save
-        BookPassDueJob.set(wait_until: 1.seconds.from_now).perform_later(@rent.id)
+        BookPassDueJob.set(wait_until: 30.seconds.from_now).perform_later(@rent.id)
         format.html { redirect_to book_url(@book), notice: "Book was successfully rented." }
         format.json { render :show, status: :created, location: @book }
       else

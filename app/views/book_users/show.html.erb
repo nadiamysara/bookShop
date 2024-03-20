@@ -4,9 +4,15 @@
 
 <div>
   <%#= link_to "Pay this book", pay_book_user_path(@book_user) %> |
-  <%= link_to "Pay this book", new_book_user_payment_path %>
-  <%= link_to "Edit this book user", edit_book_user_path(@book_user) %> |
+  <%#= link_to "Pay this book", new_book_user_payment_path %> |
+  <% if @book_user.status == "Due" %>
+    <%= link_to "Pay this due", new_book_user_payment_path(@book_user) %>
+  <% end %>
+  <% if can? :update, @book_user %>
+    <%= link_to "Edit this book user", edit_book_user_path(@book_user) %> |
+  <% end %>
   <%= link_to "Back to book users", book_users_path %>
-
-  <%= button_to "Destroy this book user", @book_user, method: :delete %>
+  <% if can? :destroy, @book_user %>
+    <%= button_to "Destroy this book user", @book_user, method: :delete %>
+  <% end %>
 </div>
