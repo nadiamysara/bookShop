@@ -10,51 +10,33 @@
     </div>
   <% end %>
   
+  <%= form.hidden_field :user_id, :value => current_user.id %>    
+  <%= form.hidden_field :book_user_id, :value => params[:book_user_id] %>    
   <div>
-    <%= form.hidden_field :user_id, :value => current_user.id %>    
-    <%#= form.label "ID", style: "display: block" %>
-    <%#= form.text_field :user_id, :value => current_user.id, :readonly => true %>
+    <%= form.label "Order Number", style: "display: block" %>
+    <%= form.text_field :order_number, value: g_order_number(current_user.id), readonly: true, class: "form-control-plaintext" %>
   </div>
   <div>
     <%= form.label "Full Name", style: "display: block" %>
-    <%= form.text_field :buyer_name, :value => current_user.name %>
+    <%= form.text_field :buyer_name, :value => current_user.name, class: "form-control" %>
   </div>
   <div>
     <%= form.label "E-mail", style: "display: block" %>
-    <%= form.text_field :buyer_email, :value => current_user.email %>
+    <%= form.text_field :buyer_email, :value => current_user.email, class: "form-control" %>
   </div>
   <div>
     <%= form.label "Phone Number", style: "display: block" %>
-    <%= form.text_field :buyer_phone, :value => current_user.phone %>
+    <%= form.text_field :buyer_phone, :value => current_user.phone, class: "form-control" %>
   </div>
-
   <div>
-    <%#= form.label "Order Number", style: "display: block" %>
-    <%#= form.text_field :id, :value => @payment.id, :disabled => true %>
-
-    <%#= form.label :order_number, style: "display: block" %>
-    <%#= form.collection_select :order_number, BookUser.where(status: "Due"), :id, :id, prompt: true %>
-
-    <%#= form.label "Book Rent ID", style: "display: block" %>
-    <%#= form.collection_select :book_user_id, BookUser.where(status: "Due"), :id, :id, prompt: true %>
-    <%= form.hidden_field :book_user_id, :value => params[:book_user_id] %>    
-    <%#= form.text_field :book_user_id, :value => params[:book_user_id] %>
-  </div>
-
-  <div>
-    <%= form.label "Order Number", style: "display: block" %>
-    <%= form.text_field :order_number, value: g_order_number(current_user.id), readonly: true %>
-  </div>
-
-  <div>
-    <%= form.label "Pay Price", style: "display: block" %>
-    <%= form.text_field :transaction_amount, :value => 3.00, readonly: true %>
+    <%= form.label "Fee", style: "display: block" %>
+    <%= form.text_field :transaction_amount, :value =>  BookUser.find(params[:book_user_id]).price, readonly: true, class: "form-control" %>
   </div>
   <div>
     <%= form.label "Description", style: "display: block" %>
-    <%= form.text_field :product_description %>
+    <%= form.text_field :product_description, class: "form-control" %>
   </div>
-
+  </br>
   <div>
     <%= form.submit %>
   </div>

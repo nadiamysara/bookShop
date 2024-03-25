@@ -1,5 +1,3 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Payments</h1>
 
 <div id="payments">
@@ -15,7 +13,8 @@
       <th scope="col">Product Description</th>
       <th scope="col"></th>
     </tr>
-    <% @payments.each do |payment| %>
+      <%# @payments.where(status: true).each do |payment| %> 
+      <% @payments.each do |payment| %>
       <%#= render payment %>
       <tr>
         <td><%= payment.id %></td>
@@ -28,7 +27,7 @@
         <td><%= payment.product_description %></td>
         <td>
           <p>
-            <%= link_to "Show this payment", payment %>
+            <%= link_to "Show details", payment %>
             <%#= link_to "Show this payment redirect" %>
           </p>
         </td>
@@ -37,4 +36,4 @@
   </table>
 </div>
 
-<%= link_to "New payment", new_payment_path %>
+<%#= link_to "New payment", new_payment_path %>

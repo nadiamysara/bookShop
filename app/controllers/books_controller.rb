@@ -12,6 +12,9 @@ class BooksController < ApplicationController
 
   # GET /books/1 or /books/1.json
   def show
+    if params[:notice].present?
+      flash[:notice] = params[:notice]
+    end
   end
 
   # GET /books/new
@@ -62,10 +65,10 @@ class BooksController < ApplicationController
   end
 
   def rent
-    @rent = BookUser.new(user_id: current_user.id, book_id: @book.id, due_date: 30.seconds.from_now, status: "renting")
+    @rent = BookUser.new(user_id: current_user.id, book_id: @book.id, due_date: 1.month.from_now, status: "renting")
     respond_to do |format|
       if @rent.save
-        BookPassDueJob.set(wait_until: 30.seconds.from_now).perform_later(@rent.id)
+        BookPassDueJob.set(wait_until: 1.month.from_now).perform_later(@rent.id)
         format.html { redirect_to book_url(@book), notice: "Book was successfully rented." }
         format.json { render :show, status: :created, location: @book }
       else
@@ -83,6 +86,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title, :genre, :year, :desc, :author_id)
+      params.require(:book).permit(:title, :genre, :year, :desc, :author_id, :purchase_status, :purchase_url)
     end
 end

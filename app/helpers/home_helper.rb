@@ -3,7 +3,7 @@ module HomeHelper
     if user.admin == true
       "Back Mr. #{user.name}"
     else
-      "Mt. #{user.name}"
+      "User #{user.name}"
     end
   end
 end

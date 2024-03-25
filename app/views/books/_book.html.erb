@@ -25,4 +25,12 @@
     <%= book.desc %>
   </p>
 
+  <p>
+    <strong>Purchase Status:</strong>
+    <% if book.purchase_status == true %>
+      <%= link_to "Available", book.purchase_url, class: "link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" %>
+    <% else %>
+      Not Available
+    <% end %>
+  </p>
 </div>

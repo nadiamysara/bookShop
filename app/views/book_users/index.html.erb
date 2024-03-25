@@ -1,5 +1,3 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Rent History</h1>
 
 <div id="book_users">
@@ -25,14 +23,14 @@
         <!--<td><%#= book_user.return_date %></td>-->
         <td><%= book_user.status %></td>
         <td><%= book_user.price %></td>
+        <td><%#= link_to "Show this book", book_path(book_user.book_id) %></td>
+        <td><%= link_to "View more detail", book_user %></td>
         <td>
-          <%= link_to "Show this rent", book_path(book_user.book_id) %>
-        </td>
-        <td>
-          <%= link_to "Show this book", book_user %>
-        </td>
-        <td>
+        <% if book_user.status == "Due" %>
           <%= link_to "Pay due fee", new_book_user_payment_path(book_user_id: book_user.id) %>
+        <% else %>
+          <%#= link_to "View payment", book_user_payment_path(book_user_id: book_user.id, id: Payment.find_by(book_user_id: book_user.id)) %>
+        <% end %>
         </td>
       <tr>
     <% end %>

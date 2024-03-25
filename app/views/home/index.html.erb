@@ -1,9 +1,10 @@
+<!--
 <h1>Home#index</h1>
 <p>Find me in app/views/home/index.html.erb</p>
-
+-->
 <% if user_signed_in? %>
     <!--<h1>Welcome <%= User.find(current_user.id).name %>!</h1> -->
-    <h1>Welcome <%= format_name(User.find(current_user.id)) %>!</h1>
+    <h1 style="font-family:cambria">Welcome <%= format_name(User.find(current_user.id)) %>!</h1>
 <% else %>
     <h1>Welcome Visitor!</h1>
 <% end %>
@@ -20,3 +21,42 @@
     <%#= link_to "Payment", payments_path, class: "nav-link" %>
 <% end %>
 -->
+
+<!-- SLideshow -->
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <% @books.each do |book| %>
+            <% unless book.id == 1 %>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<%= book.id-1 %>" aria-label="Slide <%= book.id %>"></button>
+            <% end %>
+        <% end %>
+    </div>
+    <div class="carousel-inner">
+        <% @books.each do |book| %>
+        <% if book.id == 1 %>
+        <div class="carousel-item active">
+            <a class="navbar-brand" href="books/1">
+                <img src="<%= image_path('books/1.png') %>" class="d-block w-100" alt="...">
+        <% else %>
+        <div class="carousel-item">
+            <a class="navbar-brand" href="books/<%= book.id %>">
+                <img src="<%= image_path('books/'+book.id.to_s+'.png') %>" class="d-block w-100" alt="...">
+        <% end %>
+            </a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h5><%= book.title %></h5>
+                    <p><%= book.desc %></p>
+                </div>
+        </div>
+    <% end %>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>

@@ -1,5 +1,4 @@
 <div id="<%= dom_id book_user %>">
-<%= book_user.id %>
   <p>
     <strong>Book:</strong>
     <%= Book.find(book_user.book_id).title %>
@@ -27,7 +26,7 @@
 
   <p>
     <strong>Price:</strong>
-    <%= book_user.price %>
+    RM <%= book_user.price %>0
   </p>
 
 </div>

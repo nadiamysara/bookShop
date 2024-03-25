@@ -1,5 +1,5 @@
-update_price_due:
-  cron: '*/2 * * * * ', # Runs At every 3rd minute
-  class: 'UpdatePriceDueJob',
-  queue: default
-)
+# update_price_due:
+#   cron: '*/1 * * * * ', # Runs At every 3rd minute
+#   class: 'UpdatePriceDueJob',
+#   queue: default
+# )
