@@ -66,7 +66,8 @@ class BookUsersController < ApplicationController
     respond_to do |format|
       if @book_user.update(rent_status: false, return_date: DateTime.now)
         Book.find(@book_user.book_id).update(rent_status: false)
-        User.find(current_user.id).update(rent_limit: current_user.rent_limit - 1)
+        @borrower = User.find(@book_user.user_id)
+        @borrower.update(rent_limit: @borrower.rent_limit - 1)
         format.html { redirect_to book_user_url(@book_user), notice: "Book was successfully returned." }
         format.json { render :show, status: :ok, location: @book_user }
       else

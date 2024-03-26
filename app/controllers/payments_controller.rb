@@ -116,8 +116,6 @@ class PaymentsController < ApplicationController
       _notice = "Payment was a success"
       @payment.update(status: true)
       BookUser.where(id:@payment.book_user_id).update(due_status: false, price: 0.00)
-      Book.where(id: BookUser.where(id:@payment.book_user_id).book_id).update(rent_status: false)
-      #User.find(current_user.id).update(rent_limit: "rent_limit = rent_limit - 1")
     else
       _notice = "Payment failed"
     end

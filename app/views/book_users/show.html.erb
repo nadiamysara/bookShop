@@ -13,10 +13,14 @@
     <%= link_to "Show payment", payment_path(Payment.find_by(book_user_id: @book_user.id).id) %> |
   <% end %>
   <% if can? :update, @book_user %>
-    <%= link_to "Return this book", return_book_book_user_path(@book_user)%> |
+    <% if @book_user.rent_status == true %>
+      <%= link_to "Return this book", return_book_book_user_path(@book_user)%> |
+    <% end %>
   <% end %>
   <% if can? :update, @book_user %>
-    <%= link_to "Void the due fee", void_fee_book_user_path(@book_user)%> |
+    <% if @book_user.due_status == true %>
+      <%= link_to "Void the due fee", void_fee_book_user_path(@book_user)%> |
+    <% end %>
   <% end %>
   <%= link_to "Return", book_users_path %>
   <% if can? :destroy, @book_user %>
