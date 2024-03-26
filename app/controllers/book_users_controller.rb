@@ -1,4 +1,5 @@
 class BookUsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_book_user, only: %i[ show edit update destroy return_book void_fee ]
 
   # GET /book_users or /book_users.json
@@ -65,7 +66,7 @@ class BookUsersController < ApplicationController
     respond_to do |format|
       if @book_user.update(rent_status: false, return_date: DateTime.now)
         Book.find(@book_user.book_id).update(rent_status: false)
-        User.find(current_user.id).update(rent_limit: "rent_limit - 1")
+        User.find(current_user.id).update(rent_limit: current_user.rent_limit - 1)
         format.html { redirect_to book_user_url(@book_user), notice: "Book was successfully returned." }
         format.json { render :show, status: :ok, location: @book_user }
       else

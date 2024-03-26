@@ -67,12 +67,12 @@ class BooksController < ApplicationController
   def rent
     if @book.rent_status == false
       unless BookUser.where(user_id: current_user.id).find_by(due_status: true).present?
-        if current_user.rent_limit < 1
+        if current_user.rent_limit < 2
           @rent = BookUser.new(user_id: current_user.id, book_id: @book.id, due_date: 1.month.from_now, rent_status: true)
           respond_to do |format|
             if @rent.save
               @book.update(rent_status: true)
-              User.find(current_user.id).update(rent_limit: "rent_limit + 1")
+              User.find(current_user.id).update(rent_limit: current_user.rent_limit + 1)
               BookPassDueJob.set(wait_until: 1.month.from_now).perform_later(@rent.id)
               format.html { redirect_to book_url(@book), notice: "Book was successfully rented." }
               format.json { render :show, status: :created, location: @book }

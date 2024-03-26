@@ -4,6 +4,9 @@
   <table class="table table-striped">
       <tr>
         <th scope="col">ID</th>
+        <% if current_user.admin == true %>
+          <th scope="col">User ID</th>
+        <% end %>
         <th scope="col">Book Title</th>
         <th scope="col">Rent Date</th>
         <th scope="col">Due Date</th>
@@ -16,8 +19,12 @@
         <th scope="col"></th>
       </tr>
       <% @book_users.each do |book_user| %>
+      <%# @book_users.order(:user_id).each do |book_user| %>
       <tr>
         <td><%= book_user.id %></td>
+        <% if current_user.admin == true %>
+          <td><%= book_user.user_id %></td>
+        <% end %>
         <td><%= Book.find(book_user.book_id).title %></td>
         <td><%= (book_user.created_at).strftime("%e %b %Y @ %r") %></td>
         <td><%= (book_user.due_date).strftime("%e %b %Y @ %r") %></td>
@@ -26,15 +33,19 @@
         <% else %>
           <td> Have not returned</td>
         <% end %>
-        <% if book_user.return_date == true %>
+        <% if book_user.rent_status == true %>
           <td>Renting</td>
         <% else %>
           <td>Returned</td>
         <% end %>
-        <% if book_user.rent_status == true %>
+        <% if book_user.due_status == true %>
           <td>Due</td>
         <% else %>
-          <td>Paid</td>
+          <% if Payment.find_by(book_user_id: book_user.id).present? %>
+            <td>Paid</td>
+          <% else %>
+            <td>-</td>
+          <% end %>
         <% end %>
         <td><%= book_user.price %></td>
         <td><%#= link_to "Show this book", book_path(book_user.book_id) %></td>

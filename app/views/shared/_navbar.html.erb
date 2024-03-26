@@ -21,13 +21,15 @@
             <%= link_to "Authors", authors_path, class: "nav-link" %>
           </ul>
         </li>
-        <% if current_user.admin == true %>
+        <% if user_signed_in? && current_user.admin == true %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Administartion
             </a>
             <ul class="dropdown-menu">
-              <%= link_to "User Accounts", users_path, class: "nav-link" %>
+              <%= link_to "View User Accounts", users_path, class: "nav-link" %>
+              <%= link_to "View Renting Records", book_users_path, class: "nav-link" %>
+              <%= link_to "View Payments", payments_path, class: "nav-link" %>
             </ul>
           </li>
         <% end %>
@@ -37,7 +39,7 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-person"></i>User
+              <i class="bi bi-person"></i>My Account
             </a>
             <ul class="dropdown-menu">
               <%= link_to "Profile", edit_user_registration_path, class: "nav-link" %>

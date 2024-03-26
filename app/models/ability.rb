@@ -4,9 +4,9 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    if user.admin?
+    if user.try(:admin?)
       can :manage, :all
-    elsif user.present?
+    else
       can :read, :all
       can :rent, Book
       can :create, Payment

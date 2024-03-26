@@ -24,7 +24,7 @@
   <p>
     <strong>Rent Status:</strong>
     <%#= book_user.rent_status %>
-    <% if book_user.return_date == true %>
+    <% if book_user.rent_status == true %>
       Renting
     <% else %>
       Returned
@@ -34,10 +34,14 @@
   <p>
     <strong>Due Status:</strong>
     <%#= book_user.due_status %>
-    <% if book_user.rent_status == true %>
+    <% if book_user.due_status == true %>
       Due
     <% else %>
-      Paid
+      <% if Payment.find_by(book_user_id: book_user.id).present? %>
+        <td>Paid</td>
+      <% else %>
+        <td>No due</td>
+      <% end %>
     <% end %>
   </p>
 
