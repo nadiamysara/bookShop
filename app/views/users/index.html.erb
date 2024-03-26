@@ -1,0 +1,46 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Users</h1>
+
+<!--
+<div id="users">
+  <%# @users.each do |user| %>
+    <%#= render user %>
+    <p>
+      <%#= link_to "Show this user", user %>
+    </p>
+  <%# end %>
+</div>
+-->
+
+<div>
+ <table class="table table-striped">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Status</th>
+        <th scope="col">Numbers of borrowed users</th>
+        <th scope="col"></th>
+      </tr>
+      <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.phone %></td>
+        <% if user.admin == true %>
+          <!--<td><img src="<%#= image_path('users/'+user.id.to_s+'.png') %>" width="150px"></td>-->
+          <td>Admin</td>
+        <% else %>
+          <td>Users</td>
+        <% end %>
+        <td><%= user.rent_limit %></td>
+        <td><%= link_to "Edit this user", edit_user_path(user.id) %></td>
+      <tr>
+    <% end %>
+  </table>
+</div>
+
+<%#= link_to "New user", new_user_path %>

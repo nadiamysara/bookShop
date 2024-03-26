@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users, only: [:index, :edit, :update, :destroy]
   resources :payments do
     post :redirect
   end
