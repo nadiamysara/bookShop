@@ -65,15 +65,39 @@ class BooksController < ApplicationController
   end
 
   def rent
-    @rent = BookUser.new(user_id: current_user.id, book_id: @book.id, due_date: 1.month.from_now, status: "renting")
-    respond_to do |format|
-      if @rent.save
-        BookPassDueJob.set(wait_until: 1.month.from_now).perform_later(@rent.id)
-        format.html { redirect_to book_url(@book), notice: "Book was successfully rented." }
-        format.json { render :show, status: :created, location: @book }
+    if @book.rent_status == false
+      unless BookUser.where(user_id: current_user.id).find_by(due_status: true).present?
+        if current_user.rent_limit < 1
+          @rent = BookUser.new(user_id: current_user.id, book_id: @book.id, due_date: 1.month.from_now, rent_status: true)
+          respond_to do |format|
+            if @rent.save
+              @book.update(rent_status: true)
+              User.find(current_user.id).update(rent_limit: "rent_limit + 1")
+              BookPassDueJob.set(wait_until: 1.month.from_now).perform_later(@rent.id)
+              format.html { redirect_to book_url(@book), notice: "Book was successfully rented." }
+              format.json { render :show, status: :created, location: @book }
+            else
+              format.html { render :new, status: :unprocessable_entity }
+              format.json { render json: @book.errors, status: :unprocessable_entity }
+            end
+          end
+        else
+          respond_to do |format|
+            format.html { redirect_to book_url(@book), alert: "You have reached the limit numbers of book you can borrow at a time. Please return at least one book to proceed." }
+          end
+        end
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
+        respond_to do |format|
+          format.html { redirect_to book_url(@book), alert: "You cannot borrow anymore books if there are unpaid due fees. Please pay your due fees to continue borrowing." }
+        end
+      end
+    elsif BookUser.find_by(book_id: @book.id).user_id == current_user.id
+      respond_to do |format|
+        format.html { redirect_to book_url(@book), alert: "You are currently renting this book. Please check the rent history for more detail." }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to book_url(@book), alert: "This book is currently not available to be rented because someone else is currently borrowing it." }
       end
     end
   end
@@ -86,6 +110,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title, :genre, :year, :desc, :author_id, :purchase_status, :purchase_url)
+      params.require(:book).permit(:title, :genre, :year, :desc, :author_id, :purchase_status, :purchase_url, :rent_status, :cover)
     end
 end

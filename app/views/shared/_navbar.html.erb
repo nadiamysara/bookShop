@@ -20,8 +20,21 @@
             <%= link_to "Books", books_path, class: "nav-link" %>
             <%= link_to "Authors", authors_path, class: "nav-link" %>
           </ul>
-          <div>
+        </li>
+        <% if current_user.admin == true %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Browse
+            </a>
+            <ul class="dropdown-menu">
+              <%= link_to "Books", books_path, class: "nav-link" %>
+            </ul>
+          </li>
+        <% end %>
         <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "Current borrowed book: #{current_user.rent_limit}", books_path, class: "nav-link" %>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="bi bi-person"></i>User
@@ -31,12 +44,13 @@
               <%= link_to "Rent History", book_users_path, class: "nav-link" %>
               <li><hr class="dropdown-divider"></li>
               <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-outline-success" %>
-              <% else %>
-              <%= button_to "Log in", new_user_session_path, class: "btn btn-dark"  %>
             </ul>
           </li>
-      <% end %>
-      </div>
+        <% end %>
+        <li>
+          <% unless user_signed_in? %>
+              <%= button_to "Log in", new_user_session_path, class: "btn btn-dark"  %>
+        <% end %>
         </li>
       </ul>
     </div>

@@ -6,22 +6,39 @@
 
   <p>
     <strong>Rent date:</strong>
-    <%= (book_user.created_at).strftime("%e %b %Y | %r") %>
+    <%= (book_user.created_at).strftime("%e %b %Y @ %r") %>
   </p>
 
   <p>
     <strong>Due date:</strong>
-    <%= (book_user.due_date).strftime("%e %b %Y | %r") %>
+    <%= (book_user.due_date).strftime("%e %b %Y @ %r") %>
   </p>
 
   <p>
     <strong>Return date:</strong>
-    <%= book_user.return_date %>
+    <% if book_user.return_date.present? %>
+      <td><%= (book_user.return_date).strftime("%e %b %Y @ %r") %></td>
+    <% end %>
   </p>
 
   <p>
-    <strong>Status:</strong>
-    <%= book_user.status %>
+    <strong>Rent Status:</strong>
+    <%#= book_user.rent_status %>
+    <% if book_user.return_date == true %>
+      Renting
+    <% else %>
+      Returned
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Due Status:</strong>
+    <%#= book_user.due_status %>
+    <% if book_user.rent_status == true %>
+      Due
+    <% else %>
+      Paid
+    <% end %>
   </p>
 
   <p>

@@ -55,16 +55,29 @@
   </div>
 
   <div>
+    <%= form.label :cover, style: "display: block" %>
+    <%= form.text_field :cover %>
+  </div>
+
+  <div>
     <%= form.label :purchase_status, style: "display: block" %>
     <%= form.radio_button :purchase_status, true %>
-    <%= form.label :purchase_status, "Available" %></br>
+    <%= form.label :purchase_status, "Available to purchase" %></br>
     <%= form.radio_button :purchase_status, false %>
-    <%= form.label :purchase_status, "Not Available" %>
+    <%= form.label :purchase_status, "Not available to purchase" %>
   </div>
   
   <div>
     <%= form.label :purchase_url, style: "display: block" %>
     <%= form.text_field :purchase_url %>
+  </div>
+
+  <div>
+    <%= form.label :rent_status, style: "display: block" %>
+    <%= form.radio_button :rent_status, false %>
+    <%= form.label :rent_status, "Available to rent" %></br>
+    <%= form.radio_button :rent_status, true %>
+    <%= form.label :rent_status, "Not available to rent" %>
   </div>
 
   <div>

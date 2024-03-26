@@ -41,13 +41,13 @@
         <% else %>
         <div class="carousel-item">
             <a class="navbar-brand" href="books/<%= book.id %>">
-                <img src="<%= image_path('books/'+book.id.to_s+'.png') %>" class="d-block w-100" alt="...">
+                <img src="<%= image_path('books/'+book.cover+'') %>" class="d-block w-100" alt="...">
         <% end %>
             </a>
-                <div class="carousel-caption d-none d-md-block">
-                    <h5><%= book.title %></h5>
-                    <p><%= book.desc %></p>
-                </div>
+            <div class="carousel-caption d-none d-md-block">
+                <h5><%= book.title %></h5>
+                <p><%= book.desc %></p>
+            </div>
         </div>
     <% end %>
     </div>

@@ -13,6 +13,18 @@
     <%= f.email_field :email, autofocus: false, autocomplete: "email" %>
   </div>
 
+  <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone, autofocus: false, autocomplete: "phone" %>
+  </div>
+
+  <% if can? :update, @user %>
+  <div class="field">
+    <%= f.label :rent_limit %><br />
+    <%= f.text_field :rent_limit, autofocus: false, autocomplete: "rent_limit" %>
+  </div>
+  <% end %>
+
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>

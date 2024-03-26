@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   require 'sidekiq/cron/web'
   mount Sidekiq::Web => '/sidekiq'
   resources :book_users do
+    get :return_book, on: :member
+    get :void_fee, on: :member
     resources :payments, shallow: true do
       post :redirect
     end

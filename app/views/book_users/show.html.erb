@@ -3,17 +3,23 @@
 <div>
   <%#= link_to "Pay this book", pay_book_user_path(@book_user) %>
   <%#= link_to "Pay this book", new_book_user_payment_path %>
-  <% if @book_user.status == "Due" %>
+  <% if @book_user.due_status == true %>
     <%= link_to "Pay this due", new_book_user_payment_path(@book_user) %> |
   <% end %>
   <% if can? :update, @book_user %>
     <%= link_to "Edit this book user", edit_book_user_path(@book_user) %> |
   <% end %>
-  <% if @book_user.status=="Paid" %>
+  <% if @book_user.due_status == false && Payment.find_by(book_user_id:@book_user.id).present? %>
     <%= link_to "Show payment", payment_path(Payment.find_by(book_user_id: @book_user.id).id) %> |
+  <% end %>
+  <% if can? :update, @book_user %>
+    <%= link_to "Return this book", return_book_book_user_path(@book_user)%> |
+  <% end %>
+  <% if can? :update, @book_user %>
+    <%= link_to "Void the due fee", void_fee_book_user_path(@book_user)%> |
   <% end %>
   <%= link_to "Return", book_users_path %>
   <% if can? :destroy, @book_user %>
-    <%= button_to "Destroy this book user", @book_user, method: :delete %>
+    <%= button_to "Destroy this record", @book_user, method: :delete %>
   <% end %>
 </div>

@@ -25,10 +25,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_21_031625) do
     t.datetime "return_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "status", default: "not returned"
-    t.string "desc"
-    t.string "checksum"
-    t.string "token"
+    t.boolean "due_status", default: false
+    t.boolean "rent_status", default: false
     t.float "price", default: 0.0
     t.index ["book_id"], name: "index_book_users_on_book_id"
     t.index ["user_id"], name: "index_book_users_on_user_id"
@@ -44,6 +42,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_21_031625) do
     t.integer "author_id", null: false
     t.boolean "purchase_status", default: false
     t.string "purchase_url"
+    t.boolean "rent_status", default: false
+    t.string "cover"
     t.index ["author_id"], name: "index_books_on_author_id"
   end
 
@@ -101,6 +101,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_21_031625) do
     t.boolean "admin", default: false
     t.string "name"
     t.string "phone"
+    t.integer "rent_limit", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

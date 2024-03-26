@@ -12,13 +12,13 @@
   <% end %>
 
   <div>
-    <%= form.label :user_id_id, style: "display: block" %>
-    <%= form.text_field :user_id_id %>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.text_field :user_id %>
   </div>
 
   <div>
-    <%= form.label :book_id_id, style: "display: block" %>
-    <%= form.text_field :book_id_id %>
+    <%= form.label :book_id, style: "display: block" %>
+    <%= form.text_field :book_id %>
   </div>
 
   <div>
@@ -32,10 +32,27 @@
   </div>
 
   <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
+    <%= form.label :rent_status, style: "display: block" %>
+    <%= form.radio_button :rent_status, true %>
+    <%= form.label :rent_status, "Have not return book" %></br>
+    <%= form.radio_button :rent_status, false %>
+    <%= form.label :rent_status, "Have return book" %>
   </div>
 
+  <div>
+    <%= form.label :due_status, style: "display: block" %>
+    <%= form.radio_button :due_status, true %>
+    <%= form.label :due_status, "Have not paid due" %></br>
+    <%= form.radio_button :due_status, false %>
+    <%= form.label :due_status, "Have paid due" %>
+  </div>
+
+  <div>
+    <%= form.label :price, style: "display: block" %>
+    <%= form.text_field :price %>
+    <i>Price must be higher than RM 1.50</i>
+  </div>
+  </br>
   <div>
     <%= form.submit %>
   </div>
