@@ -33,7 +33,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_21_031625) do
   end
 
   create_table "books", force: :cascade do |t|
-    t.string "title"
+    t.string "title", default: "", null: false
     t.string "genre"
     t.integer "year"
     t.text "desc"
@@ -98,7 +98,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_21_031625) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "admin", default: false
+    t.boolean "admin", default: false, null: false
     t.string "name"
     t.string "phone"
     t.integer "rent_limit", default: 0

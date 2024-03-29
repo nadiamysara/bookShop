@@ -72,7 +72,7 @@ gem "cancancan", "~> 3.5"
 
 gem 'sidekiq', '~> 7.2', '>= 7.2.2'
 
-gem 'sinatra', github: 'sinatra/sinatra'
+gem 'sinatra', github: 'sinatra/sinatra' #use with sidekiq
 
 gem "repost", "= 0.4.1"
 
