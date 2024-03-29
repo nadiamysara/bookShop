@@ -13,7 +13,7 @@ set application: "bookshop"
 set deploy_to: "/var/www/%{application}"
 set nodenv_node_version: "20.11.0"
 set nodenv_install_yarn: true
-set git_url: "git@github.com:nadiamysara/demoDevise.git"
+set git_url: "git@github.com:nadiamysara/bookShop.git"
 set git_branch: "main"
 set git_exclusions: %w[
   .tomo/
