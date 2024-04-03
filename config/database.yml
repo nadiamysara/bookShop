@@ -11,15 +11,19 @@ default: &default
 
 development:
   <<: *default
-  database: storage/development.sqlite3
+  database: sqlite3:/home/deploy/bookShop/shared/development.sqlite3
+  #database: sqlite3:/home/deploy/bookShop/shared/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: storage/test.sqlite3
+  database: sqlite3:/home/deploy/bookShop/shared/test.sqlite3
 
 production:
   <<: *default
-  database: storage/production.sqlite3
+  database: sqlite3:/home/deploy/bookShop/shared/production.sqlite3
+  username: deploy
+  password: 123
+  #database: storage/production.sqlite3
