@@ -43,6 +43,10 @@ set linked_dirs: %w[
   tmp/sockets
 ]
 
+set linked_files: %w[
+  config/database.yml
+]
+
 setup do
   run "env:setup"
   run "core:setup_directories"
