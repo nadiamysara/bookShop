@@ -6,6 +6,7 @@ plugin "nodenv"
 plugin "puma"
 #plugin "rbenv"
 plugin "./plugins/bookShop.rb"
+plugin "sidekiq"
 
 host "deploy@128.199.149.87"
 
