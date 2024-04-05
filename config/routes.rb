@@ -18,8 +18,6 @@ Rails.application.routes.draw do
   resources :books do
     get :rent , on: :member
   end
-  get 'about', to: 'about#index'
-  get 'contact', to: 'contact#index'
   devise_for :users
   root to: 'home#index'
 
