@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   resources :books do
     get :rent , on: :member
   end
+  # can't find users/sign_out thus create new route https://github.com/heartcombo/devise#configuring-controllers
+  devise_scope :user do
+    get 'signout', to: 'devise/sessions#destroy'
+  end
   devise_for :users
   root to: 'home#index'
 

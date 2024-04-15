@@ -8,14 +8,17 @@ plugin "puma"
 plugin "./plugins/bookShop.rb"
 plugin "sidekiq"
 
-host "deploy@128.199.149.87"
+# host "deploy@128.199.149.87"
+host "deployer@68.183.235.219"
 
 set application: "bookShop"
-set deploy_to: "/home/deploy/%{application}"
-#set deploy_to: "/var/www/%{application}"
+# set deploy_to: "/home/deploy/%{application}"
+set deploy_to: "/var/www/%{application}"
+# set nodenv_node_version: "20.12.2"
 set nodenv_node_version: "20.11.0"
 set nodenv_install_yarn: true
-set git_url: "https://github.com/nadiamysara/bookShop.git"
+# set git_url: "https://github.com/nadiamysara/bookShop.git"
+set git_url: "git@github.com:nadiamysara/bookShop.git"
 set git_branch: "main"
 set git_exclusions: %w[
   .tomo/
