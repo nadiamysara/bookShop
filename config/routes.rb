@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :users, only: [:index, :edit, :update, :destroy]
+  resources :users, only: [:index, :destroy] do
+    get :editRecord, on: :member
+    patch :updateRecord, on: :member
+    put :updateRecord, on: :member
+  end
   resources :payments do
     post :redirect
   end

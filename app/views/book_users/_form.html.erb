@@ -39,19 +39,24 @@
     <%= form.label :rent_status, "Have return book" %>
   </div>
 
-  <div>
-    <%= form.label :due_status, style: "display: block" %>
-    <%= form.radio_button :due_status, true %>
-    <%= form.label :due_status, "Have not paid due" %></br>
-    <%= form.radio_button :due_status, false %>
-    <%= form.label :due_status, "Have paid due" %>
-  </div>
+  <% if @book_user.rent_status==false %>
+    <div>
+      <%= form.label :due_status, style: "display: block" %>
+      <%= form.radio_button :due_status, true %>
+      <%= form.label :due_status, "Have not paid due" %></br>
+      <%= form.radio_button :due_status, false %>
+      <%= form.label :due_status, "Have paid due / Have no due" %>
+    </div>
+  <% end %>
 
-  <div>
-    <%= form.label :price, style: "display: block" %>
-    <%= form.text_field :price %>
-    <i>Price must be higher than RM 1.50</i>
-  </div>
+  <% if @book_user.due_status==true %>
+    <div>
+      <%= form.label :price, style: "display: block" %>
+      <%= form.text_field :price %>
+      <i>Price must be higher than RM 1.50</i>
+    </div>
+  <% end %>
+
   </br>
   <div>
     <%= form.submit %>

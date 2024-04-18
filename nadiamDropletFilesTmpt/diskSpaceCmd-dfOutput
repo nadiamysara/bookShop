@@ -1,0 +1,22 @@
+root@nadiam:~# df
+Filesystem     1K-blocks    Used Available Use% Mounted on
+tmpfs              98048    1040     97008   2% /run
+/dev/vda1       25215872 7729116  17470372  31% /
+tmpfs             490232       0    490232   0% /dev/shm
+tmpfs               5120       0      5120   0% /run/lock
+/dev/vda15        106858    6186    100673   6% /boot/efi
+tmpfs              98044       4     98040   1% /run/user/1000
+tmpfs              98044       4     98040   1% /run/user/0
+
+root@nadiam:~# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs            96M  1.1M   95M   2% /run
+/dev/vda1        25G  7.4G   17G  31% /
+tmpfs           479M     0  479M   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+/dev/vda15      105M  6.1M   99M   6% /boot/efi
+tmpfs            96M  4.0K   96M   1% /run/user/1000
+tmpfs            96M  4.0K   96M   1% /run/user/0
+
+root@nadiam:~# df -k -h / | tail -1 | awk '{print "$"$3*0.06}'
+$0.444
