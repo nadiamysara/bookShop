@@ -7,7 +7,6 @@ plugin "puma"
 #plugin "rbenv"
 plugin "./plugins/bookShop.rb"
 plugin "sidekiq"
-#plugin "tomo-plugin-sidekiq"
 
 # host "deploy@128.199.149.87"
 # host "deployer@68.183.235.219"
@@ -70,6 +69,7 @@ setup do
   #run "rails:db_schema_load"
   #run "rails:db_seed"
   run "puma:setup_systemd"
+  run "sidekiq:setup_systemd"
 end
 
 deploy do
@@ -88,4 +88,5 @@ deploy do
   run "core:clean_releases"
   run "bundler:clean"
   run "core:log_revision"
+  run "sidekiq:restart"
 end
