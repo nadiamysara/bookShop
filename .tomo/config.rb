@@ -10,7 +10,7 @@ plugin "sidekiq"
 
 # host "deploy@128.199.149.87"
 # host "deployer@68.183.235.219"
-host "deploy@6159.65.1.41"
+host "deploy@159.65.1.41"
 
 set application: "bookShop"
 set deploy_to: "/home/deploy/%{application}"
