@@ -15,8 +15,11 @@
     <style>
       .carousel-caption {
         background-color: rgba(1,1,1,0.5);
+        /* background-color: rgba(234,234,234,0.5); */
+        /* color: black; */
         object-fit: contain;
         margin: 2px;
+        padding: 2px;
       }
       .carousel {
         margin: 0;
@@ -44,23 +47,23 @@
         height: 100%;
         object-fit: contain;
       }*/
+      body{
+        background-image:url('https://scholarlykitchen.sspnet.org/wp-content/uploads/2018/07/iStock-506432952.jpg');
+        background-attachment:fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
     </style>
   </head>
-
   <body>
-    <%# if user_signed_in? %>
-      <%#= button_to "Log out", destroy_user_session_path, method: :delete %>
-    <%# else %>
-      <%#= button_to "Log in", new_user_session_path %>
-    <%# end %>
-
     <%= render partial: "shared/navbar" %>
-
-    <div class="container">
-      <p style="color: green"><%#= notice %></p>
-      <p style="color: green" class="notice"><%= notice %></p>
-      <p style="color: red" class="alert"><%= alert %></p>
-      <%= yield %>
+    <div style="background-color: white; margin:20px; padding-bottom:40px;">
+      <div class="container">
+        <p style="color: green"><%#= notice %></p>
+        <p style="color: green" class="notice"><%= notice %></p>
+        <p style="color: red" class="alert"><%= alert %></p>
+        <%= yield %> 
+      </div>
     </div>
   </body>
 </html>

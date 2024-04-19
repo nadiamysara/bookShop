@@ -25,9 +25,10 @@
         <td><%= book.id %></td>
         <% if book.cover.present? %>
           <!--<td><img src="<%#= image_path('books/'+book.id.to_s+'.png') %>" width="150px"></td>-->
-          <td><img src="<%= image_path('books/'+book.cover+'') %>" width="150px"></td>
+          <td style="text-align:center"><img src="<%= image_path('books/'+book.cover+'') %>" width="150px"></td>
         <% else %>
-          <td><i>no cover image</i></td>
+          <!--<td><img src="<%= image_path('books/noCoverImage.jpg') %>" width="150px"></td>-->
+          <td style="text-align:center"><i >no cover image</i></td>
         <% end %>
         <td><%= link_to book.title, book %></td>
         <!--<td><%#= book.title %></td>-->
