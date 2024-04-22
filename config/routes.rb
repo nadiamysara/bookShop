@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   resources :users, only: [:index, :destroy] do
-    get :editRecord, on: :member
-    patch :updateRecord, on: :member
-    put :updateRecord, on: :member
+    collection do
+      get :editRecord
+      patch :updateRecord
+      put :updateRecord
+    end
   end
   resources :payments do
     post :redirect
@@ -21,6 +23,7 @@ Rails.application.routes.draw do
   resources :authors
   resources :books do
     get :rent , on: :member
+    get :search, on: :collection
   end
   # can't find users/sign_out thus create new route https://github.com/heartcombo/devise#configuring-controllers
   devise_scope :user do

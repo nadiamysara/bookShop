@@ -1,57 +1,70 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
   <div class="container-fluid">
-    <%= link_to "Kiah Store", root_path, class: "navbar-brand", style: "font-family:cambria" %>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- Brand -->
+    <a class="navbar-brand" style: "font-family:cambria" href="<%= root_path %>">
+      <img src="<%= image_path('booklogo.png') %>" alt="" width="auto" height="30" class="d-inline-block align-text-top">
+      Navbar
+    </a>
+    <!-- Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- Home -->
         <li class="nav-item">
-          <%= link_to "Home", root_path, class: "nav-link" %>
+          <a class="nav-link active" aria-current="page" href="<%= root_path %>">Home</a>
         </li>
+        <!-- Browse -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Browse
           </a>
-          <ul class="dropdown-menu">
-            <%= link_to "Books", books_path, class: "nav-link" %>
-            <%= link_to "Authors", authors_path, class: "nav-link" %>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><%= link_to "Books", books_path, class: "dropdown-item" %></li>
+            <li><%= link_to "Authors", authors_path, class: "dropdown-item" %></li>
           </ul>
         </li>
+        <!-- Admin -->
         <% if user_signed_in? && current_user.admin == true %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Administartion
             </a>
-            <ul class="dropdown-menu">
-              <%= link_to "View User Accounts", users_path, class: "nav-link" %>
-              <%= link_to "View Renting Records", book_users_path, class: "nav-link" %>
-              <%= link_to "View Payments", payments_path, class: "nav-link" %>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><%= link_to "View User Accounts", users_path, class: "dropdown-item" %></li>
+              <li><%= link_to "View Renting Records", book_users_path, class: "dropdown-item" %></li>
+              <li><%= link_to "View Payments", payments_path, class: "dropdown-item" %></li>
             </ul>
           </li>
         <% end %>
+        <!-- Num Borrowed -->
         <% if user_signed_in? %>
           <li class="nav-item">
             <%= link_to "Current borrowed book: #{current_user.rent_limit}", books_path, class: "nav-link" %>
           </li>
+        <% end %>
+      </ul>
+      <form class="d-flex" action="<%= search_books_path %>" method="get">
+        <input class="form-control me-2" type="search" name="q" placeholder="Search by title" aria-label="Search">
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+      </form>
+      <ul class="navbar-nav mb-2 mb-lg-0" style="padding-left:20px">
+        <% if user_signed_in? %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-person"></i>My Account
+              My Account
             </a>
             <ul class="dropdown-menu">
-              <%= link_to "Profile", edit_user_registration_path, class: "nav-link" %>
-              <%= link_to "Rent History", book_users_path, class: "nav-link" %>
+              <li><%= link_to "Profile", edit_user_registration_path, class: "nav-link" %></li>
+              <li><%= link_to "Rent History", book_users_path, class: "nav-link" %></li>
               <li><hr class="dropdown-divider"></li>
-              <%#= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-outline-success" %>
-              <%= link_to "Log out", signout_path, class: "btn btn-outline-success" %>
+              <li><%= link_to "Sign Out", signout_path, class: "nav-link"%></li>
             </ul>
           </li>
+        <% else %>
+          <li><%= button_to "Sign In", new_user_session_path, class: "btn btn-dark"  %></li>
         <% end %>
-        <li>
-          <% unless user_signed_in? %>
-              <%= button_to "Log in", new_user_session_path, class: "btn btn-dark"  %>
-          <% end %>
-        </li>
       </ul>
     </div>
   </div>
