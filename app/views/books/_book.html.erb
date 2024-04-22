@@ -1,4 +1,9 @@
 <div id="<%= dom_id book %>">
+  <% if book.cover.attached? %>
+    <%= image_tag(book.cover, class: "cover-i") %>
+  <% else %>
+    <img src="<%= image_path('books/noCoverImage.jpg') %>" width="150px">
+  <% end %>
   <p>
     <strong>Title:</strong>
     <%= book.title %>

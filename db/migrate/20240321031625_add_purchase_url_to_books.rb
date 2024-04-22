@@ -4,6 +4,6 @@ class AddPurchaseUrlToBooks < ActiveRecord::Migration[7.1]
     add_column :books, :purchase_url, :string
     add_column :books, :rent_status, :boolean, default: false
     add_column :users, :rent_limit, :integer, default: 0
-    add_column :books, :cover, :string
+    add_column :books, :cover_path, :string
   end
 end

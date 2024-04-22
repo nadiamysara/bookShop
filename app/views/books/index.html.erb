@@ -23,9 +23,11 @@
       <% @books.each do |book| %>
       <tr>
         <td><%= book.id %></td>
-        <% if book.cover.present? %>
-          <!--<td><img src="<%#= image_path('books/'+book.id.to_s+'.png') %>" width="150px"></td>-->
-          <td style="text-align:center"><img src="<%= image_path('books/'+book.cover+'') %>" width="150px"></td>
+        <% if book.cover.attached? %>
+        <%# if book.cover_path.present? %>
+          <!--<td><img src="<%#= image_path('books/'+book.id.to_s+'.png') %>" width="150px"></td>
+          <td style="text-align:center"><img src="<%#= image_path('books/'+book.cover_path+'') %>" width="150px"></td>-->
+          <td style="text-align:center"><%= image_tag(book.cover, class: "cover-i") %></td>
         <% else %>
           <!--<td><img src="<%= image_path('books/noCoverImage.jpg') %>" width="150px"></td>-->
           <td style="text-align:center"><i >no cover image</i></td>

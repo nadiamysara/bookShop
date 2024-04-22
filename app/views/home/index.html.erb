@@ -41,8 +41,9 @@
             <div class="carousel-item">
         <% end %>
                 <!--<a class="navbar-brand" href="books/<%#= book.id %>">-->
-                    <% if book.cover.present? %>
-                        <img src="<%= image_path('books/'+book.cover+'') %>" class="d-block w-100" alt="...">
+                    <% if book.cover.attached? %>
+                        <%= image_tag(book.cover, class: "d-block w-100") %>
+                        <!--<img src="<%#= image_path('books/'+book.cover_path+'') %>" class="d-block w-100" alt="...">-->
                     <% end %>
                 <!--</a>-->
                 <div class="carousel-caption grid-container">

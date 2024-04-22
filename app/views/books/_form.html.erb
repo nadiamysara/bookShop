@@ -54,9 +54,19 @@
     <%= form.text_area :desc %>
   </div>
 
+ <div>
+    <%= form.label :cover_path, style: "display: block" %>
+    <%= form.text_field :cover_path %>
+  </div>
+
   <div>
     <%= form.label :cover, style: "display: block" %>
-    <%= form.text_field :cover %>
+    <% unless @book.cover.attached? %>
+      <%= form.file_field :cover %>
+    <% else %>
+        <%= form.file_field :cover %>
+        <%#= image_tag(book.cover, style: "width:50px; height:auto") %>
+    <% end %>
   </div>
 
   <div>

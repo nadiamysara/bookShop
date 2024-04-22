@@ -14,3 +14,48 @@
  *= require_self
  */
 @import "bootstrap";
+
+.carousel-caption {
+    background-color: rgba(1,1,1,0.5);
+    /* background-color: rgba(234,234,234,0.5); */
+    /* color: black; */
+    object-fit: contain;
+    margin: 2px;
+    padding: 2px;
+  }
+  .carousel {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 50vh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    grid-template-columns: 1fr 1fr;
+    justify-items: stretch;
+    align-items: stretch;
+    text-align: center;
+  }
+  .carousel-inner {
+    grid-column: 1/3;
+  }
+  .carousel-item.active {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+  }
+  /*
+  .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }*/
+  body{
+    background-image:url('https://scholarlykitchen.sspnet.org/wp-content/uploads/2018/07/iStock-506432952.jpg');
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .cover-i {
+    width: 150px;
+    height: auto;
+  }
