@@ -32,22 +32,22 @@
   </div>
 
   <div>
-    <%= form.label :rent_status, style: "display: block" %>
-    <%= form.radio_button :rent_status, true %>
-    <%= form.label :rent_status, "Have not return book" %></br>
-    <%= form.radio_button :rent_status, false %>
-    <%= form.label :rent_status, "Have return book" %>
+    <%#= form.label :rent_status, style: "display: block" %>
+    <%#= form.radio_button :rent_status, true %>
+    <%#= form.label :rent_status, "Have not return book" %><!--</br>-->
+    <%#= form.radio_button :rent_status, false %>
+    <%#= form.label :rent_status, "Have return book" %>
   </div>
 
-  <% if @book_user.rent_status==false %>
+  <%# if @book_user.rent_status==false %>
     <div>
-      <%= form.label :due_status, style: "display: block" %>
-      <%= form.radio_button :due_status, true %>
-      <%= form.label :due_status, "Have not paid due" %></br>
-      <%= form.radio_button :due_status, false %>
-      <%= form.label :due_status, "Have paid due / Have no due" %>
+      <%#= form.label :due_status, style: "display: block" %>
+      <%#= form.radio_button :due_status, true %>
+      <%#= form.label :due_status, "Have not paid due" %><!--</br>-->
+      <%#= form.radio_button :due_status, false %>
+      <%#= form.label :due_status, "Have paid due / Have no due" %>
     </div>
-  <% end %>
+  <%# end %>
 
   <% if @book_user.due_status==true %>
     <div>

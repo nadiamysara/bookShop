@@ -1,7 +1,12 @@
+  <% if @book.rent_status == true %>
+    ITS RENTED
+  <% else %>
+    AVAILABLE TO BORROW
+  <% end %>
 <%= render @book %>
-
 <div>
-  <%= link_to "Rent this book", rent_book_path(@book)%> |
+  <%#= link_to "Rent this book", rent_book_path(@book)%> 
+    <%= button_to "Borrow this book", rent_book_path(@book), method: :get %> |
   <% if @book.purchase_status == true %>
       <%= link_to "Buy this book", @book.purchase_url %> |
   <% end %>
