@@ -5,9 +5,9 @@
     <% @books.each do |book| %>
         <div class='border-t'>
             <%  if book.cover.attached? %>
-                <%= image_tag(book.cover, class: "cover-t") %>
+                <%= link_to image_tag(book.cover, class: "cover-t cursor-p"), book %>
             <% else %>
-                <img src="<%= image_path('books/noCoverImage.jpg') %>", class="cover-t">
+                <%= link_to image_tag('books/noCoverImage.jpg', class: "cover-t") , book %>
             <% end %><br>
             <%= link_to book.title, book, class: "link-primary link-underline-opacity-0 link-underline-opacity-100-hover", style: "font-size:14px" %><br>
             by <%= link_to Author.find(book.author_id).name, author_path(book.author_id), class: "link-dark link-underline-opacity-0 link-underline-opacity-100-hover" %><br>

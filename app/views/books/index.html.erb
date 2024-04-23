@@ -1,14 +1,11 @@
 <h1>Books</h1>
 
-<div id="books">
-  <%# @books.each do |book| %>
-    <%#= render book %>
-    <p>
-      <%#= link_to "Show this book", book %>
-    </p>
-  <%# end %>
+<div style="text-align:center">
+  <% if can? :create, Book %>
+    <%= link_to "New book", new_book_path %>
+  <% end %>
 </div>
-
+<br>
 <div>
  <table class="table table-striped">
       <tr>
@@ -35,14 +32,18 @@
         <td><%= link_to book.title, book %></td>
         <!--<td><%#= book.title %></td>-->
         <td><%= link_to Author.find(book.author_id).name, author_path(book.author_id) %></td>
-        <td><%= book.genre %></td>
+        <td>
+          <% Genre.where(id:BookGenre.where(book_id:book).select(:genre_id)).select(:category).each do |genre| %>     
+            <% unless genre.category == Genre.where(id:BookGenre.where(book_id:book).select(:genre_id)).select(:category).last.category %>
+              <%=h genre.category %>,
+            <% else %>
+              <%=h genre.category %>
+            <% end %>
+          <% end %>
+        </td>
         <td><%= book.year %></td>
         <td><%#= link_to "Show this book", book %></td>
       <tr>
     <% end %>
   </table>
 </div>
-
-<% if can? :create, Book %>
-  <%= link_to "New book", new_book_path %>
-<% end %>

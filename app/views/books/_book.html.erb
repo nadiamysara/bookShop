@@ -1,7 +1,7 @@
 <div id="<%= dom_id book %>">
   <div>
     <% if book.cover.attached? %>
-      <%= image_tag(book.cover, class: "cover-t", id:"img-t", alt:book.title) %>
+      <%= image_tag(book.cover, class: "cover-t cursor-p cursor-p", id:"img-t", alt:book.title) %>
     <% else %>
       <img src="<%= image_path('books/noCoverImage.jpg') %>" class="cover-t">
     <% end %>
@@ -20,7 +20,13 @@
 
   <p>
     <strong>Genre:</strong>
-    <%= book.genre %>
+    <% Genre.where(id:BookGenre.where(book_id:@book).select(:genre_id)).select(:category).each do |genre| %>     
+      <% unless genre.category == Genre.where(id:BookGenre.where(book_id:@book).select(:genre_id)).select(:category).last.category %>
+        <%=h genre.category %>,
+      <% else %>
+        <%=h genre.category %>
+      <% end %>
+    <% end %>
   </p>
 
   <p>

@@ -18,12 +18,16 @@
   
   <div>
     <%= form.label :author, style: "display: block" %>
-      <%= form.collection_select :author_id, Author.order(:name),:id,:name, prompt: true %>
+    <%= form.collection_select :author_id, Author.order(:name),:id,:name, prompt: true %>
   </div>
 
   <div>
     <%= form.label :genre, style: "display: block" %>
-    <%= form.text_field :genre %>
+    <%#= form.text_field :genre %>
+    <% for genre in Genre.all %>
+      <%= check_box_tag "book[genre_ids][]", genre.id, @book.genres.include?(genre) %>
+      <%=h genre.category %><br />
+    <% end %>
     <!--
     <%= check_box_tag(:genre) %>
     <%= label_tag(:genre, "non-fiction") %> </br>

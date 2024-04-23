@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :genres
   resources :users, only: [:index, :destroy] do
     collection do
       get :editRecord

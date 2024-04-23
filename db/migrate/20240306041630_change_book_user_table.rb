@@ -1,6 +1,5 @@
 class ChangeBookUserTable < ActiveRecord::Migration[7.1]
   def change
-
     reversible do |dir|
       change_table :book_users do |t|
         dir.up do
