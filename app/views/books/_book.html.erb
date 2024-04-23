@@ -1,9 +1,12 @@
 <div id="<%= dom_id book %>">
-  <% if book.cover.attached? %>
-    <%= image_tag(book.cover, class: "cover-i") %>
-  <% else %>
-    <img src="<%= image_path('books/noCoverImage.jpg') %>" width="150px">
-  <% end %>
+  <div>
+    <% if book.cover.attached? %>
+      <%= image_tag(book.cover, class: "cover-t", id:"img-t", alt:book.title) %>
+    <% else %>
+      <img src="<%= image_path('books/noCoverImage.jpg') %>" class="cover-t">
+    <% end %>
+  </div>
+
   <p>
     <strong>Title:</strong>
     <%= book.title %>
@@ -38,4 +41,10 @@
       Not Available
     <% end %>
   </p>
+</div>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
 </div>
