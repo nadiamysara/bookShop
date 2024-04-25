@@ -22,13 +22,13 @@
 <% end %>
 -->
 
-<!-- SLideshow -->
-<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+<!-- Featured -->
+<div id="carouselFeatured" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" style="background-color:black"></button>
+        <button type="button" data-bs-target="#carouselFeatured" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" style="background-color:black"></button>
         <% @books.each do |book| %>
             <% unless book.id == 1 %>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<%= book.id-1 %>" aria-label="Slide <%= book.id %>" style="background-color:black"></button>
+            <button type="button" data-bs-target="#carouselFeatured" data-bs-slide-to="<%= book.id-1 %>" aria-label="Slide <%= book.id %>" style="background-color:black"></button>
             <% end %>
         <% end %>
     </div>
@@ -46,14 +46,14 @@
                         <!--<img src="<%#= image_path('books/'+book.cover_path+'') %>" class="d-block w-100" alt="...">-->
                     <% end %>
                 <!--</a>-->
-                <div class="carousel-caption grid-container">
-                    <div class="grid-item">
+                <div class="carousel-caption">
+                    <div>
                         <h5><%= book.title %></h5>
                     </div>
-                    <div class="grid-item d-none d-md-block">
+                    <div class="d-none d-md-block">
                         <p><%= book.desc %></p>
                     </div>
-                    <div class="grid-item">
+                    <div>
                         <button type="button" onclick="location.href='books/<%= book.id %>';" class="btn btn-info btn-sm">Read Now</button>
                     </div>
                     <br>
@@ -61,12 +61,134 @@
             </div>
         <% end %>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev" style="background-color:grey">
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselFeatured" data-bs-slide="prev" style="background-color:grey">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next" style="background-color:grey">
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselFeatured" data-bs-slide="next" style="background-color:grey">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
 </div>
+<br>
+
+<!-- New -->
+<div id="carouselLatest" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <% i = 0 %>
+        <% @latests.each do |book| %>
+            <% if book.id == @latests.first.id %>
+                <button type="button" data-bs-target="#carouselLatest" data-bs-slide-to="<%= i %>" class="active" aria-current="true" aria-label="Slide 1" style="background-color:black"></button>
+            <% else %>
+                <button type="button" data-bs-target="#carouselLatest" data-bs-slide-to="<%= i %>" aria-label="Slide <%= i+1 %>" style="background-color:black"></button>
+            <% end %>
+            <% i = i + 1 %>
+        <% end %>
+    </div>
+    <div class="carousel-inner" style="background-color: aqua">
+        <% @latests.each do |book| %>
+            <% if book.id == @latests.first.id %>
+            <div class="carousel-item active" style="background-color: pink"> 
+            <% else %>
+            <div class="carousel-item">
+            <% end %>
+                <div id="latest-book"style="background-color: black">
+                    <table style="width:100%">
+                        <tr>
+                            <td rowspan=4  style="background-color:yellow; width:130px;"">
+                                <% if book.cover.attached? %>
+                                    <%= image_tag(book.cover, class: "cover-t") %>
+                                <% else %>
+                                    <%= image_tag('books/noCoverImage.jpg', class: "cover-t") %>
+                                <% end %>
+                            </td>
+                            <td style="background-color:green" class="d-none d-md-block">
+                                <p><%= book.title %></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="background-color:purple" class="d-none d-md-block">
+                                <div>
+                                    <p style="font-size: 12px; text-align: justify">
+                                        <% if book.desc.length > 750 %>
+                                            <%= truncate(book.desc, length: 750) %>
+                                            <%= link_to "...Read more", book %>
+                                            <script>
+                                            $('.read-more-<%= book.id %>').on('click', function(e) {
+                                                e.preventDefault()
+                                                $(this).parent().html('<%= escape_javascript book.desc %>')
+                                            })
+                                            </script>
+                                        </p>
+                                    <% else %>
+                                        <p style="font-size: 12px; text-align: justify"><%= book.desc %></p>
+                                    <% end %>
+                                <div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="background-color:orange;" class="d-none d-md-block">
+                                STAR
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="background-color:blue;" class="d-none d-md-block">
+                                <button type="button" onclick="location.href='books/<%= book.id %>';" class="btn btn-info btn-sm">Read Now</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="background-color:lime" class="d-block d-md-none">
+                                <button type="button" onclick="location.href='books/<%= book.id %>';" class="btn btn-info btn-sm">Read Now</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        <% end %>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselLatest" data-bs-slide="prev" style="background-color:grey">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselLatest" data-bs-slide="next" style="background-color:grey">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<br>
+
+<!-- By genre: fiction -->
+<f5><%= Genre.find(1).category %></f5>
+<div id="carouselFiction" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <% @fictions.each_slice(5).with_index do |slice, index| %>
+                <button type="button" data-bs-target="#carouselFiction" data-bs-slide-to="<%= index %>" class="<%= 'active' if index == 0 %>" aria-current="true" aria-label="Slide <%= index %>" style="background-color:black"></button>
+        <% end %>
+    </div>
+    <div class="carousel-inner" style="background-color: aqua">
+        <% @fictions.each_slice(5).with_index do |slice, index| %>
+            <div class="carousel-item <%= 'active' if index == 0 %>" style="background-color: pink"> 
+                <div id="genre-book"style="background-color: black">
+                    <% slice.each do |book| %>
+                        <div class="book-slide">
+                            <%  if book.cover.attached? %>
+                                <%= link_to image_tag(book.cover, class: "cover-t cursor-p"), book %>
+                            <% else %>
+                                <%= link_to image_tag('books/noCoverImage.jpg', class: "cover-t") , book %>
+                            <% end %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselFiction" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselFiction" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+

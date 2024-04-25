@@ -28,24 +28,6 @@
       <%= check_box_tag "book[genre_ids][]", genre.id, @book.genres.include?(genre) %>
       <%=h genre.category %><br />
     <% end %>
-    <!--
-    <%= check_box_tag(:genre) %>
-    <%= label_tag(:genre, "non-fiction") %> </br>
-    <%= check_box_tag(:genre) %>
-    <%= label_tag(:genre, "fiction") %> </br>
-    <%= check_box_tag(:genre) %>
-    <%= label_tag(:genre, "fantasy") %> </br>
-    <%= check_box_tag(:genre) %>
-    <%= label_tag(:genre, "romance") %> </br>
-    <%= check_box_tag(:genre) %>
-    <%= label_tag(:genre, "supernatural") %> </br>
-    <%= check_box_tag(:genre) %>
-    <%= label_tag(:genre, "horror") %> </br>
-    <%= check_box_tag(:genre) %>
-    <%= label_tag(:genre, "psychology") %> </br>
-    <%= check_box_tag(:genre) %>
-    <%= label_tag(:genre, "thriller") %> </br>
-    -->
   </div>
 
   <div>
