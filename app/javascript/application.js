@@ -1,6 +1,10 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
 import "controllers"
+//= require bootstrap
+//= require jquery3
+//= require jquery_ujs
+//= require popper
 
 // Popup Image
 // Get the modal
@@ -20,3 +24,25 @@ var span = document.getElementsByClassName("close")[0];
 span.onclick = function() { 
   modal.style.display = "none";
 }
+
+// Splide carousel
+splide = new Splide('.splide', {
+  type: 'loop',
+  autoplay: true,
+  arrows: true,
+  perPage: 5,
+  breakpoints: {
+    380: {
+      perPage: 1,
+    },
+    540: {
+      perPage: 2,
+    },
+    720: {
+      perPage: 3,
+    },
+    960: {
+      perPage: 4,
+    },
+  }
+}).mount();

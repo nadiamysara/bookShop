@@ -79,12 +79,9 @@ gem "repost", "= 0.4.1"
 gem "sidekiq-cron", "~> 1.12"
 
 gem "bootstrap", "~> 5.3"
-
 gem "dartsass-sprockets", "~> 3.1"
-
-# gem "jquery-rails", "~> 4.6"
-
-# gem "popper_js", "~> 2.11"
+gem "jquery-rails", "~> 4.6"
+gem "popper_js", "~> 2.11"
 
 gem 'tomo'
 gem "tomo-plugin-sidekiq"

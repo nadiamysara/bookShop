@@ -159,17 +159,16 @@
 
 <!-- By genre: fiction -->
 <f5><%= Genre.find(1).category %></f5>
-<div id="carouselFiction" class="carousel slide" data-bs-ride="carousel">
+<div id="carouselFiction" class="carousel slide carouselGenre" data-bs-ride="carousel">
     <div class="carousel-indicators">
-        <% @fictions.each_slice(5).with_index do |slice, index| %>
+        <% @fictions.each_with_index do |slice, index| %>
                 <button type="button" data-bs-target="#carouselFiction" data-bs-slide-to="<%= index %>" class="<%= 'active' if index == 0 %>" aria-current="true" aria-label="Slide <%= index %>" style="background-color:black"></button>
         <% end %>
     </div>
     <div class="carousel-inner" style="background-color: aqua">
-        <% @fictions.each_slice(5).with_index do |slice, index| %>
+        <% @fictions.each_with_index do |book, index| %>
             <div class="carousel-item <%= 'active' if index == 0 %>" style="background-color: pink"> 
                 <div id="genre-book"style="background-color: black">
-                    <% slice.each do |book| %>
                         <div class="book-slide">
                             <%  if book.cover.attached? %>
                                 <%= link_to image_tag(book.cover, class: "cover-t cursor-p"), book %>
@@ -177,7 +176,6 @@
                                 <%= link_to image_tag('books/noCoverImage.jpg', class: "cover-t") , book %>
                             <% end %>
                         </div>
-                    <% end %>
                 </div>
             </div>
         <% end %>
