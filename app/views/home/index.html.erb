@@ -1,28 +1,14 @@
-<!--
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
--->
 <% if user_signed_in? %>
     <!--<h1>Welcome <%= User.find(current_user.id).name %>!</h1> -->
     <h1 style="font-family:cambria">Welcome <%= format_name(User.find(current_user.id)) %>!</h1>
 <% else %>
     <h1>Welcome Visitor!</h1>
 <% end %>
-<!--
-<%= link_to "Books", books_path, class: "nav-link" %>
-<%= link_to "Author", authors_path, class: "nav-link" %>
-<% if user_signed_in? %>
-    <%= link_to "Profile", edit_user_registration_path, class: "nav-link" %>
-<% end %>
-<% if user_signed_in? %>
-    <%= link_to "Rent", book_users_path, class: "nav-link" %>
-<% end %>
-<% if user_signed_in? %>
-    <%#= link_to "Payment", payments_path, class: "nav-link" %>
-<% end %>
--->
+
+<%= javascript_include_tag "splide_tool.js" %>
 
 <!-- Featured -->
+<f5>Featured</f5>
 <div id="carouselFeatured" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselFeatured" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" style="background-color:black"></button>
@@ -73,6 +59,7 @@
 <br>
 
 <!-- New -->
+<f5>Latest</f5>
 <div id="carouselLatest" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <% i = 0 %>
@@ -159,14 +146,56 @@
 
 <!-- By genre: fiction -->
 <f5><%= Genre.find(1).category %></f5>
-<div id="carouselFiction" class="carousel slide carouselGenre" data-bs-ride="carousel">
+<section class="splide" aria-labelledby="carousel-heading">
+    <h2 id="carousel-heading">Splide Basic HTML Example</h2>
+
+    <div class="splide__track">
+	    <ul class="splide__list">
+            <% @flowers.each do |flower| %>
+                <li class="splide__slide">
+                    <div class="splide__slide__container">
+                        <%  if flower.cover.attached? %>
+                            <%= image_tag(flower.cover, class: "cover-t cursor-p") %>
+                        <% else %>
+                            <%= image_tag('books/noCoverImage.jpg', class: "cover-t")  %>
+                        <% end %>
+                    </div>
+                </li>
+            <% end %>
+		</ul>
+    </div>
+
+    <div class="splide__arrows splide__arrows--ltr">
+        <button
+        class="splide__arrow splide__arrow--prev"
+        type="button"
+        aria-label="Previous slide"
+        aria-controls="splide01-track"
+        >
+            <svg>...</svg>
+        </button>
+        <button
+        class="splide__arrow splide__arrow--next"
+        type="button"
+        aria-label="Next slide"
+        aria-controls="splide01-track"
+        >
+            <svg>...</svg>
+        </button>
+    </div>
+</section>
+
+
+<!-- By genre: non-fiction -->
+<f5><%= Genre.find(2).category %></f5>
+<div id="carouselNonnonfiction" class="carousel slide carouselGenre" data-bs-ride="carousel">
     <div class="carousel-indicators">
-        <% @fictions.each_with_index do |slice, index| %>
-                <button type="button" data-bs-target="#carouselFiction" data-bs-slide-to="<%= index %>" class="<%= 'active' if index == 0 %>" aria-current="true" aria-label="Slide <%= index %>" style="background-color:black"></button>
+        <% @nonfictions.each_with_index do |slice, index| %>
+                <button type="button" data-bs-target="#carouselNonnonfiction" data-bs-slide-to="<%= index %>" class="<%= 'active' if index == 0 %>" aria-current="true" aria-label="Slide <%= index %>" style="background-color:black"></button>
         <% end %>
     </div>
     <div class="carousel-inner" style="background-color: aqua">
-        <% @fictions.each_with_index do |book, index| %>
+        <% @nonfictions.each_with_index do |book, index| %>
             <div class="carousel-item <%= 'active' if index == 0 %>" style="background-color: pink"> 
                 <div id="genre-book"style="background-color: black">
                         <div class="book-slide">
@@ -180,13 +209,12 @@
             </div>
         <% end %>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselFiction" data-bs-slide="prev">
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselNonnonfiction" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselFiction" data-bs-slide="next">
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselNonnonfiction" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
 </div>
-
