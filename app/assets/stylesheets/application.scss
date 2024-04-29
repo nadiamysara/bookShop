@@ -180,7 +180,14 @@
   }
 
 
-  // Splide
+// Splide
+  //not enough items -> hide arrows and pagination, and not loop items
   .splide:not(.is-overflow) .splide__arrows {
     display: none;
+  }
+
+  //container
+  .splide__slide__container {
+    width:auto; 
+    height:200px;
   }

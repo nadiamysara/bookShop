@@ -58,8 +58,7 @@
 </div>
 <br>
 
-<!-- New -->
-<f5>Latest</f5>
+<!-- By latest -->
 <div id="carouselLatest" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <% i = 0 %>
@@ -144,86 +143,50 @@
 </div>
 <br>
 
-<!-- By genre: fiction -->
-<section id="splideFiction" class="splide" aria-labelledby="carousel-heading">
-    <h2 id="carousel-heading">Fiction</h2>
-    <div class="splide__track">
-	    <ul class="splide__list">
-            <% @fictions.each do |book| %>
-                <li class="splide__slide">
-                    <center>
-                        <div class="splide__slide__container">
-                            <%  if book.cover.attached? %>
-                                <%= image_tag(book.cover, class: "cover-t cursor-p") %>
-                            <% else %>
-                                <%= image_tag('books/noCoverImage.jpg', class: "cover-t")  %>
-                            <% end %>
-                        </div>
-                            <%= link_to book.title, book, class: "link-primary link-underline-opacity-0 link-underline-opacity-100-hover", style: "font-size:14px" %><br>
-                            <p style="font-size:12px">by <%= link_to Author.find(book.author_id).name, author_path(book.author_id), class: "link-dark link-underline-opacity-0 link-underline-opacity-100-hover" %></p>
-                    </center>
-                </li>
-            <% end %>
-		</ul>
-    </div>
-    <div class="splide__arrows splide__arrows--ltr">
-        <button
-        class="splide__arrow splide__arrow--prev"
-        type="button"
-        aria-label="Previous slide"
-        aria-controls="splide01-track"
-        >
-            <svg>...</svg>
-        </button>
-        <button
-        class="splide__arrow splide__arrow--next"
-        type="button"
-        aria-label="Next slide"
-        aria-controls="splide01-track"
-        >
-            <svg>...</svg>
-        </button>
-    </div>
-</section>
-
-<!-- By genre: non-fiction -->
-<section id="splideNonFiction" class="splide" aria-labelledby="carousel-heading">
-    <h2 id="carousel-heading">Fiction</h2>
-    <div class="splide__track">
-	    <ul class="splide__list">
-            <% @nonfictions.each do |book| %>
-                <li class="splide__slide">
-                    <center>
-                        <div class="splide__slide__container">
-                            <%  if book.cover.attached? %>
-                                <%= image_tag(book.cover, class: "cover-t cursor-p") %>
-                            <% else %>
-                                <%= image_tag('books/noCoverImage.jpg', class: "cover-t")  %>
-                            <% end %>
-                        </div>
-                            <%= link_to book.title, book, class: "link-primary link-underline-opacity-0 link-underline-opacity-100-hover", style: "font-size:14px" %><br>
-                            <p style="font-size:12px">by <%= link_to Author.find(book.author_id).name, author_path(book.author_id), class: "link-dark link-underline-opacity-0 link-underline-opacity-100-hover" %></p>
-                    </center>
-                </li>
-            <% end %>
-		</ul>
-    </div>
-    <div class="splide__arrows splide__arrows--ltr">
-        <button
-        class="splide__arrow splide__arrow--prev"
-        type="button"
-        aria-label="Previous slide"
-        aria-controls="splide01-track"
-        >
-            <svg>...</svg>
-        </button>
-        <button
-        class="splide__arrow splide__arrow--next"
-        type="button"
-        aria-label="Next slide"
-        aria-controls="splide01-track"
-        >
-            <svg>...</svg>
-        </button>
-    </div>
-</section>
+<!-- By genre -->
+<% @genres.each do |genre| %>
+    <% if BookGenre.find_by_genre_id(genre) %>
+        <section class="splide carouselGenre" aria-labelledby="carousel-heading">
+            <% category = genre.category %>
+            <% category[0] = category[0].capitalize %>
+            <h2 id="carousel-heading"><%= category %></h2>
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <% Book.where(id:BookGenre.where(genre_id:genre.id).select(:book_id)).each do |book| %>
+                        <li class="splide__slide">
+                            <center>
+                                <div class="splide__slide__container">
+                                    <%  if book.cover.attached? %>
+                                        <%= image_tag(book.cover, class: "cover-t cursor-p") %>
+                                    <% else %>
+                                        <%= image_tag('books/noCoverImage.jpg', class: "cover-t")  %>
+                                    <% end %>
+                                </div>
+                                    <%= link_to book.title, book, class: "link-primary link-underline-opacity-0 link-underline-opacity-100-hover", style: "font-size:14px" %><br>
+                                    <p style="font-size:12px">by <%= link_to Author.find(book.author_id).name, author_path(book.author_id), class: "link-dark link-underline-opacity-0 link-underline-opacity-100-hover" %></p>
+                            </center><br>
+                        </li>
+                    <% end %>
+                </ul>
+            </div>
+            <div class="splide__arrows splide__arrows--ltr">
+                <button
+                class="splide__arrow splide__arrow--prev"
+                type="button"
+                aria-label="Previous slide"
+                aria-controls="splide01-track"
+                >
+                    <svg>...</svg>
+                </button>
+                <button
+                class="splide__arrow splide__arrow--next"
+                type="button"
+                aria-label="Next slide"
+                aria-controls="splide01-track"
+                >
+                    <svg>...</svg>
+                </button>
+            </div>
+        </section>
+    <% end %>
+<% end %>
