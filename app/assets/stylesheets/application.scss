@@ -181,4 +181,6 @@
 
 
   // Splide
-  
+  .splide:not(.is-overflow) .splide__arrows {
+    display: none;
+  }
