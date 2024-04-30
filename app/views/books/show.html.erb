@@ -1,22 +1,18 @@
-  <% if @book.rent_status == true %>
-    ITS RENTED
-  <% else %>
-    AVAILABLE TO BORROW
-  <% end %>
-<%= render @book %>
-<div>
-  <%#= link_to "Rent this book", rent_book_path(@book)%> 
-    <%= button_to "Borrow this book", rent_book_path(@book), method: :get %> |
-  <% if @book.purchase_status == true %>
-      <%= link_to "Buy this book", @book.purchase_url %> |
-  <% end %>
-  <!--<%= link_to "Find this author", author_path(@book.author_id) %> | -->
-  <% if can? :update, @books %>
-    <%= link_to "Edit this book", edit_book_path(@book) %> 
-  |<% end %> 
-  <%= link_to "Back to books", books_path %>
-  <!-- Cannot delete book records because of the references   -->
-  <% if can? :destroy, @books %>
-    <%= button_to "Destroy this book", @book, method: :delete %>
-  <% end %>
+<div class="grid-container-1_3">
+  <div hidden class="grid-1_3-leftCol">
+    <%= link_to "Back to books", books_path %>
+  </div>
+  <div class="grid-1_3-centreCol">
+    <% if can? :update, @books %>
+      <%= link_to "Edit this book", edit_book_path(@book) %> 
+    <% end %> 
+  </div>
+  <div class="grid-1_3-rightCol">
+    <!-- Cannot delete book records because of the references   -->
+    <% if can? :destroy, @books %>
+      <%= button_to "Destroy this book", @book, method: :delete %>
+    <% end %>
+  </div>
 </div>
+<br>
+<%= render @book %>

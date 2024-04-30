@@ -3,56 +3,17 @@
 //carousel slideshow
 .carousel-caption {
     background-color: rgba(1,1,1,0.5);
-    /* background-color: rgba(234,234,234,0.5); */
-    /* color: black; */
     object-fit: contain;
     margin: 2px;
     padding: 2px;
   }
-  .carousel {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 50vh;
-    display: grid;
-    grid-template-rows: 1fr auto;
-    grid-template-columns: 1fr 1fr;
-    justify-items: stretch;
-    align-items: stretch;
-    text-align: center;
-  }
-  @media (min-width: 600px) { //screen size when more than 600px
-    .carouselGenre .carousel-item {
-      margin-right: 0; //from 1 to make many not move
-      flex: 0 0 33.333333%; //limit to three instead all
-      display: block; //from 1 to make many n move/change
-    }
-    .carouselGenre .carousel-inner {
-      display: flex;
-    }
-  }
-  .carousel-inner {
-    grid-column: 1/3;
-    // display: flex;
-  }
-  .carousel-item.active {
-    width: 100%;
-    height: 100%;
-    // background-size: cover;
-  }
-  /*
-  .carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }*/
-
   body{
     background-image:url('https://scholarlykitchen.sspnet.org/wp-content/uploads/2018/07/iStock-506432952.jpg');
     background-attachment:fixed;
     background-repeat: no-repeat;
     background-size: cover;
   }
+  /*
   #latest-book{
     padding-left: 15%;
     padding-right: 15%;
@@ -61,20 +22,7 @@
     min-width: 100%;
     min-height: 250px;
   }
-
-  #genre-book .book-slide {
-    text-align: center;
-    font-size: 12px;
-    border:1px solid skyblue;
-    color: aqua;
-    background-color: beige;
-    margin: 5px;
-    padding: 5px;
-    width: fit-content;
-    height: fit-content;
-    // float: left;
-    display: inline-block;
-  }
+*/
 
   //cover image
   .cover-i {
@@ -84,6 +32,11 @@
   .cover-t {
     width:125px; 
     height:auto;
+  }
+  .show-cover {
+    width:200px; 
+    height:auto;
+    border-radius: 0px 15px 15px 0px;
   }
   .cursor-p {
     cursor: pointer; //cursor
@@ -104,19 +57,49 @@
   }
 
   // Grid container
-  .grid-container {
+  .grid-container-1_3{
+    display: grid;
+    grid-template-areas: "left center right";
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .grid-container-1_3 .grid-1_3-leftCol {
+    grid-area: left;
+    text-align: left;
+  }
+  .grid-container-1_3 .grid-1_3-centreCol {
+    grid-area: center;
+    text-align: center;
+  }
+  .grid-container-1_3 .grid-1_3-rightCol {
+    grid-area: right;
+    text-align: right;
+  }
+
+  .grid-container-1_2{
     display: grid;
     grid-template-areas: "image desc";
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 25px;
   }
-  .grid-container .latest-cover {
-    background-color: red;
+  .grid-container-1_2 .grid-1_2-leftCol {
+    position: sticky;
+    top: 4rem;
     grid-area: image;
+    text-align: center;
   }
-  .grid-container .latest-desc {
-    background-color: yellowgreen;
+  .grid-container-1_2 .grid-1_2-rightCol {
+    // background-color: yellowgreen;
     grid-area: desc;
+    font-size: medium;
+    @media screen and (min-width: 992px){
+      #show-desc {
+        padding-right: 50px;
+      }
+    }
+  }
+  #bookCover {
+    filter: drop-shadow(0px 16px 10px grey); 
   }
 
   /* The Modal (background) */
@@ -190,4 +173,19 @@
   .splide__slide__container {
     width:auto; 
     height:200px;
+  }
+
+  //pagination & arrow
+  .splide__pagination__page.is-active {
+    background-color: skyblue !important;
+  }
+
+  .splide__arrow{
+    background-color: transparent !important;
+  }
+  .splide__arrow svg{
+    font-size: xx-large;
+  }
+  .splide__arrow path{
+    fill: skyblue;
   }

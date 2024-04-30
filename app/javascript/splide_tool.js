@@ -35,25 +35,11 @@ document.addEventListener( 'DOMContentLoaded', function() {
     genre.mount()
   }
 
-  // Non-fiction 
-  /*new Splide('#splideNonFiction', {
+  // Latest
+  new Splide('#carouselNew', {
     type: 'loop',
     autoplay: true,
     arrows: true,
-    perPage: 5,
-    breakpoints: {
-      380: {
-        perPage: 1,
-      },
-      540: {
-        perPage: 2,
-      },
-      720: {
-        perPage: 3,
-      },
-      960: {
-        perPage: 4,
-      },
-    }
-  }).mount() */
+    fixedHeight: 300
+  }).mount()
 } );

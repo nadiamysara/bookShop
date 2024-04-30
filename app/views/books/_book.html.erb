@@ -1,58 +1,54 @@
-<div id="<%= dom_id book %>">
-  <div>
-    <% if book.cover.attached? %>
-      <%= image_tag(book.cover, class: "cover-t cursor-p cursor-p", id:"img-t", alt:book.title) %>
-    <% else %>
-      <img src="<%= image_path('books/noCoverImage.jpg') %>" class="cover-t">
-    <% end %>
+<div class="grid-container-1_2" id="<%= dom_id book %>">
+  <div class="grid-1_2-leftCol">
+    <div id="bookCover">
+      <% if book.cover.attached? %>
+        <%= image_tag(book.cover, class: "show-cover cursor-p", id:"img-t", alt:book.title) %>
+      <% else %>
+        <img src="<%= image_path('books/noCoverImage.jpg') %>" class="show-cover">
+      <% end %>
+    </div><br>
+    <div id="buttonAction">
+      <% if @book.rent_status == true %>
+        <%= button_to "Rent Now", rent_book_path(@book), method: :get, disabled: true, class:"btn btn-primary" %>
+      <% else %>
+        <%= button_to "Rent Now", rent_book_path(@book), method: :get, class:"btn btn-primary" %>
+      <% end %>
+      <br>
+      <%= link_to_if(book.purchase_status, "Buy Now", book.purchase_url, class: "btn btn-outline-primary") {"Not available for purchase"} %>
+      <hr>
+    </div>
   </div>
 
-  <p>
-    <strong>Title:</strong>
-    <%= book.title %>
-  </p>
-
-  <p>
-    <strong>Author:</strong>
-    <!--<%= Author.find(book.author_id).name %>-->
-    <%= link_to Author.find(book.author_id).name, author_path(book.author_id) %>
-  </p>
-
-  <p>
-    <strong>Genre:</strong>
-    <% Genre.where(id:BookGenre.where(book_id:@book).select(:genre_id)).select(:category).each do |genre| %>     
-      <% unless genre.category == Genre.where(id:BookGenre.where(book_id:@book).select(:genre_id)).select(:category).last.category %>
-        <%=h genre.category %>,
-      <% else %>
-        <%=h genre.category %>
+  <div class="grid-1_2-rightCol">
+    <h1 class="display-5" style="font-family:Monaco">
+      <strong><%= book.title %></strong>
+    </h1>
+    <h5 style="font-family:Didot,serif">
+      <%= link_to Author.find(book.author_id).name, author_path(book.author_id), class: "link-dark link-underline-opacity-0 link-underline-opacity-100-hover" %>
+    </h5>
+    <p id="show-desc" style="text-align:justify">
+      <%= book.desc %>
+    </p>
+    <p>
+      <strong>Genres:</strong>
+      <% Genre.where(id:BookGenre.where(book_id:@book).select(:genre_id)).select(:category).each do |genre| %>     
+        <% unless genre.category == Genre.where(id:BookGenre.where(book_id:@book).select(:genre_id)).select(:category).last.category %>
+          <%=h genre.category %>,
+        <% else %>
+          <%=h genre.category %>
+        <% end %>
       <% end %>
-    <% end %>
-  </p>
-
-  <p>
-    <strong>Year:</strong>
-    <%= book.year %>
-  </p>
-
-  <p>
-    <strong>Desc:</strong>
-    <%= book.desc %>
-  </p>
-
-  <p>
-    <strong>Purchase Status:</strong>
-    <% if book.purchase_status == true %>
-      <%= link_to "Available", book.purchase_url, class: "link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" %>
-    <% else %>
-      Not Available
-    <% end %>
-  </p>
+    </p>
+    <small class="text-muted">
+      First published year <%= book.year %>
+    </small>
+  </div>
 </div>
 
 <!-- The Modal -->
-<%= javascript_include_tag "enlarge.js" %>
 <div id="myModal" class="modal">
   <span class="close">&times;</span>
   <img class="modal-content" id="img01">
   <div id="caption"></div>
 </div>
+<%= javascript_include_tag "enlarge.js" %>
