@@ -1,0 +1,17 @@
+<h1><%= @genre.category.titleize %> Books</h1>
+
+<div class='container-t'>
+    <% @category.each do |book| %>
+        <div class='border-t'>
+            <%  if book.cover.attached? %>
+                <%= link_to image_tag(book.cover, class: "cover-t cursor-p"), book %>
+            <% else %>
+                <%= link_to image_tag('books/noCoverImage.jpg', class: "cover-t") , book %>
+            <% end %><br>
+            <%= link_to book.title, book, class: "link-primary link-underline-opacity-0 link-underline-opacity-100-hover", style: "font-size:14px" %><br>
+            by <%= link_to Author.find(book.author_id).name, author_path(book.author_id), class: "link-dark link-underline-opacity-0 link-underline-opacity-100-hover" %><br>
+            <%#= link_to "Show this book", book %>
+        </div>
+    <% end %>
+    <div style="clear:both"><!-- so items doesn't float away from main div-->
+</div>

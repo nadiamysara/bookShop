@@ -33,11 +33,11 @@
         <!--<td><%#= book.title %></td>-->
         <td><%= link_to Author.find(book.author_id).name, author_path(book.author_id) %></td>
         <td>
-          <% Genre.where(id:BookGenre.where(book_id:book).select(:genre_id)).select(:category).each do |genre| %>     
+          <% Genre.where(id:BookGenre.where(book_id:book).select(:genre_id)).select(:id, :category).each do |genre| %>     
             <% unless genre.category == Genre.where(id:BookGenre.where(book_id:book).select(:genre_id)).select(:category).last.category %>
-              <%=h genre.category %>,
+              <%=h link_to genre.category, search_genres_path(id: genre.id) %>,
             <% else %>
-              <%=h genre.category %>
+              <%=h link_to genre.category, search_genres_path(id: genre.id) %>
             <% end %>
           <% end %>
         </td>
@@ -46,4 +46,8 @@
       <tr>
     <% end %>
   </table>
+</div>
+
+<div class="pagination">
+  <%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>
 </div>

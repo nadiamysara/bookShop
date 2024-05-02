@@ -57,6 +57,11 @@ class GenresController < ApplicationController
     end
   end
 
+  def search
+    @genre = Genre.find(params[:id])
+    @category = Book.where(id: BookGenre.where(genre_id: params[:id]).select(:book_id))
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_genre

@@ -85,3 +85,6 @@ gem "popper_js", "~> 2.11"
 
 gem 'tomo'
 gem "tomo-plugin-sidekiq"
+
+# Pages
+gem 'pagy'

@@ -13,17 +13,13 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
-  /*
-  #latest-book{
-    padding-left: 15%;
-    padding-right: 15%;
-  }
-  #latest-book table{
-    min-width: 100%;
-    min-height: 250px;
-  }
-*/
 
+  //Page nums Pagination
+  .pagination {
+    width:100%;
+    display: flex;
+    justify-content: center;
+  }
   //cover image
   .cover-i {
     width: 150px;

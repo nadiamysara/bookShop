@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  include Pagy::Backend
   before_action :authenticate_user!, except: [:index]
   before_action :set_book, only: %i[ show edit update destroy ]
 
@@ -6,7 +7,7 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    @books = Book.all
+    @pagy, @books = pagy(Book.all, items:5)
     @rents = BookUser.where(user_id: current_user)
   end
 
