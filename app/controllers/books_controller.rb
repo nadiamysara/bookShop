@@ -7,7 +7,7 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    @pagy, @books = pagy(Book.all, items:5)
+    @pagy, @books = pagy(Book.all, items:10)
     @rents = BookUser.where(user_id: current_user)
   end
 

@@ -24,14 +24,17 @@
   .cover-i {
     width: 150px;
     height: auto;
+    max-height: 250px;
   }
   .cover-t {
     width:125px; 
     height:auto;
+    max-height: 200px;
   }
   .show-cover {
     width:200px; 
     height:auto;
+    // max-height: 320px;
     border-radius: 0px 15px 15px 0px;
   }
   .cursor-p {

@@ -12,7 +12,4 @@
   <%= link_to "New author", new_author_path %>
 <% end %>
 
-<%# Note the double equals sign "==" which marks the output as trusted and html safe: %>
-<div style="width: 50%; or width: 500px; margin: auto">
-  <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
-</div>
+<%= render partial: "shared/pagination" %>
