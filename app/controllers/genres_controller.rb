@@ -1,11 +1,11 @@
 class GenresController < ApplicationController
   include Pagy::Backend
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_genre, only: %i[ show edit update destroy ]
 
   # GET /genres or /genres.json
   def index
-    @pagy, @genres = pagy(Genre.all, items:10)
+    @genres = Genre.all.order(:category)
   end
 
   # GET /genres/1 or /genres/1.json

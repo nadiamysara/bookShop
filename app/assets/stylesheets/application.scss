@@ -35,6 +35,30 @@
     display: flex;
     justify-content: center;
   }
+
+  //Links
+  .light-offset-underline-hover {
+    @extend .link-light;
+    @extend .link-offset-2;
+    @extend .link-underline-opacity-25;
+    @extend .link-underline-opacity-100-hover;
+  }
+  .dark-underline-hover {
+    @extend .link-dark;
+    @extend .link-underline-opacity-25;
+    @extend .link-underline-opacity-100-hover;
+  }
+  .dark-hover {
+    @extend .link-dark;
+    @extend .link-underline-opacity-0;
+    @extend .link-underline-opacity-100-hover;
+  }
+  .primary-hover {
+    @extend .link-primary;
+    @extend .link-underline-opacity-0;
+    @extend .link-underline-opacity-100-hover;
+  }
+
   //cover image
   .cover-i {
     width: 150px;
@@ -68,6 +92,15 @@
     width: 150px;
     height: 300px;
     float: left;
+  }
+
+  //Padding
+  .padding-right {
+    @include media-breakpoint-up(lg){
+      #show-desc {
+        padding-right: 50px;
+      }
+    }
   }
 
   // Grid container
@@ -106,16 +139,13 @@
     // background-color: yellowgreen;
     grid-area: desc;
     font-size: medium;
-    @media screen and (min-width: 992px){
-      #show-desc {
-        padding-right: 50px;
-      }
-    }
+    @extend .padding-right;
   }
   #bookCover {
     filter: drop-shadow(0px 16px 10px grey); 
   }
 
+//Model (PopUP Image)
   /* The Modal (background) */
   .modal {
     display: none; /* Hidden by default */

@@ -24,7 +24,7 @@
       <strong><%= book.title %></strong>
     </h1>
     <h5 style="font-family:Didot,serif">
-      <%= link_to Author.find(book.author_id).name, author_path(book.author_id), class: "link-dark link-underline-opacity-0 link-underline-opacity-100-hover" %>
+      <%= link_to Author.find(book.author_id).name, author_path(book.author_id), class: "dark-hover" %>
     </h5>
     <p id="show-desc" style="text-align:justify">
       <%= book.desc %>

@@ -1,8 +1,17 @@
-<%= render @genre %>
-
-<div>
-  <%= link_to "Edit this genre", edit_genre_path(@genre) %> |
-  <%= link_to "Back to genres", genres_path %>
-
-  <%= button_to "Destroy this genre", @genre, method: :delete %>
+<div class="grid-container-1_3">
+  <div hidden class="grid-1_3-leftCol">
+    <%= link_to "Back to genres", genres_path %>
+  </div>
+  <div class="grid-1_3-centreCol">
+    <% if can? :update, @genre %>
+    <%= link_to "Edit this genre", edit_genre_path(@genre) %>
+  <% end %>
+  </div>
+  <div class="grid-1_3-rightCol">
+    <% if can? :destroy, @genre %>
+      <%= button_to "Destroy this genre", @genre, method: :delete, class:"btn btn-danger" %>
+    <% end %>
+  </div>
 </div>
+
+<%= render @genre %>

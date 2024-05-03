@@ -9,7 +9,7 @@
                 <%= link_to image_tag('books/noCoverImage.jpg', class: "cover-t") , book %>
             <% end %><br>
             <% if book.title.length > 50 %>
-                    <%= link_to book.title.truncate(50), book, class:"link-primary link-underline-opacity-0 link-underline-opacity-100-hover", style: "font-size:14px" %>
+                    <%= link_to book.title.truncate(50), book, class:"dark-primary", style: "font-size:14px" %>
                     <script>
                     $('.read-more-<%= book.id %>').on('click', function(e) {
                         e.preventDefault()
@@ -17,9 +17,9 @@
                     })
                     </script><br>
             <% else %>
-                <%= link_to book.title, book, class: "link-primary link-underline-opacity-0 link-underline-opacity-100-hover", style: "font-size:14px" %><br>
+                <%= link_to book.title, book, class: "primary-hover", style: "font-size:14px" %><br>
             <% end %>
-            by <%= link_to Author.find(book.author_id).name, author_path(book.author_id), class: "link-dark link-underline-opacity-0 link-underline-opacity-100-hover" %><br>
+            by <%= link_to Author.find(book.author_id).name, author_path(book.author_id), class: "dark-hover" %><br>
             <%#= link_to "Show this book", book %>
         </div>
     <% end %>
