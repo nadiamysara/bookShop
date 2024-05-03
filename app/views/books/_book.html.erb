@@ -26,7 +26,7 @@
     <h5 style="font-family:Didot,serif">
       <%= link_to Author.find(book.author_id).name, author_path(book.author_id), class: "dark-hover" %>
     </h5>
-    <p id="show-desc" style="text-align:justify">
+    <p id="show-desc" style="text-align:justify; white-space:pre-wrap">
       <%= book.desc %>
     </p>
     <p>
