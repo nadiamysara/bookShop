@@ -104,7 +104,7 @@ class BooksController < ApplicationController
   end
 
   def search
-    @books = Book.where("title LIKE ?", "%" + params[:q] + "%")
+    @pagy, @books = pagy(Book.where("title LIKE ?", "%" + params[:q] + "%"), items:30)
   end
 
   private

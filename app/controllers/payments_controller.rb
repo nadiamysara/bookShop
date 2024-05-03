@@ -1,4 +1,5 @@
 class PaymentsController < ApplicationController
+  include Pagy::Backend
   #before_action :authenticate_user!
   before_action :set_payment, only: %i[ show edit update destroy ]
 
@@ -10,9 +11,9 @@ class PaymentsController < ApplicationController
   # GET /payments or /payments.json
   def index
     if current_user.admin == true
-      @payments = Payment.all
+    @pagy, @payments = pagy(Payment.all, items:10)
     else
-      @payments = Payment.where(user_id: current_user.id)
+    @pagy, @payments = pagy(Payment.where(user_id: current_user.id), items:10)
     end
   end
 

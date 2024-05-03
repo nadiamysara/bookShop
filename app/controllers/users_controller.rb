@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
+  include Pagy::Backend
   before_action :set_user, only: %i[ show editRecord updateRecord destroy ]
   # before_action :authenticate_user!
 
   # GET /users or /users.json
   def index
-    @users = User.all
+    @pagy, @users = pagy(User.all, items:10)
   end
 
   # GET /users/1 or /users/1.json

@@ -1,12 +1,19 @@
-<% if user_signed_in? %>
-    <!--<h1>Welcome <%= User.find(current_user.id).name %>!</h1> -->
-    <h1 style="font-family:cambria">Welcome <%= format_name(User.find(current_user.id)) %>!</h1>
-<% else %>
-    <h1>Welcome Visitor!</h1>
-<% end %>
-
 <%= javascript_include_tag "splide_tool.js" %>
 
+
+
+<div id="banner">
+    <%= image_tag('books.jpg', style:"width:100%;")  %>
+    <div id="banner-text">
+        <% if user_signed_in? %>
+            <!--<h1>Welcome <%= User.find(current_user.id).name %>!</h1> -->
+            <h2>Welcome <%= format_name(User.find(current_user.id)) %>!</h2>
+        <% else %>
+            <h2>Welcome Visitor!</h2>
+        <% end %>
+    </div>
+</div>
+<br>
 <!-- By latest -->
 <section id="carouselNew" class="splide" aria-labelledby="carousel-heading">
     <h2 id="carousel-heading">New Book Drops!</h2>

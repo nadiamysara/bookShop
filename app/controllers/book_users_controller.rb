@@ -1,13 +1,14 @@
 class BookUsersController < ApplicationController
+  include Pagy::Backend
   before_action :authenticate_user!
   before_action :set_book_user, only: %i[ show edit update destroy return_book void_fee ]
 
   # GET /book_users or /book_users.json
   def index
     if current_user.admin == true
-      @book_users = BookUser.all
+    @pagy, @book_users = pagy(BookUser.all, items:10)
     else
-      @book_users = BookUser.where(user_id:current_user.id)
+    @pagy, @book_users = pagy(BookUser.where(user_id:current_user.id), items:10)
     end
   end
 

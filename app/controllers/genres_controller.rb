@@ -1,9 +1,11 @@
 class GenresController < ApplicationController
+  include Pagy::Backend
+  before_action :authenticate_user!
   before_action :set_genre, only: %i[ show edit update destroy ]
 
   # GET /genres or /genres.json
   def index
-    @genres = Genre.all
+    @pagy, @genres = pagy(Genre.all, items:10)
   end
 
   # GET /genres/1 or /genres/1.json
@@ -59,7 +61,7 @@ class GenresController < ApplicationController
 
   def search
     @genre = Genre.find(params[:id])
-    @category = Book.where(id: BookGenre.where(genre_id: params[:id]).select(:book_id))
+    @pagy, @category = pagy(Book.where(id: BookGenre.where(genre_id: params[:id]).select(:book_id)), items:30)
   end
 
   private

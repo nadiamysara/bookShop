@@ -8,10 +8,22 @@
             <% else %>
                 <%= link_to image_tag('books/noCoverImage.jpg', class: "cover-t") , book %>
             <% end %><br>
-            <%= link_to book.title, book, class: "link-primary link-underline-opacity-0 link-underline-opacity-100-hover", style: "font-size:14px" %><br>
+            <% if book.title.length > 50 %>
+                    <%= link_to book.title.truncate(50), book, class:"link-primary link-underline-opacity-0 link-underline-opacity-100-hover", style: "font-size:14px" %>
+                    <script>
+                    $('.read-more-<%= book.id %>').on('click', function(e) {
+                        e.preventDefault()
+                        $(this).parent().html('<%= escape_javascript book.desc %>')
+                    })
+                    </script><br>
+            <% else %>
+                <%= link_to book.title, book, class: "link-primary link-underline-opacity-0 link-underline-opacity-100-hover", style: "font-size:14px" %><br>
+            <% end %>
             by <%= link_to Author.find(book.author_id).name, author_path(book.author_id), class: "link-dark link-underline-opacity-0 link-underline-opacity-100-hover" %><br>
             <%#= link_to "Show this book", book %>
         </div>
     <% end %>
     <div style="clear:both"><!-- so items doesn't float away from main div-->
 </div>
+
+<%= render partial: "shared/pagination" %>
