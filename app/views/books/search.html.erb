@@ -7,7 +7,7 @@
             <%  if book.cover.attached? %>
                 <%= link_to image_tag(book.cover, class: "cover-t cursor-p"), book %>
             <% else %>
-                <%= link_to image_tag('books/noCoverImage.jpg', class: "cover-t") , book %>
+                <%= link_to image_tag('noImage.jpg', class: "cover-t") , book %>
             <% end %><br>
             <% if book.title.length > 50 %>
                     <%= link_to book.title.truncate(50), book, class:"primary-hover", style: "font-size:14px" %>

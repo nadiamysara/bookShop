@@ -26,7 +26,7 @@
           <td style="text-align:center"><img src="<%#= image_path('books/'+book.cover_path+'') %>" width="150px"></td>-->
           <td style="text-align:center"><%= image_tag(book.cover, class: "cover-i") %></td>
         <% else %>
-          <!--<td><img src="<%= image_path('books/noCoverImage.jpg') %>" width="150px"></td>-->
+          <!--<td><img src="<%= image_path('noImage.jpg') %>" width="150px"></td>-->
           <td style="text-align:center"><i >no cover image</i></td>
         <% end %>
         <td><%= link_to book.title, book %></td>

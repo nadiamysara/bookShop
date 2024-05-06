@@ -25,6 +25,18 @@
     </div>
   </div>
   <br>
+  <div class="form-group row">
+    <%= form.label :potrait, style: "display: block", class:"col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <% unless author.potrait.attached? %>
+        <%= form.file_field :potrait, class:"form-control-file" %>
+      <% else %>
+          <%= form.file_field :potrait, class:"form-control-file" %>
+          <%= image_tag(author.potrait, style: "width:50px; height:auto") %>
+      <% end %>
+    </div>
+  </div>
+  <br>
   <div class="form-group" style="text-align:center">
     <%= link_to "Return", @author, class:"btn btn-outline-success" %>
     <%= form.submit :Submit, class:"btn btn-success"%>

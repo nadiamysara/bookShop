@@ -4,7 +4,7 @@
       <% if book.cover.attached? %>
         <%= image_tag(book.cover, class: "show-cover cursor-p", id:"img-t", alt:book.title) %>
       <% else %>
-        <img src="<%= image_path('books/noCoverImage.jpg') %>" class="show-cover">
+        <img src="<%= image_path('noImage.jpg') %>" class="show-cover">
       <% end %>
     </div><br>
     <div id="buttonAction">
