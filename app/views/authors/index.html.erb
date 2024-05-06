@@ -1,15 +1,41 @@
 <h1>Authors</h1>
 
-<div id="authors">
-  <% @authors.each do |author| %>
-    <%= render author %>
-    <p>
-      <%= link_to "Show this author", author %>
-    </p>
+<div style="text-align:center">
+  <% if can? :create, @author %>
+    <%= link_to "New author", new_author_path %>
   <% end %>
 </div>
-<% if can? :create, @author %>
-  <%= link_to "New author", new_author_path %>
-<% end %>
-
-<%= render partial: "shared/pagination" %>
+<br>
+<div style="text-align:center">
+  <%= link_to "#", '#author-#'  %>
+  <% ('A'..'Z').each do |abc| %>
+    <%= link_to abc, '#author-'+abc  %>
+  <% end %>
+</div>
+<br>
+<div id="authors">
+  <hr>
+  <div id="author-#", class="snap">
+    <h5>#</h5>
+    <% @authors.each do |author| %>
+      <% unless author.name[0].match?(/[A-Za-z]/) %>
+        <%= link_to author.name, author %>
+        <br>
+      <% end %>
+    <% end %>
+    <hr>
+  </div>
+  <% ('A'..'Z').each do |abc| %>
+    <div id="author-<%=abc%>", class="snap">
+    <h5>#<%=abc%></h5>
+    <% @authors.each do |author| %>
+      <% if author.name[0].upcase == abc %>
+        <%= link_to author.name, author %>
+        <br>
+      <% end %>
+    <% end %>
+    <hr>
+    </div>
+  <% end %>
+</div>
+<br>

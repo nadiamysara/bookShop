@@ -162,8 +162,13 @@
   }
   #authorImg{
     float:left; 
-    padding-right:20px;
-    padding-bottom:15px;
+    padding-right:25px;
+    padding-bottom:25px;
+  }
+
+  .snap {
+    // Set scroll margin top to set value between the snap position and the container
+    scroll-margin-top: 4rem;
   }
 
 //Model (PopUP Image)
