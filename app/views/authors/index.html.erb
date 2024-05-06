@@ -7,9 +7,9 @@
 </div>
 <br>
 <div style="text-align:center">
-  <%= link_to "#", '#author-#'  %>
+  <%= link_to "#", '#author-#', class:"dark-underline-hover" %>
   <% ('A'..'Z').each do |abc| %>
-    <%= link_to abc, '#author-'+abc  %>
+    <%= link_to abc, '#author-'+abc, class:"dark-underline-hover" %>
   <% end %>
 </div>
 <br>
@@ -19,7 +19,7 @@
     <h5>#</h5>
     <% @authors.each do |author| %>
       <% unless author.name[0].match?(/[A-Za-z]/) %>
-        <%= link_to author.name, author %>
+        <%= link_to author.name, author, class:"dark-underline-hover" %>
         <br>
       <% end %>
     <% end %>
@@ -27,10 +27,10 @@
   </div>
   <% ('A'..'Z').each do |abc| %>
     <div id="author-<%=abc%>", class="snap">
-    <h5>#<%=abc%></h5>
+    <h5><%=abc%></h5>
     <% @authors.each do |author| %>
       <% if author.name[0].upcase == abc %>
-        <%= link_to author.name, author %>
+        <%= link_to author.name, author, class:"dark-underline-hover" %>
         <br>
       <% end %>
     <% end %>

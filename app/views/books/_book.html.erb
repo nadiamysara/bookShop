@@ -33,9 +33,9 @@
       <strong>Genres:</strong>
       <% Genre.where(id:BookGenre.where(book_id:@book).select(:genre_id)).select(:id, :category).each do |genre| %>     
         <% unless genre.category == Genre.where(id:BookGenre.where(book_id:@book).select(:genre_id)).select(:category).last.category %>
-          <%=h link_to genre.category, search_genres_path(id: genre.id) %>,
+          <%=h link_to genre.category, search_genres_path(id: genre.id), class: "dark-hover" %>,
         <% else %>
-          <%=h link_to genre.category, search_genres_path(id: genre.id) %>
+          <%=h link_to genre.category, search_genres_path(id: genre.id), class: "dark-hover" %>
         <% end %>
       <% end %>
     </p>

@@ -1,6 +1,10 @@
 <div class="grid-container-1_3">
-  <div hidden class="grid-1_3-leftCol">
-    <%= link_to "Back to genres", genres_path %>
+  <div class="grid-1_3-leftCol"> 
+    <%= link_to "Home", root_path, class: "primary-hover" %>
+    >
+    <%= link_to "Genre", genres_path, class: "primary-hover" %>
+    >
+    <%= @genre.category %>
   </div>
   <div class="grid-1_3-centreCol">
     <% if can? :update, @genre %>

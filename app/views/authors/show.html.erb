@@ -1,6 +1,10 @@
 <div class="grid-container-1_3">
-  <div hidden class="grid-1_3-leftCol">
-    <%= link_to "Back to authors", authors_path %>
+  <div class="grid-1_3-leftCol"> 
+    <%= link_to "Home", root_path, class: "primary-hover" %>
+    >
+    <%= link_to "Authors", authors_path, class: "primary-hover" %>
+    >
+    <%= @author.name %>
   </div>
   <div class="grid-1_3-centreCol">
     <% if can? :update, @authors %>
@@ -18,7 +22,7 @@
 <%= render @author %>
 
 <div id="books">
-  <b>This writers works:</b>
+  <b>This writer's works:</b>
   <ol>
       <% Book.all.where(author_id: @author).each do |book| %>     
         <li>

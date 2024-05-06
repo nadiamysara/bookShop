@@ -1,5 +1,7 @@
 <h1><%= @genre.category.titleize %> Books</h1>
-
+<details>
+    <p style="text-align:justify"><%= @genre.description %></p>
+</details>
 <div class='container-t'>
     <% @category.each do |book| %>
         <div class='border-t'>
