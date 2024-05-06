@@ -1,12 +1,14 @@
-<div id="<%= dom_id author %>">
-  <p>
-    <strong>Name:</strong>
-    <%= author.name %>
-  </p>
-
-  <p>
-    <strong>Dec:</strong>
-    <%= author.dec %>
-  </p>
-
+<div class="" id="<%= dom_id author %>">
+  <h1 class="display-5" style="font-family:Monaco">
+    <strong><%= author.name %></strong>
+  </h1><br>
+  <div>
+    <div id="authorImg">
+        <img src="<%= image_path('https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/LewisCarrollSelfPhoto.jpg/330px-LewisCarrollSelfPhoto.jpg') %>" class="show-potrait">
+    </div>
+    <p id="show-desc" style="text-align:justify; white-space:pre-wrap">
+      <%= author.dec %>
+    </p>
+    <div style="clear:both"></div>
+  </div>
 </div>

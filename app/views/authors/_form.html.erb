@@ -11,17 +11,22 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="form-group row">
+    <%= form.label :name, style: "display: block", class:"col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= form.text_field :name, placeholder:"Enter Author's Name", class:"form-control" %>
+    </div>
   </div>
-
-  <div>
-    <%= form.label :dec, style: "display: block" %>
-    <%= form.text_area :dec %>
+  <br>
+  <div class="form-group row">
+    <%= form.label :dec, style: "display: block", class:"col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= form.text_area :dec, placeholder:"Enter About Author", class:"form-control" %>
+    </div>
   </div>
-
-  <div>
-    <%= form.submit %>
+  <br>
+  <div class="form-group" style="text-align:center">
+    <%= link_to "Return", @author, class:"btn btn-outline-success" %>
+    <%= form.submit :Submit, class:"btn btn-success"%>
   </div>
 <% end %>

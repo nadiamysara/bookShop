@@ -1,4 +1,4 @@
-<div class="grid-container-1_2" id="<%= dom_id book %>">
+<div class="grid-container-1_2 book-controller" id="<%= dom_id book %>">
   <div class="grid-1_2-leftCol">
     <div id="bookCover">
       <% if book.cover.attached? %>
@@ -42,6 +42,9 @@
     <small class="text-muted">
       First published year <%= book.year %>
     </small>
+  </div>
+
+  <div class="grid-1_2-bottom">
   </div>
 </div>
 
