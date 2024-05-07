@@ -44,6 +44,7 @@ class BookUsersController < ApplicationController
   def update
     respond_to do |format|
       if @book_user.update(book_user_params)
+        # BookPassDueJob.set(wait_until: 1.minute.from_now).perform_later(temp.id)
         format.html { redirect_to book_user_url(@book_user), notice: "Record was successfully updated." }
         format.json { render :show, status: :ok, location: @book_user }
       else
@@ -98,7 +99,7 @@ class BookUsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_user_params
-      params.require(:book_user).permit(:user_id, :book_id, :due_date, :return_date, :rent_status, :due_status, :price)
+      params.require(:book_user).permit(:user_id, :book_id, :due_date, :return_date, :rent_status, :due_status, :price, :jid)
     end
 
     # def payment_params
