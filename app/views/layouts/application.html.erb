@@ -27,7 +27,11 @@
     <%= render partial: "shared/navbar" %>
     <div style="background-color: white; margin:20px; padding-bottom:40px; object-fit: ">
       <div class="container"">
-        <p style="color: green"><%#= notice %></p>
+        <%
+=begin%>
+ <p style="color: green"><%= notice %></p> 
+<%
+=end%>
         <p style="color: green" class="notice"><%= notice %></p>
         <p style="color: red" class="alert"><%= alert %></p>
         <%= yield %> 

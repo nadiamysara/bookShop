@@ -18,7 +18,7 @@
 <%
 =end%>
       <br>
-      <%= button_to "Rent Now", rent_book_path(@book), method: :get, class:"btn btn-primary" %>
+      <%= button_to "Rent Now", rent_book_path(@book), method: :get, class:"btn btn-primary" %><br>
       <%= link_to_if(book.purchase_status, "Buy Now", book.purchase_url, class: "btn btn-outline-primary") {"Not available for purchase"} %>
       <hr>
     </div>

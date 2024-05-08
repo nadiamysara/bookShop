@@ -3,8 +3,11 @@
 <div>
   <%#= link_to "Pay this book", pay_book_user_path(@book_user) %>
   <%#= link_to "Pay this book", new_book_user_payment_path %>
-  <% if @book_user.due_status == true %>
+  <% if @book_user.due_status && @book_user.rent_status == false %>
     <%= link_to "Pay this due", new_book_user_payment_path(@book_user) %> |
+    <% if can? :update, @book_user %>
+      <%= link_to "Void the due fee", void_fee_book_user_path(@book_user)%> |
+    <% end %>
   <% end %>
   <% if can? :update, @book_user %>
     <%= link_to "Edit this book user", edit_book_user_path(@book_user) %> |
@@ -15,13 +18,14 @@
   <% if can? :update, @book_user %>
     <% if @book_user.rent_status == true %>
       <%= link_to "Return this book", return_book_book_user_path(@book_user)%> |
+      <% if @book_user.due_status == false %>
+        <%= link_to "Extend the due date", extend_due_book_user_path(@book_user)%> |
+      <% end %>
     <% end %>
   <% end %>
-  <% if can? :update, @book_user %>
-    <% if @book_user.due_status == true %>
-      <%= link_to "Void the due fee", void_fee_book_user_path(@book_user)%> |
-    <% end %>
-  <% end %>
+  
+  <%= @book_user.extend_limit %>
+  
   <%= link_to "Return", book_users_path %>
   <% if can? :destroy, @book_user %>
     <%= button_to "Destroy this record", @book_user, method: :delete %>

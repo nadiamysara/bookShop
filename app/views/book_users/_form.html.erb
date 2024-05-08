@@ -21,35 +21,45 @@
     <%= form.text_field :book_id %>
   </div>
 
-  <div>
+  <%
+=begin%>
+ <div>
     <%= form.label :due_date, style: "display: block" %>
     <%= form.datetime_field :due_date %>
-  </div>
+  </div> 
+<%
+=end%>
 
-  <div>
-    <%= form.label :return_date, style: "display: block" %>
-    <%= form.datetime_field :return_date %>
-  </div>
-
-  <div>
-    <%#= form.label :rent_status, style: "display: block" %>
-    <%#= form.radio_button :rent_status, true %>
-    <%#= form.label :rent_status, "Have not return book" %><!--</br>-->
-    <%#= form.radio_button :rent_status, false %>
-    <%#= form.label :rent_status, "Have return book" %>
-  </div>
-
-  <%# if @book_user.rent_status==false %>
+  <% unless book_user.rent_status %>
     <div>
-      <%#= form.label :due_status, style: "display: block" %>
-      <%#= form.radio_button :due_status, true %>
-      <%#= form.label :due_status, "Have not paid due" %><!--</br>-->
-      <%#= form.radio_button :due_status, false %>
-      <%#= form.label :due_status, "Have paid due / Have no due" %>
+      <%= form.label :return_date, style: "display: block" %>
+      <%= form.datetime_field :return_date %>
     </div>
-  <%# end %>
+  <% end %>
 
-  <% if @book_user.due_status==true %>
+  <%
+=begin%>
+ <div>
+    <%= form.label :rent_status, style: "display: block" %>
+    <%= form.radio_button :rent_status, true %>
+    <%= form.label :rent_status, "Have not return book" %><!--</br>-->
+    <%= form.radio_button :rent_status, false %>
+    <%= form.label :rent_status, "Have return book" %>
+  </div>
+
+  <% if @book_user.rent_status==false %>
+    <div>
+      <%= form.label :due_status, style: "display: block" %>
+      <%= form.radio_button :due_status, true %>
+      <%= form.label :due_status, "Have not paid due" %><!--</br>-->
+      <%= form.radio_button :due_status, false %>
+      <%= form.label :due_status, "Have paid due / Have no due" %>
+    </div>
+  <% end %> 
+<%
+=end%>
+
+  <% if @book_user.due_status %>
     <div>
       <%= form.label :price, style: "display: block" %>
       <%= form.text_field :price %>

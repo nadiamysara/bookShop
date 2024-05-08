@@ -35,7 +35,7 @@
           <td>Users</td>
         <% end %>
         <td><%= user.rent_limit %></td>
-        <td><%= link_to "Edit this user", editRecord_users_path(user.id) %></td>
+        <td><%= link_to "Edit this user", editRecord_users_path(id:user.id) %></td>
       <tr>
     <% end %>
   </table>

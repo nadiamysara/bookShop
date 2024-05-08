@@ -1,7 +1,7 @@
 class BookUsersController < ApplicationController
   include Pagy::Backend
   before_action :authenticate_user!
-  before_action :set_book_user, only: %i[ show edit update destroy return_book void_fee ]
+  before_action :set_book_user, only: %i[ show edit update destroy return_book void_fee extend_due]
 
   # GET /book_users or /book_users.json
   def index
@@ -44,7 +44,6 @@ class BookUsersController < ApplicationController
   def update
     respond_to do |format|
       if @book_user.update(book_user_params)
-        # BookPassDueJob.set(wait_until: 1.minute.from_now).perform_later(temp.id)
         format.html { redirect_to book_user_url(@book_user), notice: "Record was successfully updated." }
         format.json { render :show, status: :ok, location: @book_user }
       else
@@ -68,8 +67,9 @@ class BookUsersController < ApplicationController
     respond_to do |format|
       if @book_user.update(rent_status: false, return_date: DateTime.now)
         Book.find(@book_user.book_id).update(rent_status: false)
-        @borrower = User.find(@book_user.user_id)
-        @borrower.update(rent_limit: @borrower.rent_limit - 1)
+        _borrower = User.find(@book_user.user_id)
+        _borrower.update(rent_limit: _borrower.rent_limit - 1)
+        CancelDueJob.perform_async(@book_user.jid)
         format.html { redirect_to book_user_url(@book_user), notice: "Book was successfully returned." }
         format.json { render :show, status: :ok, location: @book_user }
       else
@@ -87,6 +87,22 @@ class BookUsersController < ApplicationController
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @book_user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def extend_due
+    respond_to do |format|
+      if @book_user.extend_limit < 2 # max time is 2
+        if UpdateDueJob.perform_async(@book_user.jid, @book_user.id)
+          format.html { redirect_to book_user_url(@book_user), notice: "Due date was successfully extended." }
+          format.json { render :show, status: :ok, location: @book_user }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @book_user.errors, status: :unprocessable_entity }
+        end
+      else
+        format.html { redirect_to book_user_url(@book_user), alert: "You have reached the limit numbers of times can be extended." }
       end
     end
   end

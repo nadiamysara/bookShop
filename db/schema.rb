@@ -66,6 +66,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_063503) do
     t.boolean "rent_status", default: false
     t.float "price", default: 0.0
     t.string "jid"
+    t.integer "extend_limit", default: 0
     t.index ["book_id"], name: "index_book_users_on_book_id"
     t.index ["user_id"], name: "index_book_users_on_user_id"
   end
