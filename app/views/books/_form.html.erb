@@ -1,4 +1,4 @@
-<%= form_with(model: book) do |form| %>
+<%= bootstrap_form_with(model: book, layout: :horizontal) do |form| %>
   <% if book.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
@@ -11,28 +11,21 @@
     </div>
   <% end %>
 
-  <div class="form-group row">
-    <%= form.label :title, style: "display: block", class:"col-sm-2 col-form-label" %>
-    <div class="col-sm-10">
-      <%= form.text_field :title, placeholder:"", class:"form-control" %>
-    </div>
+  <div>
+    <%= form.text_field :title %>
   </div>
-  <br>
-  <div class="form-group row">
-    <%= form.label :author, style: "display: block", class:"col-sm-2 col-form-label" %>
-    <div class="col-sm-10">
-      <%= form.collection_select :author_id, Author.order(:name),:id,:name, {prompt: "Select Author"}, { class: 'form-control' } %>
-    </div>
+  <div>
+    <%= form.collection_select :author_id, Author.order(:name),:id,:name, {prompt: "Select Author"}, { class: 'form-control' } %>
   </div>
-  <br>
-  <div class="form-group row">
-    <%= form.label :genre, style: "display: block", class:"col-sm-2 col-form-label" %>
+  <%#= form.collection_check_boxes :genre_id, Genre.all, :id, :category %>
+  <div class="mb-3 row">
+    <%= form.label :genre, class:"col-form-label col-sm-2" %>
     <div class="col-sm-10">
       <%Genre.all.each_slice(2) do |lists| %>
-        <div class="row">
+        <div class="row col-sm-10">
           <% for genre in lists %>
-            <div class="col">
-              <%= check_box_tag "book[genre_ids][]", genre.id, @book.genres.include?(genre), style:"accent-color:green" %>
+            <div class="col form-check">
+              <%= check_box_tag "book[genre_ids][]", genre.id, @book.genres.include?(genre), style:"accent-color:green", class:"form-check-input" %>
               <%=h genre.category %><br />
             </div>
           <% end %>
@@ -40,61 +33,38 @@
       <% end %>
     </div>
   </div>
-  <br>
-  <div class="form-group row">
-    <%= form.label :year, style: "display: block", class:"col-sm-2 col-form-label" %>
-    <div class="col-sm-10">
-      <%= form.text_field :year, class:"form-control" %>
-    </div>
+  <div>
+    <%= form.text_field :year, label:"Year published" %>
   </div>
-  <br>
-  <div class="form-group row">
-    <%= form.label :desc, style: "display: block", class:"col-sm-2 col-form-label" %>
-    <div class="col-sm-10">
-      <%= form.text_area :desc, class:"form-control" %>
-    </div>
-  </div>
-  <br>
-  <div class="form-group row">
-    <%= form.label :cover, style: "display: block", class:"col-sm-2 col-form-label" %>
-    <div class="col-sm-10">
+  <div>
+    <%= form.text_area :desc, label:"Summary" %>
+    <div>
       <% unless @book.cover.attached? %>
         <%= form.file_field :cover, class:"form-control-file" %>
       <% else %>
-          <%= form.file_field :cover, class:"form-control-file" %>
-          <%= image_tag(book.cover, style: "width:50px; height:auto") %>
+        <%= form.file_field :cover, class:"form-control-file" %>
+        <%= image_tag(book.cover, style: "width:50px; height:auto") %>
       <% end %>
-    </div>
+    </div>  
   </div>
   <br>
-  <div class="form-group row">
-    <%= form.label :purchase_status, style: "display: block", class:"col-sm-2 col-form-label" %>
-    <div class="col-sm-10">
-      <%= form.radio_button :purchase_status, true, style:"accent-color:green" %>
-      <%= form.label :purchase_status, "Available to purchase" %></br>
-      <%= form.radio_button :purchase_status, false, style:"accent-color:green" %>
-      <%= form.label :purchase_status, "Not available to purchase" %>
-    </div>
+  <div>
+    <%= form.form_group :purchase_status, label: {text: "Purchase status"} do %>
+      <%= form.radio_button :purchase_status, true, label:"Available to purchase", style:"accent-color:green" %>
+      <%= form.radio_button :purchase_status, false, label:"Not available to purchase", style:"accent-color:green" %>
+    <% end %>
   </div>
-   <br> 
-  <div class="form-group row">
-    <%= form.label :purchase_url, style: "display: block", class:"col-sm-2 col-form-label" %>
-    <div class="col-sm-10">
-      <%= form.text_field :purchase_url, class:"form-control" %>
-    </div>
+  <div>
+    <%= form.text_field :purchase_url %>
   </div>
-  <br>
-  <div class="form-group row">
-    <%= form.label :rent_status, style: "display: block", class:"col-sm-2 col-form-label" %>
-    <div class="col-sm-10">
-    <%= form.radio_button :rent_status, false, style:"accent-color:green" %>
-    <%= form.label :rent_status, "Available to rent" %></br>
-    <%= form.radio_button :rent_status, true, style:"accent-color:green" %>
-    <%= form.label :rent_status, "Not available to rent" %>
-    </div>
+  <div>
+    <%= form.form_group :rent_status, label: {text: "Rent status"} do %>
+      <%= form.radio_button :rent_status, false, label:"Available to rent", style:"accent-color:green" %>
+      <%= form.radio_button :rent_status, true, label:"Not available to rent",style:"accent-color:green" %>
+    <% end %>
   </div>
   <br>
-  <div class="form-group" style="text-align:center">
+  <div style="text-align:center">
     <%= link_to "Return", @book, class:"btn btn-outline-success" %>
     <%= form.submit :Submit, class:"btn btn-success"%>
   </div>

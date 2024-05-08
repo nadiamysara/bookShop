@@ -1,4 +1,4 @@
-<%= form_with(model: @payment, data:{turbo: false}) do |form| %>
+<%= bootstrap_form_with(layout: :horizontal, model: @payment, data:{turbo: false}) do |form| %>
   <% if @payment.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
@@ -13,31 +13,25 @@
   <%= form.hidden_field :user_id, :value => current_user.id %>    
   <%= form.hidden_field :book_user_id, :value => params[:book_user_id] %>    
   <div>
-    <%= form.label "Order Number", style: "display: block" %>
-    <%= form.text_field :order_number, value: g_order_number(current_user.id), readonly: true, class: "form-control-plaintext" %>
+    <%= form.static_control :order_number, value: g_order_number(current_user.id), class: "form-control-plaintext" %>
   </div>
   <div>
-    <%= form.label "Full Name", style: "display: block" %>
-    <%= form.text_field :buyer_name, :value => current_user.name, class: "form-control" %>
+    <%= form.text_field :buyer_name, label:"Name", :value => current_user.name, class: "form-control" %>
   </div>
   <div>
-    <%= form.label "E-mail", style: "display: block" %>
-    <%= form.text_field :buyer_email, :value => current_user.email, class: "form-control" %>
+    <%= form.text_field :buyer_email, label:"Email", :value => current_user.email, class: "form-control" %>
   </div>
   <div>
-    <%= form.label "Phone Number", style: "display: block" %>
-    <%= form.text_field :buyer_phone, :value => current_user.phone, class: "form-control" %>
+    <%= form.text_field :buyer_phone, label:"Phone", :value => current_user.phone, class: "form-control" %>
   </div>
   <div>
-    <%= form.label "Fee", style: "display: block" %>
-    <%= form.text_field :transaction_amount, :value =>  BookUser.find(params[:book_user_id]).price, readonly: true, class: "form-control" %>
+    <%= form.text_field :transaction_amount, label:"Fee", :value =>  BookUser.find(params[:book_user_id]).price, readonly: true, class: "form-control" %>
   </div>
   <div>
-    <%= form.label "Description", style: "display: block" %>
-    <%= form.text_field :product_description, class: "form-control" %>
+    <%= form.text_field :product_description, label:"Desciption", class: "form-control" %>
   </div>
   </br>
-  <div>
-    <%= form.submit %>
+  <div style="text-align:center">
+    <%= form.submit :Submit, class:"btn btn-primary" %>
   </div>
 <% end %>

@@ -1,4 +1,6 @@
-<%= form_for(@payment) do |form| %>
+<%
+=begin%>
+ <%= bootstrap_form_for(@payment) do |form| %>
   <% if @payment.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
@@ -42,7 +44,9 @@
     <%= form.text_field :price, :value => @payment.price, :disabled => true %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div style="text-align:center">
+    <%= form.submit :Submit, class:"btn btn-primary" %>
   </div>
-<% end %>
+<% end %> 
+<%
+=end%>

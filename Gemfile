@@ -82,6 +82,7 @@ gem "bootstrap", "~> 5.3"
 gem "dartsass-sprockets", "~> 3.1"
 gem "jquery-rails", "~> 4.6"
 gem "popper_js", "~> 2.11"
+gem "bootstrap_form", "~> 5.4"
 
 gem 'tomo'
 gem "tomo-plugin-sidekiq"
