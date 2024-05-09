@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   include Pagy::Backend
-  before_action :set_user, only: %i[ show editRecord updateRecord destroy ]
+  before_action :set_user, only: %i[ editRecord updateRecord destroy ]
   # before_action :authenticate_user!
 
   # GET /users or /users.json

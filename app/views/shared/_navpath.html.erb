@@ -1,0 +1,15 @@
+<% if defined?(parent) %>
+<div>
+    <%= link_to :Home, root_path, class: "primary-hover" %>
+    >
+    <%= link_to parent.capitalize, parent_path, class: "primary-hover" %>
+    >
+    <%= child %>
+</div>
+<% else %>
+<div>
+    <%= link_to :Home, root_path, class: "primary-hover" %>
+    >
+    <%= child %>
+</div>
+<% end %>

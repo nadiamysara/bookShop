@@ -1,10 +1,6 @@
 <div class="grid-container-1_3">
   <div class="grid-1_3-leftCol"> 
-    <%= link_to "Home", root_path, class: "primary-hover" %>
-    >
-    <%= link_to "Authors", authors_path, class: "primary-hover" %>
-    >
-    <%= @author.name %>
+    <%= render "/shared/navpath", parent: :authors, parent_path: authors_path, child: @author.name %>
   </div>
   <div class="grid-1_3-centreCol">
     <% if can? :update, @authors %>

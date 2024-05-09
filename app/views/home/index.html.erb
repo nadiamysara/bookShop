@@ -91,9 +91,9 @@
                             <center>
                                 <div class="splide__slide__container">
                                     <%  if book.cover.attached? %>
-                                        <%= link_to image_tag(book.cover, class: "cover-t cursor-p"), book %>
+                                        <%= link_to image_tag(book.cover, class: "thumb cursor-p"), book %>
                                     <% else %>
-                                        <%= link_to image_tag('noImage.jpg', class: "cover-t", style:"border:1px solid skyblue"), book  %>
+                                        <%= link_to image_tag('noImage.jpg', class: "thumb", style:"border:1px solid skyblue"), book  %>
                                     <% end %>
                                 </div>
                                 <%= link_to book.title, book, class: "primary-hover", style: "font-size:14px" %><br>

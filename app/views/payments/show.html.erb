@@ -1,4 +1,8 @@
-<%#= render @payment %>
+<%#= render "/shared/navpath", parent: :payments, parent_path: payments_path, child: "" %>
+<br>
+<%= render "history" %>
+<%= render @payment %>
+
 <!--
 <div>
   <% if can? :update, @payment %>
@@ -10,37 +14,4 @@
   <% end %>
 </div>-->
 
-<% History.where(payment_id: @payment).each do |history| %>     
-  <p>
-    <strong>ID:</strong>
-    <%= history.id %>
-  </p>
-  
-  <p>
-    <strong>Source:</strong>
-    <%= history.source %>
-  </p>
-
-  <p>
-    <strong>Status:</strong>
-    <%= history.payment_status %>
-  </p>
-
-  <p>
-    <strong>Transaction Amount:</strong>
-    <%= history.currency %> <%= history.transaction_amount %>
-  </p>
-
-  <p>
-    <strong>Order Number:</strong>
-    <%= history.order_number %>
-  </p>
-
-  <p>
-    <strong>Merchant Reference Number:</strong>
-    <%= history.merchant_reference_number %>
-  </p>
-<% end %>
-
-<%= link_to :Return, payments_path %>
 <%= link_to "See rent details", book_user_path(@payment.book_user_id) %>

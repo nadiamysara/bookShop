@@ -3,23 +3,27 @@
 <div id="payments">
   <table class="table table-striped tablelayout">
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Rent #</th>
-      <th scope="col">Status</th>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Phone</th>
-      <th scope="col">Transaction Amount</th>
-      <th scope="col">Product Description</th>
-      <th scope="col"></th>
+      <th>#</th>
+      <th>Status</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Transaction Amount</th>
+      <th>Product Description</th>
+      <th></th>
     </tr>
       <%# @payments.where(status: true).each do |payment| %> 
-      <% @payments.each do |payment| %>
+      <% @payments.each.with_index(1) do |payment, index| %>
       <%#= render payment %>
       <tr>
-        <td><%= payment.id %></td>
-        <td><%= payment.book_user_id %></td>
-        <td><%= payment.status %></td>
+        <td><%= index %></td>
+        <td>
+          <% if payment.status %>
+            Success
+          <% else %>
+            Fail
+          <% end %>
+        </td>
         <td><%= payment.buyer_name %></td>
         <td><%= payment.buyer_email %></td>
         <td><%= payment.buyer_phone %></td>

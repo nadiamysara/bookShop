@@ -1,75 +1,56 @@
-<h1>Rent History</h1>
-
-<div id="book_users">
+<%= render "/shared/navpath", child:"Rent History" %><br>
+<div class="table-responsive">
   <table class="table table-striped">
       <tr>
-        <th scope="col">ID</th>
-        <% if current_user.admin == true %>
-          <th scope="col">User ID</th>
-        <% end %>
-        <th scope="col">Book Title</th>
-        <th scope="col">Rent Date</th>
-        <th scope="col">Due Date</th>
-        <th scope="col">Return Date</th>
-        <th scope="col">Rent Status</th>
-        <th scope="col">Due Status</th>
-        <th scope="col">Due Fee</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"></th>
+        <th>ID</th>
+        <th>Book Title</th>
+        <th>Rent Date</th>
+        <th>Due Date</th>
+        <th>Return Date</th>
+        <th>Status</th>
+        <th>Payment</th>
+        <th>More Details</th>
       </tr>
       <% @book_users.each do |book_user| %>
-      <%# @book_users.order(:user_id).each do |book_user| %>
       <tr>
         <td><%= book_user.id %></td>
-        <% if current_user.admin == true %>
-          <td><%= book_user.user_id %></td>
-        <% end %>
-        <td><%= Book.find(book_user.book_id).title %></td>
+        <td><%= link_to Book.find(book_user.book_id).title, book_path(book_user.book_id), class:"primary-hover" %></td>
         <td><%= (book_user.created_at).strftime("%e %b %Y @ %r") %></td>
         <td><%= (book_user.due_date).strftime("%e %b %Y @ %r") %></td>
-        <% if book_user.return_date.present? %>
-          <td><%= (book_user.return_date).strftime("%e %b %Y @ %r") %></td>
-        <% else %>
-          <td> Have not returned</td>
-        <% end %>
-        <% if book_user.rent_status == true %>
-          <td>Renting</td>
-        <% else %>
-          <td>Returned</td>
-        <% end %>
-        <% if book_user.due_status == true %>
-          <td>Due</td>
-        <% else %>
-          <% if Payment.find_by(book_user_id: book_user.id).present? %>
-            <td>Paid</td>
-          <% else %>
-            <td>-</td>
-          <% end %>
-        <% end %>
-        <td><%= book_user.price %></td>
-        <td><%#= link_to "Show this book", book_path(book_user.book_id) %></td>
-        <td><%= link_to "View more detail", book_user %></td>
         <td>
-        <% if book_user.due_status == true %>
-          <%= link_to "Pay due fee", new_book_user_payment_path(book_user_id: book_user.id) %>
-        <% else %>
-          <%#= link_to "View payment", book_user_payment_path(book_user_id: book_user.id, id: Payment.find_by(book_user_id: book_user.id)) %>
-        <% end %>
+          <% if book_user.return_date.present? %>
+            <%= (book_user.return_date).strftime("%e %b %Y @ %r") %></td>
+          <% else %>
+            Have not returned
+          <% end %>
         </td>
+        <td>
+          <% if book_user.rent_status %>
+            Renting
+          <% else %>
+            Returned
+          <% end %>
+          <% if book_user.due_status %> 
+            and Due
+          <% else %>
+            <% if Payment.find_by(book_user_id: book_user.id).present? %>
+            and Paid Due Fee
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% if book_user.due_status %>
+            <%= link_to "Pay due fee", new_book_user_payment_path(book_user_id: book_user.id) %>
+          <% else %>
+            <% if Payment.find_by(book_user_id: book_user.id).present? %>
+              <%= link_to "View payment", payment_path(book_user_id: book_user.id, id: Payment.find_by(book_user_id: book_user.id)) %>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= link_to "View", book_user %></td>
       <tr>
     <% end %>
   </table>
-
-    <%#= render book_user %>
-      <%#= link_to "Show this book", book_path(book_user.book_id) %>
-      <%#= link_to "Show this rent", book_user %>
-      <%# if book_user.due_status == true %>
-        <%#= link_to "Pay this due", new_book_user_book_user_path(book_user_id: book_user.id) %>
-      <%# end %>
-  <%# end %>
 </div>
-
-<%= link_to "Borrow more books", books_path %>
-
+<br>
 <%= render partial: "shared/pagination" %>

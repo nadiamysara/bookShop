@@ -1,26 +1,14 @@
-<h1>Users</h1>
-
-<!--
-<div id="users">
-  <%# @users.each do |user| %>
-    <%#= render user %>
-    <p>
-      <%#= link_to "Show this user", user %>
-    </p>
-  <%# end %>
-</div>
--->
-
-<div>
+<%= render "/shared/navpath", child: "User Records" %><br>
+<div class="table-responsive">
  <table class="table table-striped">
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Phone Number</th>
-        <th scope="col">Status</th>
-        <th scope="col">Numbers of borrowed books</th>
-        <th scope="col"></th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Status</th>
+        <th>Books borrowed</th>
+        <th>Action</th>
       </tr>
       <% @users.each do |user| %>
       <tr>
@@ -34,8 +22,10 @@
         <% else %>
           <td>Users</td>
         <% end %>
-        <td><%= user.rent_limit %></td>
-        <td><%= link_to "Edit this user", editRecord_users_path(id:user.id) %></td>
+        <td>
+        <%= user.rent_limit %>
+        </td>
+        <td><%= link_to "Edit", editRecord_users_path(id:user.id) %></td>
       <tr>
     <% end %>
   </table>

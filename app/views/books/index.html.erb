@@ -1,43 +1,40 @@
-<h1>Books</h1>
-
+<%= render "/shared/navpath", child: :Books %>
 <div style="text-align:center">
   <% if can? :create, Book %>
     <%= link_to "New book", new_book_path %>
   <% end %>
 </div>
 <br>
-<div>
+<div style="overflow-x:auto;">
  <table class="table table-striped">
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col"></th>
-        <th scope="col">Title</th>
-        <th scope="col">Author</th>
-        <th scope="col">Genre</th>
-        <th scope="col">Year</th>
-        <th scope="col"></th>
+        <th></th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Publication Year</th>
+        <th></th>
       </tr>
       <% @books.each do |book| %>
       <tr>
-        <td><%= book.id %></td>
         <% if book.cover.attached? %>
         <%# if book.cover_path.present? %>
           <!--<td><img src="<%#= image_path('books/'+book.id.to_s+'.png') %>" width="150px"></td>
           <td style="text-align:center"><img src="<%#= image_path('books/'+book.cover_path+'') %>" width="150px"></td>-->
-          <td style="text-align:center"><%= image_tag(book.cover, class: "cover-i") %></td>
+          <td style="text-align:center"><%= image_tag(book.cover, class: "thumb") %></td>
         <% else %>
           <!--<td><img src="<%= image_path('noImage.jpg') %>" width="150px"></td>-->
           <td style="text-align:center"><i >no cover image</i></td>
         <% end %>
-        <td><%= link_to book.title, book %></td>
+        <td><%= link_to book.title, book, class:"primary-hover" %></td>
         <!--<td><%#= book.title %></td>-->
-        <td><%= link_to Author.find(book.author_id).name, author_path(book.author_id) %></td>
+        <td><%= link_to Author.find(book.author_id).name, author_path(book.author_id), class:"primary-hover" %></td>
         <td>
           <% Genre.where(id:BookGenre.where(book_id:book).select(:genre_id)).select(:id, :category).each do |genre| %>     
             <% unless genre.category == Genre.where(id:BookGenre.where(book_id:book).select(:genre_id)).select(:category).last.category %>
-              <%=h link_to genre.category, search_genres_path(id: genre.id) %>,
+              <%=h link_to genre.category, search_genres_path(id: genre.id), class:"primary-hover" %>,
             <% else %>
-              <%=h link_to genre.category, search_genres_path(id: genre.id) %>
+              <%=h link_to genre.category, search_genres_path(id: genre.id), class:"primary-hover" %>
             <% end %>
           <% end %>
         </td>

@@ -1,5 +1,4 @@
-<h1>Authors</h1>
-
+<%= render "/shared/navpath", child: :Authors %>
 <div style="text-align:center">
   <% if can? :create, @author %>
     <%= link_to "New author", new_author_path %>
