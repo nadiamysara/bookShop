@@ -24,7 +24,7 @@
     <% end %>
   <% end %>
     
-  <%= link_to "Return", book_users_path %>
+  <%= link_to :Return, book_users_path %>
   <% if can? :destroy, @book_user %>
     <%= button_to "Destroy this record", @book_user, method: :delete %>
   <% end %>

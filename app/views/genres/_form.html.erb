@@ -1,4 +1,4 @@
-<%= bootstrap_form_with(model: genre) do |form| %>
+<%= bootstrap_form_with(model: genre, layout: :horizontal) do |form| %>
   <% if genre.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(genre.errors.count, "error") %> prohibited this genre from being saved:</h2>
@@ -21,7 +21,7 @@
   </div>
   <br>
   <div style="text-align:center">
-    <%= link_to "Return", @genre, class:"btn btn-outline-success" %>
-    <%= form.submit :Submit, class:"btn btn-success" %>
+    <%= link_to :Return, @genre, class:"btn btn-outline-primary" %>
+    <%= form.primary :Submit %>
   </div>
 <% end %>

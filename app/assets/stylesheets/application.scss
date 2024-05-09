@@ -171,6 +171,22 @@
     scroll-margin-top: 4rem;
   }
 
+  .h2-center{
+    @extend .h2;
+    text-align:center;
+  }
+
+  .tablelayout{
+    text-align: center;
+    width: 100%;
+    table-layout: auto;
+    th, td {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
 //Model (PopUP Image)
   /* The Modal (background) */
   .modal {

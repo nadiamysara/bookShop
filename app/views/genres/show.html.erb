@@ -4,7 +4,7 @@
     >
     <%= link_to "Genre", genres_path, class: "primary-hover" %>
     >
-    <%= @genre.category %>
+    <%= @genre.category.capitalize %>
   </div>
   <div class="grid-1_3-centreCol">
     <% if can? :update, @genre %>

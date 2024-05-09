@@ -1,10 +1,4 @@
-<h1>Editing book user</h1>
-
-<%= render "form", book_user: @book_user %>
-
+<div class="h2-center">Editing Rent Record #<%=@book_user.id%></div>
 <br>
-
-<div>
-  <%= link_to "Show this book user", @book_user %> |
-  <%= link_to "Back to book users", book_users_path %>
-</div>
+<%= render "form", book_user: @book_user %>
+<br>

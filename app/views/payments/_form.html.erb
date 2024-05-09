@@ -10,28 +10,29 @@
     </div>
   <% end %>
   
-  <%= form.hidden_field :user_id, :value => current_user.id %>    
-  <%= form.hidden_field :book_user_id, :value => params[:book_user_id] %>    
+  <%= form.hidden_field :user_id, value: current_user.id %>    
+  <%= form.hidden_field :book_user_id, value: params[:book_user_id] %>    
   <div>
-    <%= form.static_control :order_number, value: g_order_number(current_user.id), class: "form-control-plaintext" %>
+    <%= form.static_control :order_number, value: g_order_number(current_user.id) %>
   </div>
   <div>
-    <%= form.text_field :buyer_name, label:"Name", :value => current_user.name, class: "form-control" %>
+    <%= form.text_field :buyer_name, label:"Name", :value => current_user.name %>
   </div>
   <div>
-    <%= form.text_field :buyer_email, label:"Email", :value => current_user.email, class: "form-control" %>
+    <%= form.text_field :buyer_email, label:"Email", :value => current_user.email %>
   </div>
   <div>
-    <%= form.text_field :buyer_phone, label:"Phone", :value => current_user.phone, class: "form-control" %>
+    <%= form.text_field :buyer_phone, label:"Phone", :value => current_user.phone %>
   </div>
   <div>
-    <%= form.text_field :transaction_amount, label:"Fee", :value =>  BookUser.find(params[:book_user_id]).price, readonly: true, class: "form-control" %>
+    <%= form.text_field :transaction_amount, label:"Fee", prepend: "RM", value: (number_with_precision BookUser.find(params[:book_user_id]).price, precision: 2), readonly: true %>
   </div>
   <div>
-    <%= form.text_field :product_description, label:"Desciption", class: "form-control" %>
+    <%= form.text_field :product_description, label:"Desciption" %>
   </div>
   </br>
   <div style="text-align:center">
-    <%= form.submit :Submit, class:"btn btn-primary" %>
+    <%= link_to :Return, book_user_path(id:params[:book_user_id]), class:"btn btn-outline-primary" %>
+    <%= form.primary :Submit %>
   </div>
 <% end %>

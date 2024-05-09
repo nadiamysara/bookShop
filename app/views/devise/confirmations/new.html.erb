@@ -1,4 +1,6 @@
+<center>
 <h2>Resend confirmation instructions</h2>
+<!-- Confirmable: sends emails with confirmation instructions and verifies whether an account is already confirmed during sign in. -->
 
 <%= bootstrap_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
   <%= f.alert_message "Please fix the errors below." %>
@@ -7,9 +9,9 @@
     <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
   </div>
 
-  <div class="actions" style="text-align:center">
-    <%= f.submit "Resend confirmation instructions" %>
+  <div class="actions">
+    <%= link_to :Return, :back, class:"btn btn-outline-primary" %>
+    <%= f.primary "Resend confirmation instructions" %>
   </div>
 <% end %>
-
-<%= render "devise/shared/links" %>
+</center>

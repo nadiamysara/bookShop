@@ -1,9 +1,3 @@
-<h1>Pay Due Fee</h1>
-
-<%= render "form", model: @payment %>
-
+<div class="h2-center">Pay Due Fee #<%=@payment.id%></div>
 <br>
-
-<div>
-  <%#= link_to "Back to payments", payments_path %>
-</div>
+<%= render "form", model: @payment %>

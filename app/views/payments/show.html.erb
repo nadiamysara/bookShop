@@ -42,4 +42,5 @@
   </p>
 <% end %>
 
-<%= link_to "Return", book_user_path(@payment.book_user_id) %>
+<%= link_to :Return, payments_path %>
+<%= link_to "See rent details", book_user_path(@payment.book_user_id) %>

@@ -1,5 +1,7 @@
-<h1>Editing payment</h1>
-
+<%
+=begin%>
+ <div class="h2-center">Editing Payment #<%=@author.id%></div>
+<br>
 <%= render "form", payment: @payment %>
 
 <br>
@@ -7,4 +9,6 @@
 <div>
   <%= link_to "Show this payment", @payment %> |
   <%= link_to "Back to payments", payments_path %>
-</div>
+</div> 
+<%
+=end%>

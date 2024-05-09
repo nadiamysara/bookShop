@@ -1,13 +1,31 @@
 <%- if controller_name != 'sessions' %>
-  <%= link_to "Sign In", new_session_path(resource_name) %><br />
+  <% if defined?(header) && header %>
+    <div class="h2-center">
+      <%= link_to "Sign In", new_session_path(resource_name), class:"primary-underline-hover" %>
+      |
+      Sign Up
+      <br />
+    </div>
+  <% end %>
+  <br />
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Sign up", new_registration_path(resource_name) %><br />
+  <% if defined?(header) && header %>
+    <div class="h2-center">
+      Sign In
+      |
+      <%= link_to "Sign Up", new_registration_path(resource_name), class:"primary-underline-hover" %>
+      <br />
+    </div>
+  <% end %>
+  <br />
 <% end %>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+  <% if defined?(header) && header==false%>
+    <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+  <% end %>
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>

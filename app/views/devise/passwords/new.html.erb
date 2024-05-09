@@ -1,15 +1,17 @@
+<center>
 <h2>Forgot your password?</h2>
-
+<br>
 <%= bootstrap_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   <%= f.alert_message "Please fix the errors below." %>
 
-  <div class="field">
+  <div class="text-align:center">
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
-
-  <div class="actions" style="text-align:center">
-    <%= f.submit "Send me reset password instructions" %>
+  <br>
+  <div class="actions">
+    <%= link_to :Return, :back, class:"btn btn-outline-primary" %>
+    <%= f.primary "Send me reset password instructions" %>
   </div>
 <% end %>
-
-<%= render "devise/shared/links" %>
+<br>
+</center>

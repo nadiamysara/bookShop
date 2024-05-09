@@ -12,11 +12,11 @@
   <% end %>
 
   <div>
-    <%= form.text_field :user_id %>
+    <%= form.collection_select :user_id, User.order(:name),:id,:name, {prompt: "Select User"} %>
   </div>
 
   <div>
-    <%= form.text_field :book_id %>
+    <%= form.collection_select :book_id, Book.order(:title),:id,:title, {prompt: "Select Book"} %>
   </div>
 
   <%
@@ -61,9 +61,9 @@
       <%= form.text_field :price, help:"Price must be higher than RM 1.50" %>
     </div>
   <% end %>
-
-  </br>
+  
   <div style="text-align:center">
-    <%= form.submit :Update, class:"btn btn-primary" %>
+    <%= link_to :Return, @book_user, class:"btn btn-outline-primary" %>
+    <%= form.primary :Update %>
   </div>
 <% end %>

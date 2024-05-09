@@ -1,4 +1,6 @@
+<center>
 <h2>Resend unlock instructions</h2>
+<!-- Lockable: locks an account after a specified number of failed sign-in attempts. Can unlock via email or after a specified time period. -->
 
 <%= bootstrap_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
   <%= f.alert_message "Please fix the errors below." %>
@@ -7,9 +9,9 @@
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
-  <div class="actions" style="text-align:center">
-    <%= f.submit "Resend unlock instructions" %>
+  <div class="actions">
+    <%= link_to :Return, :back, class:"btn btn-outline-primary" %>
+    <%= f.primary "Resend unlock instructions" %>
   </div>
 <% end %>
-
-<%= render "devise/shared/links" %>
+</center>
