@@ -87,5 +87,9 @@ gem "bootstrap_form", "~> 5.4"
 gem 'tomo'
 gem "tomo-plugin-sidekiq"
 
-# Pages
-gem 'pagy'
+gem 'pagy' # Pages
+
+gem 'ransack' # easily add searching to your Rails application, without any additional dependencies
+
+# gem 'wicked_pdf' #PDF generation plugin
+# gem 'wkhtmltopdf-binary'

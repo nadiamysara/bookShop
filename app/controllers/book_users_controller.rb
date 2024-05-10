@@ -6,9 +6,13 @@ class BookUsersController < ApplicationController
   # GET /book_users or /book_users.json
   def index
     if current_user.admin == true
-    @pagy, @book_users = pagy(BookUser.all.reverse_order, items:10)
+      # @pagy, @book_users = pagy(BookUser.all.reverse_order, items:10)
+      @q = BookUser.ransack(params[:q])
+      @pagy, @book_users = pagy(@q.result(distinct: true).reverse_order, items:10)
     else
-    @pagy, @book_users = pagy(BookUser.where(user_id:current_user.id).reverse_order, items:10)
+      # @pagy, @book_users = pagy(BookUser.where(user_id:current_user.id).reverse_order, items:10)
+      @q = BookUser.where(user_id:current_user.id).ransack(params[:q])
+      @pagy, @book_users = pagy(@q.result(distinct: true).reverse_order, items:10)
     end
   end
 

@@ -1,5 +1,14 @@
 @import "bootstrap";
 @import "rails_bootstrap_forms.css";
+
+//Element
+body{
+  background-image:url('https://scholarlykitchen.sspnet.org/wp-content/uploads/2018/07/iStock-506432952.jpg');
+  background-attachment:fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 //carousel slideshow
 .carousel-caption {
     background-color: rgba(1,1,1,0.5);
@@ -7,13 +16,7 @@
     margin: 2px;
     padding: 2px;
   }
-  body{
-    background-image:url('https://scholarlykitchen.sspnet.org/wp-content/uploads/2018/07/iStock-506432952.jpg');
-    background-attachment:fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-
+  
   //banner
   #banner {
     position: relative; 
@@ -180,6 +183,38 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+  }
+
+  .contain-table{
+    overflow-x:auto;
+    width: 100%;
+    height: 100%
+  }
+
+  .search-div{
+    border: 1px solid grey;
+    border-radius: 2px;
+    width: fit-content;
+    display:inline-block;
+
+    padding-right: 5px!important;
+    padding-left: 5px!important;
+    padding-top: 1px!important;
+    padding-bottom: 1px!important;
+  }
+  .search-select{
+    @extend .btn; 
+    @extend .btn-outline-secondary ;
+    @extend .dropdown-toggle; 
+    @extend .btn-sm;
+  }
+  .search-sidebar{
+    width:20%;display:none;
+    margin-right:5px;
+    padding:10px;
+    background-color: #f2f2f2;
+    // border:1px solid gray;
+    border-radius:5px;
   }
 
 //Model (PopUP Image)

@@ -7,7 +7,10 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    @pagy, @books = pagy(Book.all, items:10)
+    # @pagy, @books = pagy(Book.all.reverse_order, items:10)
+    @q = Book.ransack(params[:q])
+    # @pagy, @books = pagy(@q.result(distinct: true).reverse_order, items:10)
+    @pagy, @books = pagy(@q.result.includes(:author, :genres).reverse_order, items:10)
     @rents = BookUser.where(user_id: current_user)
   end
 

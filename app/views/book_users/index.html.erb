@@ -1,27 +1,43 @@
 <%= render "/shared/navpath", child:"Rent History" %><br>
+<div>
+  <%= search_form_for @q do |f| %>
+    <!-- List of all possible predicates for Search: https://activerecord-hackery.github.io/ransack/getting-started/search-matches/ -->
+    <%= f.label "Rent Date: " %>
+    <%= f.search_field :created_at_date_equals, type: :date, style:"margin-right:15px" %>
+    <%= f.label "Return Date: " %>
+    <%= f.search_field :return_date_date_equals, type: :date, style:"margin-right:15px"%>
+    <%= f.label "Rent status:" %>
+    <%= f.select :rent_status_eq, BookUser.pluck(:rent_status).uniq, {include_blank: true}, class:"search-select", style:"margin-right:15px" %>
+    <%= f.label "Due status:" %>
+    <%= f.select :due_status_eq, BookUser.pluck(:due_status).uniq, {include_blank: true}, class:"search-select", style:"margin-right:15px" %>
+
+    <%= f.submit :Search, class:"btn btn-secondary btn-sm" %>
+    <%= link_to :Clear, request.path, class:"btn btn-outline-secondary btn-sm" %>
+  <% end %>
+  <br>
+</div>
+
 <div class="table-responsive">
   <table class="table table-striped">
       <tr>
-        <th>ID</th>
-        <th>Book Title</th>
-        <th>Rent Date</th>
-        <th>Due Date</th>
-        <th>Return Date</th>
-        <th>Status</th>
-        <th>Payment</th>
+        <th><%= sort_link(@q, :id, default_order: :desc) %></th>
+        <th style="width: 275px">Book Title</th>
+        <th><%= sort_link(@q, :created_at) %></th>
+        <th><%= sort_link(@q, :due_date) %></th>
+        <th><%= sort_link(@q, :return_date) %></th>
+        <th style="width: 130px">Status</th>
+        <th style="width: 130px">Payment</th>
         <th>More Details</th>
       </tr>
       <% @book_users.each do |book_user| %>
       <tr>
         <td><%= book_user.id %></td>
         <td><%= link_to Book.find(book_user.book_id).title, book_path(book_user.book_id), class:"primary-hover" %></td>
-        <td><%= (book_user.created_at).strftime("%e %b %Y @ %r") %></td>
-        <td><%= (book_user.due_date).strftime("%e %b %Y @ %r") %></td>
+        <td><%= (book_user.created_at).strftime("%e %b %Y") %></td>
+        <td><%= (book_user.due_date).strftime("%e %b %Y") %></td>
         <td>
           <% if book_user.return_date.present? %>
-            <%= (book_user.return_date).strftime("%e %b %Y @ %r") %></td>
-          <% else %>
-            Have not returned
+            <%= (book_user.return_date).strftime("%e %b %Y") %></td>
           <% end %>
         </td>
         <td>
@@ -40,10 +56,10 @@
         </td>
         <td>
           <% if book_user.due_status %>
-            <%= link_to "Pay due fee", new_book_user_payment_path(book_user_id: book_user.id) %>
+            <%= link_to "Pay due now", new_book_user_payment_path(book_user_id: book_user.id) %>
           <% else %>
             <% if Payment.find_by(book_user_id: book_user.id).present? %>
-              <%= link_to "View payment", payment_path(book_user_id: book_user.id, id: Payment.find_by(book_user_id: book_user.id)) %>
+              <%= link_to "View Payment", payment_path(book_user_id: book_user.id, id: Payment.find_by(book_user_id: book_user.id)) %>
             <% end %>
           <% end %>
         </td>

@@ -5,44 +5,66 @@
   <% end %>
 </div>
 <br>
-<div style="overflow-x:auto;">
- <table class="table table-striped">
+<div>
+  <%= search_form_for @q do |f| %>
+    <%= f.label "Book title or author name: " %>
+    <%= f.search_field :title_or_author_name_cont %>  
+
+    <%= f.submit :Search, class:"btn btn-secondary btn-sm" %>
+    <%= link_to :Clear, books_path, class:"btn btn-outline-secondary btn-sm" %>
+  <% end %>
+  <button onclick="funcReveal()", class="btn btn-outline-secondary btn-sm">Search Genre</button>
+</div>
+<br>
+<div style="display:flex">
+  <div class="search-sidebar" id="hidden-searchBook">
+    <%= collection_check_boxes(:q, :genres_category_in, Genre.all, :category, :category, {}) do |genre| %>
+      <div style="display:inline">
+        <%= genre.check_box %>
+        <%= genre.label %><br>
+      </div>
+    <% end %>
+  </div>
+  <div class="contain-table">
+    <table class="table table-striped">
       <tr>
         <th></th>
-        <th>Title</th>
-        <th>Author</th>
+        <th><%= sort_link(@q, :title) %></th>
+        <th><%= sort_link(@q, :author_name) %></th>
         <th>Genre</th>
         <th>Publication Year</th>
         <th></th>
       </tr>
       <% @books.each do |book| %>
-      <tr>
-        <% if book.cover.attached? %>
-        <%# if book.cover_path.present? %>
-          <!--<td><img src="<%#= image_path('books/'+book.id.to_s+'.png') %>" width="150px"></td>
-          <td style="text-align:center"><img src="<%#= image_path('books/'+book.cover_path+'') %>" width="150px"></td>-->
-          <td style="text-align:center"><%= image_tag(book.cover, class: "thumb") %></td>
-        <% else %>
-          <!--<td><img src="<%= image_path('noImage.jpg') %>" width="150px"></td>-->
-          <td style="text-align:center"><i >no cover image</i></td>
-        <% end %>
-        <td><%= link_to book.title, book, class:"primary-hover" %></td>
-        <!--<td><%#= book.title %></td>-->
-        <td><%= link_to Author.find(book.author_id).name, author_path(book.author_id), class:"primary-hover" %></td>
-        <td>
-          <% Genre.where(id:BookGenre.where(book_id:book).select(:genre_id)).select(:id, :category).each do |genre| %>     
-            <% unless genre.category == Genre.where(id:BookGenre.where(book_id:book).select(:genre_id)).select(:category).last.category %>
-              <%=h link_to genre.category, search_genres_path(id: genre.id), class:"primary-hover" %>,
-            <% else %>
-              <%=h link_to genre.category, search_genres_path(id: genre.id), class:"primary-hover" %>
-            <% end %>
+        <tr>
+          <% if book.cover.attached? %>
+          <%# if book.cover_path.present? %>
+            <!--<td><img src="<%#= image_path('books/'+book.id.to_s+'.png') %>" width="150px"></td>
+            <td style="text-align:center"><img src="<%#= image_path('books/'+book.cover_path+'') %>" width="150px"></td>-->
+            <td style="text-align:center"><%= image_tag(book.cover, class: "thumb") %></td>
+          <% else %>
+            <!--<td><img src="<%= image_path('noImage.jpg') %>" width="150px"></td>-->
+            <td style="text-align:center"><i >no cover image</i></td>
           <% end %>
-        </td>
-        <td><%= book.year %></td>
-        <td><%#= link_to "Show this book", book %></td>
-      <tr>
-    <% end %>
-  </table>
+          <td><%= link_to book.title, book, class:"primary-hover" %></td>
+          <!--<td><td><%#= link_to Author.find(book.author_id).name, author_path(book.author_id), class:"primary-hover" %></td></td>-->
+          <td><%= link_to book.author.name, author_path(book.author_id), class:"primary-hover" %></td>
+          <td>
+            <% Genre.where(id:BookGenre.where(book_id:book).select(:genre_id)).select(:id, :category).each do |genre| %>     
+              <% unless genre.category == Genre.where(id:BookGenre.where(book_id:book).select(:genre_id)).select(:category).last.category %>
+                <%=h link_to genre.category, search_genres_path(id: genre.id), class:"primary-hover" %>,
+              <% else %>
+                <%=h link_to genre.category, search_genres_path(id: genre.id), class:"primary-hover" %>
+              <% end %>
+            <% end %>
+          </td>
+          <td><%= book.year %></td>
+          <td><%#= link_to "Show this book", book %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 </div>
 <br>
 <%= render partial: "shared/pagination" %>
+<%= javascript_include_tag "reveal.js" %>
