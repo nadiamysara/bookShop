@@ -1,3 +1,5 @@
+<%= render "/shared/navpath", parent: :genres, parent_path: genres_path, child: "Search #{@genre.category.capitalize}" %>
+<br>
 <h1><%= @genre.category.titleize %> Books</h1>
 <details>
     <p style="text-align:justify"><%= @genre.description %></p>

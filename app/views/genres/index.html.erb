@@ -5,21 +5,14 @@
   <% end %>
 </div>
 <br>
-<%
-=begin%>
- <div>
-  <% ('a'..'z').each do |abc| %>
-    <%= link_to abc, '#letter-'+abc  %>
-  <% end %>
-</div> 
-<%
-=end%>
 <div id="genres">
   <% @genres.each do |genre| %>
     <details id="section-<%= genre.category %>">
       <summary><%=h link_to genre.category, search_genres_path(id: genre.id), class: "dark-underline-hover" %></summary>
       <p style="text-align:justify"><%= genre.description %></p>
-      <%= link_to "View "+genre.category, genre  %>
+      <% if can? :update, @genre %>
+        <%= link_to "View "+genre.category, genre  %>
+      <% end %>
     </details><br>
   <% end %>
 </div>
