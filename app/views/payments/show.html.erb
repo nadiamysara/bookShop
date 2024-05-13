@@ -1,9 +1,16 @@
-<%#= render "/shared/navpath", parent: :payments, parent_path: payments_path, child: "" %>
+ <% if current_user.admin %>
+  <%= render "/shared/navpath", parent: :payments, parent_path: payments_path, child: "##{@payment.id}" %>
+<% end %> 
 <br>
-<%= render "history" %>
-<hr>
 <%= render @payment %>
-
+<hr>
+<%= render "history" %>
+<br>
+<div style="text-align:center">
+ <% unless current_user.admin %>
+  <%= link_to "Return", book_user_path(@payment.book_user_id), class:"btn btn-outline-primary" %>
+ <% end %>
+</div>
 <!--
 <div>
   <% if can? :update, @payment %>
@@ -14,5 +21,3 @@
     <%#= button_to "Destroy this payment", @payment, method: :delete %>
   <% end %>
 </div>-->
-
-<%= link_to "See rent details", book_user_path(@payment.book_user_id) %>

@@ -45,10 +45,10 @@
   <tr>
     <th>Due Status<th>
     <% if book_user.due_status %>
-    <td>Due</td>
+    <td style="color:red">Due</td>
     <% else %>
       <% if Payment.find_by(book_user_id: book_user.id).present? %>
-        <td>Paid</td>
+        <td style="color:green">Paid</td>
       <% else %>
         <td>No due</td>
       <% end %>

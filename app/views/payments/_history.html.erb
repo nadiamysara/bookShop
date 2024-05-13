@@ -1,5 +1,112 @@
-<div id="<%#= dom_id history %>">
+<div id="<%#= dom_id history %>" class="contain-table">
 <% History.where(payment_id: @payment).each do |history| %>     
+<% if current_user.admin %>
+  <table class="table table-striped" style="width:inherit">
+    <tr>
+      <th>Transaction ID<th>
+      <td><%= history.id %></td>
+      <th>Payment ID<th>
+      <td><%= history.payment_id %></td>
+    </tr>
+    <tr>
+      <th>Source<th>
+      <td><%= history.source %></td>
+      <th>Transaction Status<th>
+      <td>
+        <% if history.payment_status %>
+        <td style="color:green">
+          Success
+        </td>
+        <% else %>
+        <td style="color:red">
+          Fail
+        </td>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>Currency<th>
+      <td><%= history.currency %></td>
+      <th>Transaction Amount<th>
+      <td><%= (number_with_precision history.transaction_amount, precision: 2) %></td>
+    </tr>
+    <tr>
+      <th>Order Number<th>
+      <td><%= history.order_number %></td>
+      <th>Merchant Reference Number<th>
+      <td><%= history.merchant_reference_number %></td>
+    </tr>
+    <tr>
+      <th>Buyer Name<th>
+      <td colspan=4><%= history.buyer_name %></td>
+    </tr>
+    <tr>
+      <th>Buyer Phone<th>
+      <td><%= history.buyer_phone %></td>
+      <th>Buyer Email<th>
+      <td><%= history.buyer_email %></td>
+    </tr>
+    <tr>
+      <th>Created at<th>
+      <td colspan=4><%= history.created_at %></td>
+    </tr>
+    <%
+=begin%>
+    <tr>
+      <th>Exchange Number<th>
+      <td><%= history.exchange_number %></td>
+    </tr>
+    <tr>
+      <th>Transaction Amount Received<th>
+      <td><%= history.transaction_amount_received %></td>
+    </tr>
+    <tr>
+      <th>Client IP<th>
+      <td><%= history.client_ip %></td>
+    </tr>
+    <tr>
+      <th>Status URL<th>
+      <td><%= history.status_url %></td>
+    </tr>
+    <tr>
+      <th>Transaction Fee<th>
+      <td><%= history.transaction_fee %></td>
+    </tr>
+    <tr>
+      <th>Retry URL<th>
+      <td><%= history.retry_url %></td>
+    </tr>
+    <tr>
+      <th>Receipt URL<th>
+      <td><%= history.receipt_url %></td>
+    </tr>
+    <tr>
+      <th>Checksum<th>
+      <td><%= history.checksum %></td>
+    </tr>
+    <tr>
+      <th>Payment Mode<th>
+      <td><%= history.payment_mode %></td>
+    </tr>
+    <tr>
+      <th>Payment Method<th>
+      <td><%= history.payment_method %></td>
+    </tr>
+    <tr>
+      <th>FPX Model<th>
+      <td><%= history.fpx_model %></td>
+    </tr>
+    <tr>
+      <th>FPX Debit Auth Code<th>
+      <td><%= history.fpx_debit_auth_code %></td>
+    </tr> 
+<%
+=end%>
+  </table>
+<% end %>
+
+<%
+=begin%>
   <p>
     <strong>ID:</strong>
     <%= history.id %>
@@ -28,6 +135,8 @@
   <p>
     <strong>Merchant Reference Number:</strong>
     <%= history.merchant_reference_number %>
-  </p>
+  </p> 
+<%
+=end%>
 <% end %>
 </div>

@@ -14,7 +14,7 @@
       <% end %>
     <% end %>
     <% if @book_user.due_status == false && Payment.find_by(book_user_id:@book_user.id).present? %>
-      <%= link_to "Show payment", payment_path(Payment.find_by(book_user_id: @book_user.id).id) %> |
+      <%= link_to "Show payment", payment_path(Payment.find_by(book_user_id: @book_user.id).id) %>
     <% end %>
     <% if can? :update, @book_user %>
       <% if @book_user.rent_status == true %>
