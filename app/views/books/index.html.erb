@@ -6,7 +6,7 @@
 </div>
 <br>
 <div>
-  <%= search_form_for @q do |f| %>
+  <%= search_form_for @q, id: :search_form do |f| %>
     <%= f.label "Book title or author name: " %>
     <%= f.search_field :title_or_author_name_cont %>  
 
@@ -18,7 +18,7 @@
 <br>
 <div style="display:flex">
   <div class="search-sidebar" id="hidden-searchBook">
-    <%= collection_check_boxes(:q, :genres_category_in, Genre.all, :category, :category, {}) do |genre| %>
+    <%= collection_check_boxes(:q, :genres_category_in, Genre.all, :category, :category, {}, form: :search_form) do |genre| %>
       <div style="display:inline">
         <%= genre.check_box %>
         <%= genre.label %><br>
@@ -30,10 +30,9 @@
       <tr>
         <th></th>
         <th><%= sort_link(@q, :title) %></th>
-        <th><%= sort_link(@q, :author_name) %></th>
+        <th><%= sort_link(@q, :author_name, "Author") %></th>
         <th>Genre</th>
-        <th>Publication Year</th>
-        <th></th>
+        <th><%= sort_link(@q, :year, "Publication Year") %></th>
       </tr>
       <% @books.each do |book| %>
         <tr>
@@ -59,7 +58,6 @@
             <% end %>
           </td>
           <td><%= book.year %></td>
-          <td><%#= link_to "Show this book", book %></td>
         </tr>
       <% end %>
     </table>

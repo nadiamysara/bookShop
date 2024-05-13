@@ -209,12 +209,13 @@ body{
     @extend .btn-sm;
   }
   .search-sidebar{
-    width:20%;display:none;
+    width:20%;
+    display:none;
     margin-right:5px;
     padding:10px;
     background-color: #f2f2f2;
     // border:1px solid gray;
-    border-radius:5px;
+    // border-radius:5px;
   }
 
 //Model (PopUP Image)
