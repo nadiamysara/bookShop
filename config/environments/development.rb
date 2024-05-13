@@ -2,7 +2,7 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   #Mail
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 } #needed in sidekiq n mail
+  config.action_mailer.default_url_options = { host: '159.65.1.41', port: 3000 } #needed in sidekiq n mail
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
 

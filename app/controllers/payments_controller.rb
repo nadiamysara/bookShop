@@ -51,7 +51,7 @@ class PaymentsController < ApplicationController
         buyer_phone: @payment.buyer_phone,
         transaction_amount: @payment.transaction_amount,
         product_description: @payment.product_description,
-        redirect_url: "http://localhost:3000/payments/#{@payment.id}/redirect",
+        redirect_url: "http://159.65.1.41:3000/payments/#{@payment.id}/redirect",
         callback_url: "",
         uid: "96111c67-91fc-43dd-b3fa-ad2e3a323753",
         token: "9eoFDBenJ88_Zq2yzpqw",
