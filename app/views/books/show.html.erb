@@ -1,6 +1,6 @@
 <div class="grid-container-1_3">
   <div class="grid-1_3-leftCol"> 
-    <%= render "/shared/navpath", parent: :books, parent_path: books_path, child: @book.title%>
+    <%= render "/shared/navpath", parent: "books", parent_path: books_path, child: @book.title%>
   </div>
   <div class="grid-1_3-centreCol">
     <% if can? :update, @books %>

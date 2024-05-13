@@ -1,6 +1,6 @@
 <div class="grid-container-1_3">
   <div class="grid-1_3-leftCol">
-    <%= render "/shared/navpath", parent: :genres, parent_path: genres_path, child: @genre.category.capitalize %>
+    <%= render "/shared/navpath", parent:"genres", parent_path: genres_path, child: @genre.category.capitalize %>
   </div>
   <div class="grid-1_3-centreCol">
     <% if can? :update, @genre %>
