@@ -1,22 +1,35 @@
 <%= render "/shared/navpath", child:"Payment History" %><br>
-
+<br>
+<div>
+  <%= search_form_for @q do |f| %>
+    <%= f.label "Date: " %>
+    <%= f.search_field :created_at_date_equals, type: :date, style:"margin-right:15px" %>
+    <%= f.label "Rent ID: " %>
+    <%= f.search_field :book_user_id_eq, style:"margin-right:15px; width:75px" %>
+    <%= f.label "Status:" %>
+    <%= f.select :status_eq, Payment.pluck(:status).uniq, {include_blank: true}, style:"margin-right:15px" %>
+    
+    <%= f.submit :Search, class:"btn btn-secondary btn-sm" %>
+    <%= link_to :Clear, request.path, class:"btn btn-outline-secondary btn-sm" %>
+  <% end %>
+  <br>
+</div>
+<br>
 <div id="payments">
   <table class="table table-striped tablelayout">
     <tr>
       <th>#</th>
+      <th>Rent ID</th>
+      <th>Transaction (RM)</th>
       <th>Status</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>Transaction Amount (RM)</th>
-      <th>Product Description</th>
-      <th></th>
+      <th><%= sort_link(@q, :created_at, "Payment Date") %></th>
+      <th>More Details</th>
     </tr>
-      <%# @payments.where(status: true).each do |payment| %> 
       <% @payments.each.with_index(1) do |payment, index| %>
-      <%#= render payment %>
       <tr>
         <td><%= index %></td>
+        <td><%= payment.book_user_id %></td>
+        <td><%= (number_with_precision payment.transaction_amount, precision: 2) %></td>
         <td>
           <% if payment.status %>
             Success
@@ -24,17 +37,8 @@
             Fail
           <% end %>
         </td>
-        <td><%= payment.buyer_name %></td>
-        <td><%= payment.buyer_email %></td>
-        <td><%= payment.buyer_phone %></td>
-        <td><%= (number_with_precision payment.transaction_amount, precision: 2) %></td>
-        <td><%= payment.product_description %></td>
-        <td>
-          <p>
-            <%= link_to "Show details", payment %>
-            <%#= link_to "Show this payment redirect" %>
-          </p>
-        </td>
+        <td><%= (payment.created_at).strftime("%e %b %Y") %></td>
+        <td><%= link_to "View", payment %></td>
       <tr>
     <% end %>
   </table>

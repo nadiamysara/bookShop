@@ -11,9 +11,11 @@ class PaymentsController < ApplicationController
   # GET /payments or /payments.json
   def index
     if current_user.admin == true
-    @pagy, @payments = pagy(Payment.all, items:10)
+      @q = Payment.ransack(params[:q])
+      @pagy, @payments = pagy(@q.result(distinct: true).reverse_order, items:10)
     else
-    @pagy, @payments = pagy(Payment.where(user_id: current_user.id), items:10)
+      @q = Payment.where(user_id:current_user.id).ransack(params[:q])
+      @pagy, @payments = pagy(@q.result(distinct: true).reverse_order, items:10)
     end
   end
 

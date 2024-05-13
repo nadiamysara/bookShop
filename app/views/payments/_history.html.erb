@@ -12,17 +12,15 @@
       <th>Source<th>
       <td><%= history.source %></td>
       <th>Transaction Status<th>
+      <% if history.payment_status %>
       <td>
-        <% if history.payment_status %>
-        <td style="color:green">
-          Success
-        </td>
-        <% else %>
-        <td style="color:red">
-          Fail
-        </td>
-        <% end %>
+        Success
       </td>
+      <% else %>
+      <td>
+        Fail
+      </td>
+      <% end %>
     </tr>
     <tr>
       <th>Currency<th>

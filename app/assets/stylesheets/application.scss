@@ -201,12 +201,12 @@ body{
     padding-top: 1px!important;
     padding-bottom: 1px!important;
   }
-  .search-select{
-    @extend .btn; 
-    @extend .btn-outline-secondary ;
-    @extend .dropdown-toggle; 
-    @extend .btn-sm;
-  }
+  // .search-select{
+  //   @extend .btn; 
+  //   @extend .btn-outline-secondary ;
+  //   @extend .dropdown-toggle; 
+  //   @extend .btn-sm;
+  // }
   .search-sidebar{
     width:20%;
     display:none;

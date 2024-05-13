@@ -1,23 +1,21 @@
- <% if current_user.admin %>
-  <%= render "/shared/navpath", parent: :payments, parent_path: payments_path, child: "##{@payment.id}" %>
-<% end %> 
+<div class="grid-container-1_3">
+  <div class="grid-1_3-leftCol"> 
+    <%= render "/shared/navpath", parent: "Payment History", parent_path: payments_path, child: "##{@payment.id}" %>
+  </div>
+  <div class="grid-1_3-centreCol">
+    <br><br>
+    <%# if current_user.admin %>
+      <%= link_to "View rent record", book_user_path(@payment.book_user_id) %>
+    <%# end %> 
+  </div>
+</div>
 <br>
 <%= render @payment %>
 <hr>
 <%= render "history" %>
 <br>
 <div style="text-align:center">
- <% unless current_user.admin %>
-  <%= link_to "Return", book_user_path(@payment.book_user_id), class:"btn btn-outline-primary" %>
- <% end %>
+ <%# unless current_user.admin %>
+  <%= link_to "Return", :back, class:"btn btn-outline-primary" %>
+ <%# end %>
 </div>
-<!--
-<div>
-  <% if can? :update, @payment %>
-    <%#= link_to "Edit this payment", edit_payment_path(@payment) %> |
-  <% end %>
-  <%#= link_to "Back to payments", payments_path %>
-  <% if can? :destroy, @payment %>
-    <%#= button_to "Destroy this payment", @payment, method: :delete %>
-  <% end %>
-</div>-->

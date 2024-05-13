@@ -7,9 +7,9 @@
     <%= f.label "Return Date: " %>
     <%= f.search_field :return_date_date_equals, type: :date, style:"margin-right:15px"%>
     <%= f.label "Rent status:" %>
-    <%= f.select :rent_status_eq, BookUser.pluck(:rent_status).uniq, {include_blank: true}, class:"search-select", style:"margin-right:15px" %>
+    <%= f.select :rent_status_eq, BookUser.pluck(:rent_status).uniq, {include_blank: true}, style:"margin-right:15px" %>
     <%= f.label "Due status:" %>
-    <%= f.select :due_status_eq, BookUser.pluck(:due_status).uniq, {include_blank: true}, class:"search-select", style:"margin-right:15px" %>
+    <%= f.select :due_status_eq, BookUser.pluck(:due_status).uniq, {include_blank: true}, style:"margin-right:15px" %>
 
     <%= f.submit :Search, class:"btn btn-secondary btn-sm" %>
     <%= link_to :Clear, request.path, class:"btn btn-outline-secondary btn-sm" %>
@@ -20,13 +20,13 @@
 <div class="table-responsive">
   <table class="table table-striped">
       <tr>
-        <th><%= sort_link(@q, :id, default_order: :desc) %></th>
-        <th style="width: 275px">Book Title</th>
+        <th><%= sort_link(@q, :id, "ID", default_order: :desc) %></th>
+        <th style="width:275px">Book Title</th>
         <th><%= sort_link(@q, :created_at) %></th>
         <th><%= sort_link(@q, :due_date) %></th>
         <th><%= sort_link(@q, :return_date) %></th>
-        <th style="width: 130px">Status</th>
-        <th style="width: 130px">Payment</th>
+        <th style="width:130px">Status</th>
+        <th style="width:130px">Payment</th>
         <th>More Details</th>
       </tr>
       <% @book_users.each do |book_user| %>
